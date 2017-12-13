@@ -15,11 +15,19 @@ body {
 
 .password {
     display: inline-block;
-    height: 1.5em;
     width: 100%;
-    font-size: 1.5em;
 
     overflow-wrap: break-word
+}
+
+.password-active {
+    color: #bd4147;
+    font-size: 1.5em;
+}
+
+.password-idle {
+    color: #f8a9ad;
+    font-size: 1em;
 }
 
 /* Override Bootstrap button outline for mobile */

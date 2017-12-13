@@ -30,7 +30,7 @@ export default connect(
 					Users
 				</CardTitle>
 
-				<Table className="text-left">
+				<Table className="text-left" style={{marginBottom: 0}}>
 					<tbody>
 					{Object.keys(this.props.users).map((key,) => {
 						const name = this.props.users[key];
@@ -38,26 +38,42 @@ export default connect(
 						return (
 							<tr key={"user-" + key}>
 								<td>
-									<Button color="link" onClick={this.setCurrentUser(key).bind(this)}>
+									<Button
+										color="link"
+										className="m-1"
+										onClick={this.setCurrentUser(key).bind(this)}>
 										{current ? <strong>{name}</strong> : name}
 									</Button>
 								</td>
 								<td>
-									<Button
-										color="danger"
-										className="float-right"
-										onClick={() => this.props.removeUser(key)}
-										aria-label={"Delete" + name}
-									>
-										<span aria-hidden="true">&times;</span>
-									</Button>
+									<div className="float-right">
+										<Button
+											color="danger"
+											className="m-1"
+											onClick={
+												() => window.confirm("Are you sure you want to delete " + name + "?") &&
+													this.props.removeUser(key)
+											}
+											aria-label={"Delete " + name}
+										>
+											<span aria-hidden="true">&times;</span>
+										</Button>
+										<Button
+											color="primary"
+											className="m-1"
+											onClick={this.setCurrentUser(key).bind(this)}
+											aria-label={"Select " + name}
+										>
+											<span aria-hidden="true">&#65515;</span>
+										</Button>
+									</div>
 								</td>
 							</tr>
 						);
 					})}
 					</tbody>
 				</Table>
-				<hr/>
+				<hr style={{marginTop: 0}}/>
 				<Row>
 					<Col className="p-1" sm={6}>
 						<Button block onClick={() => this.props.history.push('/')}>

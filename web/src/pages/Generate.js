@@ -92,7 +92,7 @@ export default connect(state => ({
 						</Col>
 						<Col className="p-1" sm={6}>
 							<CopyToClipboard text={this.state.password}>
-								<Button block color="success" disabled={!this.state.password}>
+								<Button block color="primary" disabled={!this.state.password}>
 									Copy
 								</Button>
 							</CopyToClipboard>
@@ -131,7 +131,8 @@ export default connect(state => ({
 										/>
 										<InputGroupButton>
 											<Button color="success" onClick={this.onIncrement(1).bind(this)}>+</Button>
-											<Button color="danger" disabled={this.state.counter <= 1} onClick={this.onIncrement(-1).bind(this)}>-</Button>
+											<Button color="danger" disabled={this.state.counter <= 1}
+											        onClick={this.onIncrement(-1).bind(this)}>-</Button>
 										</InputGroupButton>
 									</InputGroup>
 								</Col>
@@ -144,8 +145,7 @@ export default connect(state => ({
 
 				<div style={{width: "100%", marginBottom: "10px"}}>
 					<samp
-						className="password"
-						style={{color: this.state.password ? "#bd4147" : "#f8a9ad"}}
+						className={"password " + this.state.password ? "password-active" : "password-idle"}
 					>
 						{this.state.password || "Enter site to start..."}
 					</samp>
@@ -154,7 +154,7 @@ export default connect(state => ({
 				<Row>
 					<Col className="p-1" sm={6}>
 						<Button
-							block color="primary"
+							block color="danger"
 							onClick={this.onReset.bind(this)}
 							disabled={
 								this.state.site === this.initialState.site &&
@@ -167,7 +167,7 @@ export default connect(state => ({
 					</Col>
 					<Col className="p-1" sm={6}>
 						<Button
-							block color="info"
+							block color="warning"
 							onClick={() => this.props.history.push('/users')}
 						>
 							{this.props.users[this.props.currentUser]} (change user)
