@@ -13,10 +13,15 @@ body {
     max-width: 600px;
 }
 
+.password-container {
+    height: 2em;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 .password {
     display: inline-block;
     width: 100%;
-    height: 1.5em;
 
     overflow-wrap: break-word
 }

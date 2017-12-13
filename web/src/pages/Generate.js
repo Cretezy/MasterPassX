@@ -143,7 +143,7 @@ export default connect(state => ({
 
 				<hr/>
 
-				<div style={{width: "100%", marginBottom: "10px"}}>
+				<div className="password-container">
 					<samp
 						className={"password " + (this.state.password ? "password-active" : "password-idle")}
 					>
