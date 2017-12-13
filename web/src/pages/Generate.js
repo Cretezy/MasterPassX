@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, Input, Col, Label, FormGroup, CardBody, CardTitle, Form, Collapse, Card, Row
+	Button, Input, Col, Label, FormGroup, CardBody, CardTitle, Form, Collapse, Card, Row, InputGroupButton, InputGroup
 } from 'reactstrap';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {connect} from "react-redux";
@@ -35,6 +35,10 @@ export default connect(state => ({
 		this.setState({counter}, this.generate);
 	}
 
+	onIncrement(increment) {
+		return () => this.setState(state => ({counter: state.counter + increment}), this.generate);
+	}
+
 	onToggleShowOptions() {
 		this.setState(state => ({showOptions: !state.showOptions}));
 	}
@@ -63,6 +67,7 @@ export default connect(state => ({
 				<CardTitle>
 					Generate Password
 				</CardTitle>
+				<hr/>
 
 				<Form noValidate>
 					<FormGroup row>
@@ -86,17 +91,11 @@ export default connect(state => ({
 							</Button>
 						</Col>
 						<Col className="p-1" sm={6}>
-							<Button
-								block color="primary"
-								onClick={this.onReset.bind(this)}
-								disabled={
-									this.state.site === this.initialState.site &&
-									this.state.type === this.initialState.type &&
-									this.state.counter === this.initialState.counter
-								}
-							>
-								Reset
-							</Button>
+							<CopyToClipboard text={this.state.password}>
+								<Button block color="success" disabled={!this.state.password}>
+									Copy
+								</Button>
+							</CopyToClipboard>
 						</Col>
 					</Row>
 					<Collapse isOpen={this.state.showOptions}>
@@ -121,13 +120,20 @@ export default connect(state => ({
 							<FormGroup row>
 								<Label for="counter" sm={4}>Counter</Label>
 								<Col sm={8}>
-									<Input
-										name="counter"
-										type="number"
-										min="1"
-										value={this.state.counter}
-										onChange={this.onCounterChange.bind(this)}
-									/>
+
+									<InputGroup>
+										<Input
+											name="counter"
+											type="number"
+											min="1"
+											value={this.state.counter}
+											onChange={this.onCounterChange.bind(this)}
+										/>
+										<InputGroupButton>
+											<Button color="success" onClick={this.onIncrement(1).bind(this)}>+</Button>
+											<Button color="danger" disabled={this.state.counter <= 1} onClick={this.onIncrement(-1).bind(this)}>-</Button>
+										</InputGroupButton>
+									</InputGroup>
 								</Col>
 							</FormGroup>
 						</Card>
@@ -147,11 +153,17 @@ export default connect(state => ({
 
 				<Row>
 					<Col className="p-1" sm={6}>
-						<CopyToClipboard text={this.state.password}>
-							<Button block color="success" disabled={!this.state.password}>
-								Copy
-							</Button>
-						</CopyToClipboard>
+						<Button
+							block color="primary"
+							onClick={this.onReset.bind(this)}
+							disabled={
+								this.state.site === this.initialState.site &&
+								this.state.type === this.initialState.type &&
+								this.state.counter === this.initialState.counter
+							}
+						>
+							Reset
+						</Button>
 					</Col>
 					<Col className="p-1" sm={6}>
 						<Button

@@ -26,7 +26,10 @@ export default connect(
 	render() {
 		return (
 			<CardBody className="text-center">
-				<CardTitle>Users </CardTitle>
+				<CardTitle>
+					Users
+				</CardTitle>
+
 				<Table className="text-left">
 					<tbody>
 					{Object.keys(this.props.users).map((key,) => {
@@ -54,7 +57,7 @@ export default connect(
 					})}
 					</tbody>
 				</Table>
-
+				<hr/>
 				<Row>
 					<Col className="p-1" sm={6}>
 						<Button block onClick={() => this.props.history.push('/')}>

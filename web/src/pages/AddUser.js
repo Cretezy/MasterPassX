@@ -17,15 +17,20 @@ export default connect(
 	state = {
 		name: "",
 		master: "",
+		loading: false,
 	};
 
-	async onSubmit(event) {
+	onSubmit(event) {
 		event.preventDefault();
 		const {name, master} = this.state;
 		if (name.length > 0 && master.length > 0) {
-			const key = await createKey(name, master);
-			this.props.addUser(name, key);
-			this.props.history.push('/');
+			this.setState({loading: true});
+			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
+			setTimeout(async () => {
+				const key = await createKey(name, master);
+				this.props.addUser(name, key);
+				this.props.history.push('/');
+			}, 20);
 		}
 	}
 
@@ -45,6 +50,8 @@ export default connect(
 		return (
 			<CardBody className="text-center">
 				<CardTitle>Add User</CardTitle>
+				<hr/>
+
 				<Form onSubmit={this.onSubmit.bind(this)} autoComplete="new-password">
 					<FormGroup row>
 						<Label for="name" sm={4}>Full Name</Label>
@@ -76,12 +83,19 @@ export default connect(
 
 				<Row>
 					<Col className="p-1" sm={6}>
-						<Button block onClick={() => this.props.history.push('/users')}>
+						<Button
+							block
+							onClick={() => this.props.history.push('/users')}
+						>
 							Back
 						</Button>
 					</Col>
 					<Col className="p-1" sm={6}>
-						<Button block color="success" onClick={this.onSubmit.bind(this)}>
+						<Button
+							block color="success"
+							disabled={this.state.loading}
+							onClick={this.onSubmit.bind(this)}
+						>
 							Create User
 						</Button>
 					</Col>

@@ -9,6 +9,12 @@ export default class Welcome extends React.Component {
 			<CardBody className="text-center">
 				<CardTitle>Welcome to MasterPassX</CardTitle>
 				<hr/>
+
+				<p>
+					A deterministic stateless password generator.
+				</p>
+
+				<hr/>
 				<Button
 					block color="success"
 					onClick={() => this.props.history.push('/add')}
