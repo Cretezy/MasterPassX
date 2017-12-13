@@ -145,7 +145,7 @@ export default connect(state => ({
 
 				<div style={{width: "100%", marginBottom: "10px"}}>
 					<samp
-						className={"password " + this.state.password ? "password-active" : "password-idle"}
+						className={"password " + (this.state.password ? "password-active" : "password-idle")}
 					>
 						{this.state.password || "Enter site to start..."}
 					</samp>
