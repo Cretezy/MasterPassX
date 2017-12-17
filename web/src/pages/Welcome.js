@@ -120,8 +120,9 @@ export default class Welcome extends React.Component {
 						<CardTitle>Get Started Now</CardTitle>
 						<div className="text-left">
 							MasterPassX is free as in beer ($0) and as in freedom (open source).
-							It is licensed under the MIT and can be viewed on Github (with more information).
+							It is shared under the MIT license and can be <a href="https://github.com/Cretezy/MasterPassX">viewed on Github</a> (with more information).
 						</div>
+						<br/>
 						<Button
 							block size="lg" color="success"
 							onClick={() => this.props.history.push('/add')}
