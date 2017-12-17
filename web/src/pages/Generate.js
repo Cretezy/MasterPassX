@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-	Button, Input, Col, Label, FormGroup, CardBody, CardTitle, Form, Collapse, Card, Row, InputGroupButton, InputGroup
+	Button, Input, Col, Label, FormGroup, CardBody, CardTitle, Form, Collapse, Card, Row, InputGroupButton, InputGroup,
+	Tooltip
 } from 'reactstrap';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {connect} from "react-redux";
@@ -16,6 +17,7 @@ export default connect(state => ({
 		counter: 1,
 		type: "long",
 		showOptions: false,
+		counterTooltipOpen: false,
 	};
 
 	state = this.initialState;
@@ -41,6 +43,12 @@ export default connect(state => ({
 
 	onToggleShowOptions() {
 		this.setState(state => ({showOptions: !state.showOptions}));
+	}
+
+	toggleCounterTooltip() {
+		this.setState(state => ({
+			counterTooltipOpen: !this.state.counterTooltipOpen
+		}));
 	}
 
 	generate() {
@@ -118,9 +126,17 @@ export default connect(state => ({
 								</Col>
 							</FormGroup>
 							<FormGroup row>
-								<Label for="counter" sm={4}>Counter</Label>
+								<Label for="counter" sm={4}>
+									<a href="#" id="counterLabel" className="tooltip-label">Counter</a>
+									<Tooltip
+										placement="top"
+										isOpen={this.state.counterTooltipOpen}
+									         target="counterLabel"
+										toggle={this.toggleCounterTooltip.bind(this)}>
+										Hello world!
+									</Tooltip>
+								</Label>
 								<Col sm={8}>
-
 									<InputGroup>
 										<Input
 											name="counter"

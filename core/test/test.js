@@ -1,7 +1,7 @@
 const assert = require('assert');
 const mpx = require('../');
 
-describe('MasterPasswordX', () => {
+describe('MasterPassX', () => {
 	let key;
 	let seed;
 	let password;

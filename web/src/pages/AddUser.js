@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, Form, FormGroup, Label, Col, Input, CardBody, CardTitle, Row
+	Button, Form, FormGroup, Label, Col, Input, CardBody, CardTitle, Row, CardText
 } from 'reactstrap';
 import {createKey} from "../core";
 import {addUser} from "../actions";
@@ -50,6 +50,10 @@ export default connect(
 		return (
 			<CardBody className="text-center">
 				<CardTitle>Add User</CardTitle>
+				<CardText>
+					By adding a user to MasterPassX, it creating a master key to which it derives passwords from. This
+					key is <i>only</i> store on this local device and <strong>never</strong> sent over the network.
+				</CardText>
 				<hr/>
 
 				<Form onSubmit={this.onSubmit.bind(this)} autoComplete="new-password">
