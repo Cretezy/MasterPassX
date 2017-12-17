@@ -22,7 +22,13 @@ export default class Welcome extends React.Component {
 							As the number of online services used by millions around the globe increase daily, password
 							security is often an overlooked subject.
 							<br/>
-							With leaks of tens of <a href="https://techcrunch.com/2017/09/07/equifax-data-leak-could-involve-143-million-consumers/">hundreds millions of user’s data</a> (<a href="https://www.theverge.com/2017/10/3/16414306/yahoo-security-data-breach-3-billion-verizon">or even billions</a>), <a href="https://techcrunch.com/2017/11/27/imgur-says-1-7m-emails-and-passwords-were-breached-in-2014-hack/">including passwords (or hashs)</a>,
+							With leaks of tens of <a
+							href="https://techcrunch.com/2017/09/07/equifax-data-leak-could-involve-143-million-consumers/">hundreds
+							millions of user’s data</a> (<a
+							href="https://www.theverge.com/2017/10/3/16414306/yahoo-security-data-breach-3-billion-verizon">or
+							even billions</a>), <a
+							href="https://techcrunch.com/2017/11/27/imgur-says-1-7m-emails-and-passwords-were-breached-in-2014-hack/">including
+							passwords (or hashs)</a>,
 							users are reminded to never reuse passwords across difference services, but very few do.
 							<hr/>
 							A common solution is to use a password manager, however this introduces a new set of
@@ -88,7 +94,8 @@ export default class Welcome extends React.Component {
 							This ensures that all password generation is:
 							<ul>
 								<li>
-									<strong>Client-side.</strong> No back-end, so no risk to ever intercept passwords or other data,
+									<strong>Client-side.</strong> No back-end, so no risk to ever intercept passwords or
+									other data,
 									making generation <strong>trustless</strong>.
 								</li>
 								<li>
@@ -107,13 +114,13 @@ export default class Welcome extends React.Component {
 				</Card>
 
 				<br/>
+
 				<Card>
 					<CardBody>
 						<CardTitle>Get Started Now</CardTitle>
 						<div className="text-left">
 							MasterPassX is free as in beer ($0) and as in freedom (open source).
-							<br/>
-							It is licensed under the MIT and can be view on Github (with more information).
+							It is licensed under the MIT and can be viewed on Github (with more information).
 						</div>
 						<Button
 							block size="lg" color="success"
@@ -123,9 +130,6 @@ export default class Welcome extends React.Component {
 						</Button>
 					</CardBody>
 				</Card>
-
-				<hr/>
-
 
 			</CardBody>
 		);

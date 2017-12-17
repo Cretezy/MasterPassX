@@ -82,28 +82,29 @@ export default connect(
 							/>
 						</Col>
 					</FormGroup>
-				</Form>
-				<hr/>
+					<hr/>
 
-				<Row>
-					<Col className="p-1" sm={6}>
-						<Button
-							block
-							onClick={() => this.props.history.push('/users')}
-						>
-							Back
-						</Button>
-					</Col>
-					<Col className="p-1" sm={6}>
-						<Button
-							block color="success"
-							disabled={this.state.loading}
-							onClick={this.onSubmit.bind(this)}
-						>
-							Create User
-						</Button>
-					</Col>
-				</Row>
+					<Row>
+						<Col className="p-1" sm={6}>
+							<Button
+								block
+								onClick={() => this.props.history.push('/users')}
+							>
+								Back
+							</Button>
+						</Col>
+						<Col className="p-1" sm={6}>
+							<Button
+								type="submit"
+								block color="success"
+								disabled={this.state.loading}
+							>
+								Create User
+							</Button>
+						</Col>
+					</Row>
+				</Form>
+
 			</CardBody>
 		);
 	}
