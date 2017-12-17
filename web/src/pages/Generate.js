@@ -133,7 +133,7 @@ export default connect(state => ({
 										isOpen={this.state.counterTooltipOpen}
 									         target="counterLabel"
 										toggle={this.toggleCounterTooltip.bind(this)}>
-										Hello world!
+										Increment this when needing a new password for the same site
 									</Tooltip>
 								</Label>
 								<Col sm={8}>
