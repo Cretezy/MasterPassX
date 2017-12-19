@@ -2,7 +2,7 @@ import React from 'react';
 import {
 	Button, Form, FormGroup, Label, Col, Input, Row, Card
 } from 'reactstrap';
-import {createKey} from "../core";
+import {createKey} from "masterpassx-core";
 import {addUser} from "../actions";
 import {connect} from "react-redux";
 

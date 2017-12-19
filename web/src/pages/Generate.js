@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {connect} from "react-redux";
-import {createPassword, createSeed, templates} from "../core";
+import {createPassword, createSeed, templates} from "masterpassx-core";
 
 export default connect(state => ({
 	currentUser: state.users.currentUser
