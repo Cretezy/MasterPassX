@@ -29,3 +29,9 @@ body {
     outline: none !important;
     box-shadow: none !important;
 }
+
+/* Make text overflow in Bootstrap button */
+.btn{
+    white-space:normal !important;
+    word-wrap: break-word;
+}
