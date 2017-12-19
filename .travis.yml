@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "latest"
+  - "stable"
+cache:
+  yarn: true
+  directories:
+  - web/node_modules
+  - core/node_modules
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
+        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
+    packages:
+      - yarn
+env:
+  - PACKAGE=core
+  - PACKAGE=web
+script:
+  - cd $PACKAGE && yarn && yarn test
