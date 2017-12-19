@@ -1,8 +1,8 @@
 import React from 'react';
 import {createStore} from 'redux'
 import {persistStore, persistCombineReducers} from 'redux-persist'
-import {PersistGate} from 'redux-persist/es/integration/react'
-import storage from 'redux-persist/es/storage'
+import {PersistGate} from 'redux-persist/lib/integration/react'
+import storage from 'localforage'
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
 import reducer from "./reducer";
