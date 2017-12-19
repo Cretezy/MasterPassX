@@ -106,14 +106,14 @@ export default connect(state => ({
 							</samp>
 						</div>
 						<Row noGutters>
-							<Col className="p-1" xs={6} md={4}>
+							<Col className="p-1" xs={6}>
 								<CopyToClipboard text={this.state.password} onCopy={this.onCopy.bind(this)}>
 									<Button block color="primary" disabled={!this.state.password || this.state.copied}>
 										Copy {this.state.copied && '✓'}
 									</Button>
 								</CopyToClipboard>
 							</Col>
-							<Col className="p-1" xs={6} md={4} >
+							<Col className="p-1" xs={6}>
 								<Button
 									block color="danger"
 									onClick={this.onReset.bind(this)}
@@ -126,7 +126,7 @@ export default connect(state => ({
 									Reset
 								</Button>
 							</Col>
-							<Col className="p-1" xs={12} sm={6} md={4} >
+							<Col className="p-1" xs={12} sm={6}>
 								<Button
 									block color="warning"
 									onClick={() => this.props.history.push('/settings')}
@@ -134,10 +134,10 @@ export default connect(state => ({
 									⚙ Settings ({this.props.users[this.props.currentUser].split(" ")[0]})
 								</Button>
 							</Col>
-							<Col className="p-1" xs={12} sm={6} md={12}>
-									<Button block onClick={this.onToggleShowOptions.bind(this)}>
-										{this.state.showOptions ? "Hide" : "Show"} Options
-									</Button>
+							<Col className="p-1" xs={12} sm={6}>
+								<Button block onClick={this.onToggleShowOptions.bind(this)}>
+									{this.state.showOptions ? "Hide" : "Show"} Options
+								</Button>
 							</Col>
 						</Row>
 
