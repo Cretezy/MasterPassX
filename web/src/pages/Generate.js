@@ -105,14 +105,14 @@ export default connect(state => ({
 							</samp>
 						</div>
 						<Row noGutters>
-							<Col className="p-1" sm={5}>
+							<Col className="p-1" xs={5}>
 								<CopyToClipboard text={this.state.password} onCopy={this.onCopy.bind(this)}>
 									<Button block color="primary" disabled={!this.state.password || this.state.copied}>
 										Copy {this.state.copied && '✓'}
 									</Button>
 								</CopyToClipboard>
 							</Col>
-							<Col className="p-1" sm={5}>
+							<Col className="p-1" xs={5}>
 								<Button
 									block color="danger"
 									onClick={this.onReset.bind(this)}
@@ -125,7 +125,7 @@ export default connect(state => ({
 									Reset
 								</Button>
 							</Col>
-							<Col className="p-1" sm={2}>
+							<Col className="p-1" xs={2}>
 								<Button
 									block color="warning"
 									onClick={() => this.props.history.push('/settings')}
@@ -140,7 +140,7 @@ export default connect(state => ({
 							</Button>
 						</div>
 						<Collapse isOpen={this.state.showOptions}>
-							<div className="mt-3">
+							<div className="pt-3">
 								<FormGroup row className="p-1">
 									<Label for="type" sm={3} className="text-sm-right text-center">Type</Label>
 									<Col sm={9}>
