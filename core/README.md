@@ -18,7 +18,7 @@ Core library for MasterPassX, implementation of [original MasterPassword algorit
 
 ## Example
 
-See [`test.js`](test.js)
+See [`index.js`](test/index.js)
 
 ## Tests
 

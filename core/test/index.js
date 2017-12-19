@@ -1,5 +1,5 @@
-const assert = require('assert');
-const {createKey, createSeed, createPassword} = require('.');
+import assert from 'assert';
+import {createKey, createSeed, createPassword} from '../src';
 
 describe('MasterPassX', () => {
 	let key;
