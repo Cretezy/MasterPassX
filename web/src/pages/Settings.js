@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, CardTitle, CardBody, Table, Row, Col, Card
+	Button, Row, Col, Card
 } from 'reactstrap';
 import {removeUser, setCurrentUser} from "../actions";
 import {connect} from "react-redux";

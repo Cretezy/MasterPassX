@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, Input, Col, Label, FormGroup, CardBody, CardTitle, Form, Collapse, Card, Row, InputGroupButton, InputGroup,
+	Button, Input, Col, Label, FormGroup, Form, Collapse, Card, Row, InputGroupButton, InputGroup,
 	Tooltip
 } from 'reactstrap';
 import {CopyToClipboard} from 'react-copy-to-clipboard';

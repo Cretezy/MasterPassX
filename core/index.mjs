@@ -1,6 +1,9 @@
 import scrypt from "scrypt-async";
 import crypto from "crypto-js";
-import {Buffer} from "buffer";
+import Buffer_ from "buffer";
+
+// XXX
+const Buffer = Buffer_.Buffer;
 
 const namespace = "com.lyndir.masterpassword";
 

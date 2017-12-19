@@ -5,8 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "4.0.0-beta.2",
-    "buffer": "^5.0.8",
-    "crypto-js": "^3.1.9-1",
+    "masterpassx-core": "^0.1.0",
     "react": "^16.2.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
@@ -15,9 +14,7 @@
     "react-scripts": "1.0.17",
     "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.7.2",
-    "redux-persist": "^5.4.0",
-    "scrypt-async": "^1.3.1",
-    "masterpassx-core": "../core"
+    "redux-persist": "^5.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
