@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {createPassword, createSeed, templates} from "masterpassx-core";
 
 export default connect(state => ({
+	users: state.users.users,
 	currentUser: state.users.currentUser
 }))(class Generate extends React.Component {
 	initialState = {
@@ -105,14 +106,14 @@ export default connect(state => ({
 							</samp>
 						</div>
 						<Row noGutters>
-							<Col className="p-1" xs={5}>
+							<Col className="p-1" xs={6} md={4}>
 								<CopyToClipboard text={this.state.password} onCopy={this.onCopy.bind(this)}>
 									<Button block color="primary" disabled={!this.state.password || this.state.copied}>
 										Copy {this.state.copied && '✓'}
 									</Button>
 								</CopyToClipboard>
 							</Col>
-							<Col className="p-1" xs={5}>
+							<Col className="p-1" xs={6} md={4} >
 								<Button
 									block color="danger"
 									onClick={this.onReset.bind(this)}
@@ -125,20 +126,21 @@ export default connect(state => ({
 									Reset
 								</Button>
 							</Col>
-							<Col className="p-1" xs={2}>
+							<Col className="p-1" xs={12} sm={6} md={4} >
 								<Button
 									block color="warning"
 									onClick={() => this.props.history.push('/settings')}
 								>
-									⚙
+									⚙ Settings ({this.props.users[this.props.currentUser].split(" ")[0]})
 								</Button>
 							</Col>
+							<Col className="p-1" xs={12} sm={6} md={12}>
+									<Button block onClick={this.onToggleShowOptions.bind(this)}>
+										{this.state.showOptions ? "Hide" : "Show"} Options
+									</Button>
+							</Col>
 						</Row>
-						<div className="m-1">
-							<Button block onClick={this.onToggleShowOptions.bind(this)}>
-								{this.state.showOptions ? "Hide" : "Show"} Options
-							</Button>
-						</div>
+
 						<Collapse isOpen={this.state.showOptions}>
 							<div className="pt-3">
 								<FormGroup row className="p-1">
