@@ -4097,9 +4097,9 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-masterpassx-core@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/masterpassx-core/-/masterpassx-core-0.1.0.tgz#9d556b8036d3a37769d7237f99d4d054d6006c8c"
+masterpassx-core@^0.1.3:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/masterpassx-core/-/masterpassx-core-0.1.2.tgz#9de70458ff0299d959b71848d72386d6cec687d1"
   dependencies:
     buffer "^5.0.8"
     crypto-js "^3.1.9-1"

@@ -1,9 +1,6 @@
-import scrypt from "scrypt-async";
-import crypto from "crypto-js";
-import Buffer_ from "buffer";
-
-// XXX
-const Buffer = Buffer_.Buffer;
+const scrypt = require("scrypt-async");
+const crypto = require("crypto-js");
+const {Buffer} = require("buffer/");
 
 const namespace = "com.lyndir.masterpassword";
 
@@ -141,6 +138,6 @@ function createPassword(seed, template) {
 	}).join("");
 }
 
-export {
-	createKey, createSeed, createPassword, templateNames as templates
-}
+module.exports = {
+	createKey, createSeed, createPassword, templates: templateNames
+};
