@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, CardTitle, CardBody, Table, Row, Col
+	Button, CardTitle, CardBody, Table, Row, Col, Card
 } from 'reactstrap';
 import {removeUser, setCurrentUser} from "../actions";
 import {connect} from "react-redux";
@@ -15,7 +15,7 @@ export default connect(
 			dispatch(removeUser(key))
 		}
 	})
-)(class Users extends React.Component {
+)(class Settings extends React.Component {
 	setCurrentUser(key) {
 		return () => {
 			this.props.setCurrentUser(key);
@@ -25,27 +25,30 @@ export default connect(
 
 	render() {
 		return (
-			<CardBody className="text-center">
-				<CardTitle>
-					Users
-				</CardTitle>
+			<div>
+				<header className="text-center">
+					<h3>
+						Settings
+					</h3>
+					<p>You may add multiple users to MasterPassX.</p>
+				</header>
 
-				<Table className="text-left" style={{marginBottom: 0}}>
-					<tbody>
-					{Object.keys(this.props.users).map((key,) => {
-						const name = this.props.users[key];
-						const current = this.props.currentUser === key;
-						return (
-							<tr key={"user-" + key}>
-								<td>
+				<Card body>
+					<div className="pb-2">
+						{Object.keys(this.props.users).map((key,) => {
+							const name = this.props.users[key];
+							const current = this.props.currentUser === key;
+							return (
+								<div key={"user-" + key} className="m-1">
+
 									<Button
 										color="link"
 										className="m-1"
 										onClick={this.setCurrentUser(key).bind(this)}>
 										{current ? <strong>{name}</strong> : name}
 									</Button>
-								</td>
-								<td>
+
+
 									<div className="float-right">
 										<Button
 											color="danger"
@@ -67,26 +70,25 @@ export default connect(
 											<span aria-hidden="true">&#65515;</span>
 										</Button>
 									</div>
-								</td>
-							</tr>
-						);
-					})}
-					</tbody>
-				</Table>
-				<hr style={{marginTop: 0}}/>
-				<Row>
-					<Col className="p-1" sm={6}>
-						<Button block onClick={() => this.props.history.push('/')}>
-							Back
-						</Button>
-					</Col>
-					<Col className="p-1" sm={6}>
-						<Button block color="primary" onClick={() => this.props.history.push('/add')}>
-							Add User
-						</Button>
-					</Col>
-				</Row>
-			</CardBody>
+								</div>
+							);
+						})}
+					</div>
+
+					<Row noGutters>
+						<Col className="p-1" sm={6}>
+							<Button block onClick={() => this.props.history.push('/')}>
+								Back
+							</Button>
+						</Col>
+						<Col className="p-1" sm={6}>
+							<Button block color="primary" onClick={() => this.props.history.push('/add')}>
+								Add User
+							</Button>
+						</Col>
+					</Row>
+				</Card>
+			</div>
 		);
 	}
 });

@@ -2,13 +2,6 @@ body {
     background-color: #eeeeee;
 }
 
-.app {
-    padding: 30px 15px 10px 15px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
 .container {
     max-width: 600px;
 }
@@ -16,7 +9,7 @@ body {
 .password-container {
     height: 2em;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 15px 0;
 }
 
 .password {

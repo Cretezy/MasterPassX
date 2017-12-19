@@ -13,8 +13,7 @@ import Generate from "./pages/Generate";
 import {connect, Provider} from "react-redux";
 import AddUser from "./pages/AddUser";
 import Welcome from "./pages/Welcome";
-import Users from "./pages/Users";
-import {Card} from "reactstrap";
+import Settings from "./pages/Settings";
 
 export default class App extends React.Component {
 	constructor() {
@@ -41,13 +40,13 @@ const Router = connect(state => ({users: state.users.users}))(class extends Reac
 	render() {
 		return (
 			<BrowserRouter>
-				<div className="app">
-					<Card  className="container">
+				<div className="w-100 d-flex align-items-center pt-3 pb-2 px-2">
+					<div className="container">
 						<Switch>
 							{Object.keys(this.props.users).length ?
 								[
 									<Route key="route-home" exact path="/" component={Generate}/>,
-									<Route key="route-users" exact path="/users" component={Users}/>
+									<Route key="route-settings" exact path="/settings" component={Settings}/>
 								]
 								:
 								[
@@ -57,7 +56,7 @@ const Router = connect(state => ({users: state.users.users}))(class extends Reac
 							<Route exact path="/add" component={AddUser}/>
 							<Route path="*" component={() => <Redirect to={{pathname: '/'}}/>}/>
 						</Switch>
-					</Card>
+					</div>
 				</div>
 			</BrowserRouter>
 		)
