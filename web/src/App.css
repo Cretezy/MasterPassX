@@ -8,14 +8,9 @@ body {
 
 .password-container {
     height: 2em;
-    width: 100%;
-    margin: 15px 0;
 }
 
 .password {
-    display: inline-block;
-    width: 100%;
-
     overflow-wrap: break-word
 }
 

@@ -39,17 +39,18 @@ export default connect(
 							const name = this.props.users[key];
 							const current = this.props.currentUser === key;
 							return (
-								<div key={"user-" + key} className="m-1">
+								<div key={"user-" + key} className="m-1 d-flex w-100 justify-content-between">
 
-									<Button
-										color="link"
-										className="m-1"
-										onClick={this.setCurrentUser(key).bind(this)}>
-										{current ? <strong>{name}</strong> : name}
-									</Button>
+									<div>
+										<Button
+											color="link"
+											className="m-1"
+											onClick={this.setCurrentUser(key).bind(this)}>
+											{current ? <strong>{name}</strong> : name}
+										</Button>
+									</div>
 
-
-									<div className="float-right">
+									<div>
 										<Button
 											color="danger"
 											className="m-1"

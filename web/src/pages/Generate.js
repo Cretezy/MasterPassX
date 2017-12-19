@@ -97,9 +97,9 @@ export default connect(state => ({
 								/>
 							</Col>
 						</FormGroup>
-						<div className="password-container text-center">
+						<div className="password-container w-100 my-3 text-center">
 							<samp
-								className={"password " + (this.state.password ? "password-active" : "password-idle")}
+								className={"d-inline-block w-100 password " + (this.state.password ? "password-active" : "password-idle")}
 							>
 								{this.state.password || "Enter site to start..."}
 							</samp>
