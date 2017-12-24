@@ -40,7 +40,21 @@ export default class App extends React.Component {
 							return state;
 						}
 					},
-					null,
+					(state, key) => {
+						if (key === "users") {
+							let currentUser;
+							if (Object.keys(state.users).length === 0) {
+								currentUser = null
+							} else if (Object.keys(state.users).includes(state.currentUser)) {
+								currentUser = Object.keys(state.users)[0];
+							} else {
+								currentUser = state.currentUser;
+							}
+							return ({...state, currentUser});
+						} else {
+							return state;
+						}
+					},
 					{whitelist: ['users']}
 				)],
 				migrate: createMigrate(migrations, {debug: false}),
