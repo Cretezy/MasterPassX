@@ -21,7 +21,7 @@ export default class App extends React.Component {
 		super();
 		this.store = createStore(persistCombineReducers(
 			{
-				key: 'mpx',
+				key: 'masterpassx',
 				storage,
 				version: 1,
 				transforms: [createTransform(
