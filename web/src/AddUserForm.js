@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Button, Form, FormGroup, Label, Col, Input, Row, Tooltip
+	Button, Form, FormGroup, Label, Col, Input, Row, Tooltip, FormText
 } from 'reactstrap';
 import {createKey} from "masterpassx-core";
 import {addUser} from "./actions";
@@ -25,7 +25,12 @@ export default connect(
 		loading: false,
 		save: true,
 		saveTooltipOpen: false,
+		nameError: null,
+		passwordError: null,
+		passwordErrorTimer: null,
 	};
+	nameErrorTimer;
+	passwordErrorTimer;
 
 	onSubmit(event) {
 		event.preventDefault();
@@ -42,15 +47,52 @@ export default connect(
 	}
 
 	onChangeName(event) {
+		const name = event.target.value;
 		this.setState({
-			name: event.target.value
-		})
+			name
+		});
+		if (this.nameErrorTimer) {
+			clearTimeout(this.nameErrorTimer);
+		}
+
+		const errors = [];
+		if (name !== name.trim()) {
+			errors.push("Careful! Name starts or finishes with whitespace.")
+		}
+
+		if (errors.length > 0) {
+			this.nameErrorTimer = setTimeout(() => {
+				this.setState({nameError: errors.join(" ")})
+			}, 1000);
+		} else {
+			this.setState({nameError: null})
+		}
 	}
 
 	onChangeMaster(event) {
+		const master = event.target.value;
 		this.setState({
-			master: event.target.value
-		})
+			master
+		});
+		if (this.passwordErrorTimer) {
+			clearTimeout(this.passwordErrorTimer);
+		}
+
+		const errors = [];
+		if (master.length < 6) {
+			errors.push("Careful! Password is too short. We recommend at least 12 characters.")
+		} else if (master.length < 10) {
+			errors.push("Careful! Password is short, but will work. We recommend at least 12 characters.")
+		}
+
+		if (errors.length > 0) {
+			this.passwordErrorTimer = setTimeout(() => {
+				this.setState({passwordError: errors.join(" ")})
+			}, 1000);
+		} else {
+			this.setState({passwordError: null})
+		}
+
 	}
 
 	onSaveChange() {
@@ -67,8 +109,7 @@ export default connect(
 
 	render() {
 		return (
-
-			<Form onSubmit={this.onSubmit.bind(this)} autoComplete="new-password">
+			<Form onSubmit={this.onSubmit.bind(this)} autoComplete="new-password" className="text-left">
 				<FormGroup row>
 					<Label for="name" sm={4} className="text-sm-right text-center">Full Name</Label>
 					<Col sm={8}>
@@ -80,6 +121,9 @@ export default connect(
 							value={this.state.name}
 							onChange={this.onChangeName.bind(this)}
 						/>
+						<FormText>
+							{this.state.nameError || "This will need to match exactly on other devices."}
+						</FormText>
 					</Col>
 				</FormGroup>
 				<FormGroup row>
@@ -93,8 +137,12 @@ export default connect(
 							value={this.state.master}
 							onChange={this.onChangeMaster.bind(this)}
 						/>
+						<FormText>
+							{this.state.passwordError || "Use a long and hard to guess password (or passphrase)."}
+						</FormText>
 					</Col>
 				</FormGroup>
+
 
 				<Row noGutters>
 					<Col className="p-1 text-center" xs={12} sm={this.props.back ? 4 : 6}>
