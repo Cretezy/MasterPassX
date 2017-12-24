@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Row, Col, Card } from "reactstrap";
-import { removeUser, setCurrentUser } from "../actions";
+import { removeUser, setCurrentUser } from "../redux/actions";
 import { connect } from "react-redux";
 
 export default connect(

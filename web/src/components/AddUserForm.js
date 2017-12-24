@@ -11,7 +11,7 @@ import {
 	FormText
 } from "reactstrap";
 import { createKey } from "masterpassx-core";
-import { addUser } from "./actions";
+import { addUser } from "../redux/actions";
 import { connect } from "react-redux";
 
 export default connect(null, dispatch => ({

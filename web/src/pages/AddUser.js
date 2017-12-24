@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "reactstrap";
-import AddUserForm from "../AddUserForm";
+import AddUserForm from "../components/AddUserForm";
 
 export default class AddUser extends React.Component {
 	render() {

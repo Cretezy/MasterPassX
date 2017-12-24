@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardTitle, Col, Row } from "reactstrap";
-import AddUserForm from "../AddUserForm";
-import ExampleGenerator from "../ExampleGenerator";
+import AddUserForm from "../components/AddUserForm";
+import ExampleGenerator from "../components/ExampleGenerator";
 
 export default class Welcome extends React.Component {
 	render() {
