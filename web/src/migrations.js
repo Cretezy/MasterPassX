@@ -1,11 +1,11 @@
 export const migrations = {
 	0: state => state,
-	1: (state) => {
+	1: state => {
 		// migration to keep only device state
 		const users = {};
 		Object.keys(state.users.users).forEach(key => {
 			const name = state.users.users[key];
-			users[key] = {name, save: true};
+			users[key] = { name, save: true };
 		});
 		return {
 			...state,
@@ -13,6 +13,6 @@ export const migrations = {
 				...state.users,
 				users
 			}
-		}
+		};
 	}
 };
