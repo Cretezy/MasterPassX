@@ -19,4 +19,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # scss
-src/**/*.css
+/src/**/*.css
