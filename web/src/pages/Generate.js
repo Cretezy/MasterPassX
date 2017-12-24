@@ -13,13 +13,14 @@ import {
 	InputGroup,
 	Tooltip
 } from "reactstrap";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { connect } from "react-redux";
-import { createPassword, createSeed, templates } from "masterpassx-core";
+import {CopyToClipboard} from "react-copy-to-clipboard";
+import {connect} from "react-redux";
+import {createPassword, createSeed, templates} from "masterpassx-core";
 
 export default connect(state => ({
 	users: state.users.users,
-	currentUser: state.users.currentUser
+	currentUser: state.users.currentUser,
+	domain: state.session.domain
 }))(
 	class Generate extends React.Component {
 		initialState = {
@@ -32,33 +33,41 @@ export default connect(state => ({
 			copied: false
 		};
 
-		state = this.initialState;
+		constructor(props) {
+			super(props);
+			this.state = this.initialState;
+			this.state.site = this.props.domain || "";
+		}
+
+		componentDidMount(){
+			this.generate();
+		}
 
 		onSiteChange(event) {
 			const site = event.target.value;
-			this.setState({ site }, this.generate);
+			this.setState({site}, this.generate);
 		}
 
 		onTypeChange(event) {
 			const type = event.target.value;
-			this.setState({ type }, this.generate);
+			this.setState({type}, this.generate);
 		}
 
 		onCounterChange(event) {
 			const counter = parseInt(event.target.value, 10) || 1;
-			this.setState({ counter }, this.generate);
+			this.setState({counter}, this.generate);
 		}
 
 		onIncrement(increment) {
 			return () =>
 				this.setState(
-					state => ({ counter: state.counter + increment }),
+					state => ({counter: state.counter + increment}),
 					this.generate
 				);
 		}
 
 		onToggleShowOptions() {
-			this.setState(state => ({ showOptions: !state.showOptions }));
+			this.setState(state => ({showOptions: !state.showOptions}));
 		}
 
 		toggleCounterTooltip() {
@@ -68,7 +77,7 @@ export default connect(state => ({
 		}
 
 		generate() {
-			const { site, type, counter } = this.state;
+			const {site, type, counter} = this.state;
 
 			let password;
 			if (site !== "") {
@@ -92,7 +101,7 @@ export default connect(state => ({
 		}
 
 		onCopy() {
-			this.setState({ copied: true });
+			this.setState({copied: true});
 		}
 
 		render() {
@@ -166,10 +175,10 @@ export default connect(state => ({
 										onClick={() => this.props.history.push("/settings")}
 									>
 										⚙ Settings ({
-											this.props.users[this.props.currentUser].name.split(
-												" "
-											)[0]
-										})
+										this.props.users[this.props.currentUser].name.split(
+											" "
+										)[0]
+									})
 									</Button>
 								</Col>
 								<Col className="p-1" xs={12} sm={6}>

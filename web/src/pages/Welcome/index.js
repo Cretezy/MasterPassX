@@ -22,7 +22,7 @@ export class Welcome extends React.Component {
 				<div className="content">
 					<div className="wide-container">
 						<Row noGutters>
-							<Col xs={12} md={4}>
+							<Col xs={12} md={4} className="px-md-1">
 								<Card body>
 									<CardTitle>Deterministic</CardTitle>
 									<p>
@@ -34,7 +34,7 @@ export class Welcome extends React.Component {
 									</p>
 								</Card>
 							</Col>
-							<Col xs={12} md={4} className="my-3 my-md-0">
+							<Col xs={12} md={4} className="my-3 my-md-0 mx-0 px-md-1">
 								<Card body>
 									<CardTitle>Trustless</CardTitle>
 									<p>
@@ -44,7 +44,7 @@ export class Welcome extends React.Component {
 									</p>
 								</Card>
 							</Col>
-							<Col xs={12} md={4}>
+							<Col xs={12} md={4} className="px-md-1">
 								<Card body>
 									<CardTitle>Safe</CardTitle>
 									<p>

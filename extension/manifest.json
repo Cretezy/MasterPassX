@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "MasterPassX",
+  "version": "0.1.0",
+  "description": "A deterministic stateless password generator.",
+  "homepage_url": "https://masterpassx.cretezy.com",
+  "icons": {
+    "64": "assets/icon64.png",
+    "128": "assets/icon128.png",
+    "256": "assets/icon256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "64": "assets/icon64.png",
+      "128": "assets/icon128.png",
+      "256": "assets/icon256.png"
+    },
+    "default_title": "MasterPassX",
+    "default_popup": "src/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ]
+}
