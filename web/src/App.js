@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStore} from 'redux'
-import {persistStore, persistCombineReducers, createTransform} from 'redux-persist'
+import {persistStore, persistCombineReducers, createTransform, createMigrate} from 'redux-persist'
 import {PersistGate} from 'redux-persist/lib/integration/react'
 import storage from 'localforage'
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
@@ -14,13 +14,17 @@ import {connect, Provider} from "react-redux";
 import AddUser from "./pages/AddUser";
 import Welcome from "./pages/Welcome";
 import Settings from "./pages/Settings";
+import {migrations} from "./migrations";
 
 export default class App extends React.Component {
 	constructor() {
 		super();
 		this.store = createStore(persistCombineReducers(
 			{
-				key: 'masterpassx', storage, transforms: [createTransform(
+				key: 'masterpassx',
+				storage,
+				version: 1,
+				transforms: [createTransform(
 					(state, key) => {
 						// Don't save "no save" users
 						if (key === "users") {
@@ -36,9 +40,10 @@ export default class App extends React.Component {
 							return state;
 						}
 					},
-					(state, key) => state,
+					null,
 					{whitelist: ['users']}
-				)]
+				)],
+				migrate: createMigrate(migrations, {debug: false}),
 			},
 			{users: reducer}
 		), undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
