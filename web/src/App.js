@@ -41,12 +41,14 @@ export default class App extends React.Component {
 						}
 					},
 					(state, key) => {
+						console.log(state, key)
 						if (key === "users") {
+							const users = Object.keys(state.users);
 							let currentUser;
-							if (Object.keys(state.users).length === 0) {
+							if (users.length === 0) {
 								currentUser = null
-							} else if (Object.keys(state.users).includes(state.currentUser)) {
-								currentUser = Object.keys(state.users)[0];
+							} else if (!users.includes(state.currentUser)) {
+								currentUser = users[0];
 							} else {
 								currentUser = state.currentUser;
 							}
