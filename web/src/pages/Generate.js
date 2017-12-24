@@ -76,7 +76,7 @@ export default connect(state => ({
 
 	render() {
 		return (
-			<div>
+			<div className="container content">
 				<header className="text-center">
 					<h3>
 						Generate Password
@@ -89,6 +89,7 @@ export default connect(state => ({
 							<Col sm={10}>
 								<Input
 									name="site"
+									id="site"
 									type="url"
 									className="site"
 									noValidate
@@ -100,7 +101,7 @@ export default connect(state => ({
 						</FormGroup>
 						<div className="password-container w-100 my-3 text-center">
 							<samp
-								className={"d-inline-block w-100 password " + (this.state.password ? "password-active" : "password-idle")}
+								className={"d-inline-block w-100 password " + (this.state.password ? "active" : "idle")}
 							>
 								{this.state.password || "Enter site to start..."}
 							</samp>
@@ -131,7 +132,7 @@ export default connect(state => ({
 									block color="warning"
 									onClick={() => this.props.history.push('/settings')}
 								>
-									⚙ Settings ({this.props.users[this.props.currentUser].split(" ")[0]})
+									⚙ Settings ({this.props.users[this.props.currentUser].name.split(" ")[0]})
 								</Button>
 							</Col>
 							<Col className="p-1" xs={12} sm={6}>
@@ -148,6 +149,7 @@ export default connect(state => ({
 									<Col sm={9}>
 										<Input
 											name="type"
+											id="type"
 											type="select"
 											value={this.state.type}
 											onChange={this.onTypeChange.bind(this)}
@@ -161,7 +163,7 @@ export default connect(state => ({
 								</FormGroup>
 								<FormGroup row className="p-1">
 									<Label for="counter" sm={3} className="text-sm-right text-center">
-										<a href="#" id="counterLabel" className="tooltip-label">Counter</a>
+										<a id="counterLabel" className="tooltip-label">Counter</a>
 										<Tooltip
 											placement="top"
 											isOpen={this.state.counterTooltipOpen}
@@ -174,6 +176,7 @@ export default connect(state => ({
 										<InputGroup>
 											<Input
 												name="counter"
+												id="counter"
 												type="number"
 												min="1"
 												value={this.state.counter}

@@ -2,11 +2,12 @@ export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export function addUser(name, key) {
+export function addUser(name, key, save) {
 	return {
 		type: ADD_USER,
 		name,
-		key
+		key,
+		save
 	}
 }
 

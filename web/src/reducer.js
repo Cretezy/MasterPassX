@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
 		case Actions.ADD_USER:
 			return {
 				...state,
-				users: {...state.users, [action.key]: action.name},
+				users: {...state.users, [action.key]: {name: action.name, save: action.save}},
 				currentUser: action.key
 			};
 		case Actions.REMOVE_USER:

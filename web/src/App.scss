@@ -1,0 +1,69 @@
+body {
+  background-color: #f0f0f0;
+}
+
+@mixin center-flex{
+  //display: flex;
+  //justify-content: center;
+  //padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+.container {
+  max-width: 600px;
+  @include center-flex;
+}
+
+.wide-container {
+  max-width: 1000px;
+  @include center-flex;
+}
+
+.content{
+  padding: 25px 10px 10px 10px;
+}
+
+.password-container {
+  height: 2em;
+}
+
+.password {
+  overflow-wrap: break-word;
+  &.active {
+    color: #bd4147;
+    font-size: 1.5em;
+  }
+
+  &.idle {
+    color: #f8a9ad;
+    font-size: 1em;
+  }
+}
+
+/* Override Bootstrap button outline for mobile */
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Make text overflow in Bootstrap button */
+.btn {
+  white-space: normal !important;
+  word-wrap: break-word;
+}
+
+#banner {
+  background: linear-gradient(70deg, #6294f2 20%, #4e44ca 70%, #302ab6 90%);
+  width: 100%;
+  /*height: 500px;*/
+  padding: 50px;
+}
+
+.tooltip-label {
+  color: #1d588b !important;
+  text-decoration: #1d588b underline !important;
+  &:hover {
+    color: darkblue !important;
+    text-decoration: darkblue underline !important;
+  }
+}

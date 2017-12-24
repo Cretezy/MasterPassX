@@ -25,7 +25,7 @@ export default connect(
 
 	render() {
 		return (
-			<div>
+			<div className="container content">
 				<header className="text-center">
 					<h3>
 						Settings
@@ -35,8 +35,8 @@ export default connect(
 
 				<Card body>
 					<div className="pb-2">
-						{Object.keys(this.props.users).map((key,) => {
-							const name = this.props.users[key];
+						{Object.keys(this.props.users).map((key) => {
+							const name = this.props.users[key].name;
 							const current = this.props.currentUser === key;
 							return (
 								<div key={"user-" + key} className="m-1 d-flex w-100 justify-content-between">

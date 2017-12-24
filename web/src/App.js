@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStore} from 'redux'
-import {persistStore, persistCombineReducers} from 'redux-persist'
+import {persistStore, persistCombineReducers, createTransform} from 'redux-persist'
 import {PersistGate} from 'redux-persist/lib/integration/react'
 import storage from 'localforage'
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
@@ -19,7 +19,27 @@ export default class App extends React.Component {
 	constructor() {
 		super();
 		this.store = createStore(persistCombineReducers(
-			{key: 'masterpassx', storage},
+			{
+				key: 'masterpassx', storage, transforms: [createTransform(
+					(state, key) => {
+						// Don't save "no save" users
+						if (key === "users") {
+							const users = {};
+							Object.keys(state.users).forEach(key => {
+								const user = state.users[key];
+								if (user.save) {
+									users[key] = user;
+								}
+							});
+							return ({...state, users});
+						} else {
+							return state;
+						}
+					},
+					(state, key) => state,
+					{whitelist: ['users']}
+				)]
+			},
 			{users: reducer}
 		), undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 		this.persistor = persistStore(this.store);
@@ -40,24 +60,24 @@ const Router = connect(state => ({users: state.users.users}))(class extends Reac
 	render() {
 		return (
 			<BrowserRouter>
-				<div className="w-100 d-flex align-items-center pt-3 pb-2 px-2">
-					<div className="container">
-						<Switch>
-							{Object.keys(this.props.users).length ?
-								[
-									<Route key="route-home" exact path="/" component={Generate}/>,
-									<Route key="route-settings" exact path="/settings" component={Settings}/>
-								]
-								:
-								[
-									<Route key="route-welcome" exact path="/" component={Welcome}/>
-								]
-							}
-							<Route exact path="/add" component={AddUser}/>
-							<Route path="*" component={() => <Redirect to={{pathname: '/'}}/>}/>
-						</Switch>
-					</div>
-				</div>
+				{/*<div className="w-100 d-flex align-items-center pt-3 pb-2 px-2">*/}
+				{/*<div className="container">*/}
+				<Switch>
+					{Object.keys(this.props.users).length ?
+						[
+							<Route key="route-home" exact path="/" component={Generate}/>,
+							<Route key="route-settings" exact path="/settings" component={Settings}/>
+						]
+						:
+						[
+							<Route key="route-welcome" exact path="/" component={Welcome}/>
+						]
+					}
+					<Route exact path="/add" component={AddUser}/>
+					<Route path="*" component={() => <Redirect to={{pathname: '/'}}/>}/>
+				</Switch>
+				{/*</div>*/}
+				{/*</div>*/}
 			</BrowserRouter>
 		)
 	}
