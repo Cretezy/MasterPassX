@@ -24,7 +24,7 @@ export default connect(
 
 		render() {
 			return (
-				<div className="container content">
+				<div className="normal-container content">
 					<header className="text-center">
 						<h3>Settings</h3>
 						<p>You may add multiple users to MasterPassX.</p>

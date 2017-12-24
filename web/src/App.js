@@ -16,7 +16,7 @@ import "./App.css";
 import Generate from "./pages/Generate";
 import {connect, Provider} from "react-redux";
 import AddUser from "./pages/AddUser";
-import Welcome from "./pages/Welcome";
+import {Welcome} from "./pages/Welcome";
 import Settings from "./pages/Settings";
 import {migrations} from "./redux/migrations";
 import {transforms} from "./redux/transforms";

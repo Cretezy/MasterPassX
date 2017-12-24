@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, CardTitle, Col, Row } from "reactstrap";
-import AddUserForm from "../components/AddUserForm";
-import ExampleGenerator from "../components/ExampleGenerator";
-
-export default class Welcome extends React.Component {
+import AddUserForm from "../../components/AddUserForm";
+import ExampleGenerator from "../../components/ExampleGenerator";
+import "./index.css";
+export class Welcome extends React.Component {
 	render() {
 		return (
 			<div className="text-center">
@@ -21,7 +21,7 @@ export default class Welcome extends React.Component {
 				</div>
 				<div className="content">
 					<div className="wide-container">
-						<Row>
+						<Row noGutters>
 							<Col xs={12} md={4}>
 								<Card body>
 									<CardTitle>Deterministic</CardTitle>
@@ -61,7 +61,7 @@ export default class Welcome extends React.Component {
 
 					<br />
 
-					<div className="container">
+					<div className="normal-container">
 						<Card body>
 							<h6>Never remember another password.</h6>
 							<h6>Get started today.</h6>

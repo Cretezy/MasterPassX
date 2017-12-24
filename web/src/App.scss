@@ -9,7 +9,7 @@ body {
   margin: 0 auto;
   width: 100%;
 }
-.container {
+.normal-container {
   max-width: 600px;
   @include center-flex;
 }
@@ -50,13 +50,6 @@ body {
 .btn {
   white-space: normal !important;
   word-wrap: break-word;
-}
-
-#banner {
-  background: linear-gradient(70deg, #6294f2 20%, #4e44ca 70%, #302ab6 90%);
-  width: 100%;
-  /*height: 500px;*/
-  padding: 50px;
 }
 
 .tooltip-label {

@@ -5,7 +5,7 @@ import AddUserForm from "../components/AddUserForm";
 export default class AddUser extends React.Component {
 	render() {
 		return (
-			<div className="container content">
+			<div className="normal-container content">
 				<header className="text-center">
 					<h3>Add User</h3>
 					<p>

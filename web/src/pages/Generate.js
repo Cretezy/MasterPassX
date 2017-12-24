@@ -97,7 +97,7 @@ export default connect(state => ({
 
 		render() {
 			return (
-				<div className="container content">
+				<div className="normal-container content">
 					<header className="text-center">
 						<h3>Generate Password</h3>
 					</header>
