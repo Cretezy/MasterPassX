@@ -11,17 +11,29 @@ import {
 	Row,
 	InputGroupButton,
 	InputGroup,
-	Tooltip
+	Tooltip, Navbar, NavbarBrand, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Nav,
+	UncontrolledTooltip
 } from "reactstrap";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {connect} from "react-redux";
 import {createPassword, createSeed, templates} from "masterpassx-core";
+import {removeUser, setCurrentUser} from "../redux/actions/users";
 
-export default connect(state => ({
-	users: state.users.users,
-	currentUser: state.users.currentUser,
-	domain: state.session.domain
-}))(
+export default connect(
+	state => ({
+		users: state.users.users,
+		currentUser: state.users.currentUser,
+		domain: state.session.domain
+	}),
+	dispatch => ({
+		setCurrentUser(key) {
+			dispatch(setCurrentUser(key));
+		},
+		removeUser(key) {
+			dispatch(removeUser(key));
+		}
+	})
+)(
 	class Generate extends React.Component {
 		initialState = {
 			password: "",
@@ -29,17 +41,18 @@ export default connect(state => ({
 			counter: 1,
 			type: "long",
 			showOptions: false,
-			counterTooltipOpen: false,
 			copied: false
 		};
 
 		constructor(props) {
 			super(props);
-			this.state = this.initialState;
+
+			// Load /generate site
+			this.state = {...this.initialState};
 			this.state.site = this.props.domain || "";
 		}
 
-		componentDidMount(){
+		componentDidMount() {
 			this.generate();
 		}
 
@@ -70,12 +83,6 @@ export default connect(state => ({
 			this.setState(state => ({showOptions: !state.showOptions}));
 		}
 
-		toggleCounterTooltip() {
-			this.setState(state => ({
-				counterTooltipOpen: !state.counterTooltipOpen
-			}));
-		}
-
 		generate() {
 			const {site, type, counter} = this.state;
 
@@ -104,43 +111,86 @@ export default connect(state => ({
 			this.setState({copied: true});
 		}
 
+		setCurrentUser(key) {
+			return () => {
+				this.props.setCurrentUser(key);
+				this.props.history.push("/");
+			};
+		}
+
 		render() {
 			return (
-				<div className="normal-container content">
-					<header className="text-center">
-						<h3>Generate Password</h3>
-					</header>
-					<Card body>
+				<div>
+					<Navbar color="dark" dark>
+						<div className="container normal-container">
+							<NavbarBrand href={"#"}>Generate</NavbarBrand>
+							<Nav navbar>
+								<UncontrolledDropdown nav>
+									<DropdownToggle nav caret>
+										Users
+									</DropdownToggle>
+									<DropdownMenu right>
+										{Object.keys(this.props.users).map(key => {
+											const user = this.props.users[key];
+											return (
+												<DropdownItem
+													key={"user-" + key}
+													onClick={this.setCurrentUser(key).bind(this)}
+												>
+													{user.name}
+
+												</DropdownItem>
+											);
+										})}
+										<DropdownItem divider/>
+										<DropdownItem onClick={() => this.props.history.push("/add")}>
+											Add User
+										</DropdownItem>
+										<DropdownItem onClick={() =>
+											window.confirm(
+												"Are you sure you want to delete the current user?"
+											) && this.props.removeUser(this.props.currentUser)
+										}>
+											Delete Current User
+										</DropdownItem>
+									</DropdownMenu>
+								</UncontrolledDropdown>
+							</Nav>
+						</div>
+					</Navbar>
+					<div className="normal-container content-navbar">
 						<Form noValidate>
-							<FormGroup row className="p-1">
-								<Label for="site" sm={2} className="text-sm-right text-center">
-									Site
-								</Label>
-								<Col sm={10}>
-									<Input
-										name="site"
-										id="site"
-										type="url"
-										className="site"
-										noValidate
-										value={this.state.site}
-										onChange={this.onSiteChange.bind(this)}
-										placeholder="example.com"
-									/>
-								</Col>
-							</FormGroup>
-							<div className="password-container w-100 my-3 text-center">
-								<samp
-									className={
-										"d-inline-block w-100 password " +
-										(this.state.password ? "active" : "idle")
-									}
-								>
-									{this.state.password || "Enter site to start..."}
-								</samp>
-							</div>
-							<Row noGutters>
-								<Col className="p-1" xs={6}>
+							<Card body className="m-1">
+								<FormGroup row className="">
+									<Label for="site" sm={2} className="text-sm-right text-center">
+										Site
+									</Label>
+									<Col sm={10}>
+										<Input
+											name="site"
+											id="site"
+											type="url"
+											className="site"
+											noValidate
+											value={this.state.site}
+											onChange={this.onSiteChange.bind(this)}
+											placeholder="example.com"
+										/>
+									</Col>
+								</FormGroup>
+								<div className="password-container w-100 mt-1 text-center">
+									<samp
+										className={
+											"d-inline-block w-100 password " +
+											(this.state.password ? "active" : "idle")
+										}
+									>
+										{this.state.password || "Enter site to start..."}
+									</samp>
+								</div>
+							</Card>
+							<Row noGutters className="pt-2">
+								<Col className="p-1" xs={6} sm={4}>
 									<CopyToClipboard
 										text={this.state.password}
 										onCopy={this.onCopy.bind(this)}
@@ -154,7 +204,7 @@ export default connect(state => ({
 										</Button>
 									</CopyToClipboard>
 								</Col>
-								<Col className="p-1" xs={6}>
+								<Col className="p-1" xs={6} sm={4}>
 									<Button
 										block
 										color="danger"
@@ -168,20 +218,7 @@ export default connect(state => ({
 										Reset
 									</Button>
 								</Col>
-								<Col className="p-1" xs={12} sm={6}>
-									<Button
-										block
-										color="warning"
-										onClick={() => this.props.history.push("/settings")}
-									>
-										⚙ Settings ({
-										this.props.users[this.props.currentUser].name.split(
-											" "
-										)[0]
-									})
-									</Button>
-								</Col>
-								<Col className="p-1" xs={12} sm={6}>
+								<Col className="p-1" xs={12} sm={4}>
 									<Button block onClick={this.onToggleShowOptions.bind(this)}>
 										{this.state.showOptions ? "Hide" : "Show"} Options
 									</Button>
@@ -189,7 +226,7 @@ export default connect(state => ({
 							</Row>
 
 							<Collapse isOpen={this.state.showOptions}>
-								<div className="pt-3">
+								<Card body className="m-1 mt-3">
 									<FormGroup row className="p-1">
 										<Label
 											for="type"
@@ -226,15 +263,12 @@ export default connect(state => ({
 											<a id="counterLabel" className="tooltip-label">
 												Counter
 											</a>
-											<Tooltip
+											<UncontrolledTooltip
 												placement="top"
-												isOpen={this.state.counterTooltipOpen}
 												target="counterLabel"
-												toggle={this.toggleCounterTooltip.bind(this)}
 											>
-												Increment this when needing a new password for the same
-												site
-											</Tooltip>
+												Increment this when needing a new password for the same site
+											</UncontrolledTooltip>
 										</Label>
 										<Col sm={9}>
 											<InputGroup>
@@ -264,10 +298,10 @@ export default connect(state => ({
 											</InputGroup>
 										</Col>
 									</FormGroup>
-								</div>
+								</Card>
 							</Collapse>
 						</Form>
-					</Card>
+					</div>
 				</div>
 			);
 		}

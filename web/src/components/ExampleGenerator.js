@@ -1,6 +1,6 @@
 import React from "react";
-import { Input, Col, Label, FormGroup, Form } from "reactstrap";
-import { createPassword, createSeed } from "masterpassx-core";
+import {Input, Col, Label, FormGroup, Form} from "reactstrap";
+import {createPassword, createSeed} from "masterpassx-core";
 
 export default class ExampleGenerator extends React.Component {
 	state = {
@@ -47,36 +47,34 @@ export default class ExampleGenerator extends React.Component {
 		const seed = createSeed(this.key, site, 1);
 		const password = createPassword(seed, "long");
 
-		this.setState({ password, site });
+		this.setState({password, site});
 	}
 
 	render() {
 		return (
 			<div>
-				<Form noValidate>
-					<FormGroup row className="p-1">
-						<Label for="site" sm={2} className="text-sm-right text-center">
-							Site
-						</Label>
-						<Col sm={10}>
-							<Input
-								name="site"
-								type="url"
-								className="site"
-								noValidate
-								value={this.state.site}
-								placeholder="example.com"
-								disabled
-								style={{ backgroundColor: "#ffffff" }}
-							/>
-						</Col>
-					</FormGroup>
-					<div className="password-container w-100 my-3 text-center">
-						<samp className="d-inline-block w-100 password active">
-							{this.state.password || "Enter site to start..."}
-						</samp>
-					</div>
-				</Form>
+				<FormGroup row className="p-1">
+					<Label for="site" sm={2} className="text-sm-right text-center">
+						Site
+					</Label>
+					<Col sm={10}>
+						<Input
+							name="site"
+							type="url"
+							className="site"
+							noValidate
+							value={this.state.site}
+							placeholder="example.com"
+							disabled
+							style={{backgroundColor: "#ffffff"}}
+						/>
+					</Col>
+				</FormGroup>
+				<div className="password-container w-100 my-3 text-center">
+					<samp className="d-inline-block w-100 password active">
+						{this.state.password || "Enter site to start..."}
+					</samp>
+				</div>
 			</div>
 		);
 	}

@@ -23,12 +23,18 @@ body {
   padding: 25px 10px 10px 10px;
 }
 
+.content-navbar{
+  padding: 10px;
+}
+
 .password-container {
   height: 2em;
+
 }
 
 .password {
   overflow-wrap: break-word;
+
   &.active {
     color: #bd4147;
     font-size: 1.5em;
@@ -60,3 +66,15 @@ body {
     text-decoration: darkblue underline !important;
   }
 }
+
+
+/*
+Fix Firefox button/a border
+ */
+*::-moz-focus-inner {
+  border: 0;
+}
+a,button {
+  outline: 0;
+}
+

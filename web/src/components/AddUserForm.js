@@ -8,11 +8,11 @@ import {
 	Input,
 	Row,
 	Tooltip,
-	FormText
+	FormText, UncontrolledTooltip
 } from "reactstrap";
-import { createKey } from "masterpassx-core";
-import { addUser } from "../redux/actions/users";
-import { connect } from "react-redux";
+import {createKey} from "masterpassx-core";
+import {addUser} from "../redux/actions/users";
+import {connect} from "react-redux";
 
 export default connect(null, dispatch => ({
 	addUser(name, key, save) {
@@ -20,28 +20,24 @@ export default connect(null, dispatch => ({
 	}
 }))(
 	class AddUserForm extends React.Component {
-		static defaultProps = {
-			done: () => {}
-		};
-
 		state = {
 			name: "",
 			master: "",
 			loading: false,
 			save: true,
-			saveTooltipOpen: false,
 			nameError: null,
 			passwordError: null,
 			passwordErrorTimer: null
 		};
+
 		nameErrorTimer;
 		passwordErrorTimer;
 
 		onSubmit(event) {
 			event.preventDefault();
-			const { name, master } = this.state;
+			const {name, master} = this.state;
 			if (name.length > 0 && master.length > 0) {
-				this.setState({ loading: true });
+				this.setState({loading: true});
 				// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 				setTimeout(async () => {
 					const key = await createKey(name, master);
@@ -67,10 +63,10 @@ export default connect(null, dispatch => ({
 
 			if (errors.length > 0) {
 				this.nameErrorTimer = setTimeout(() => {
-					this.setState({ nameError: errors.join(" ") });
+					this.setState({nameError: errors.join(" ")});
 				}, 1000);
 			} else {
-				this.setState({ nameError: null });
+				this.setState({nameError: null});
 			}
 		}
 
@@ -96,22 +92,16 @@ export default connect(null, dispatch => ({
 
 			if (errors.length > 0) {
 				this.passwordErrorTimer = setTimeout(() => {
-					this.setState({ passwordError: errors.join(" ") });
+					this.setState({passwordError: errors.join(" ")});
 				}, 1000);
 			} else {
-				this.setState({ passwordError: null });
+				this.setState({passwordError: null});
 			}
 		}
 
 		onSaveChange() {
 			this.setState(state => ({
 				save: !state.save
-			}));
-		}
-
-		toggleSaveTooltip() {
-			this.setState(state => ({
-				saveTooltipOpen: !state.saveTooltipOpen
 			}));
 		}
 
@@ -137,7 +127,7 @@ export default connect(null, dispatch => ({
 							/>
 							<FormText>
 								{this.state.nameError ||
-									"This will need to match exactly on other devices."}
+								"This will need to match exactly on other devices."}
 							</FormText>
 						</Col>
 					</FormGroup>
@@ -156,7 +146,7 @@ export default connect(null, dispatch => ({
 							/>
 							<FormText>
 								{this.state.passwordError ||
-									"Use a long and hard to guess password (or passphrase)."}
+								"Use a long and hard to guess password (or passphrase)."}
 							</FormText>
 						</Col>
 					</FormGroup>
@@ -165,7 +155,7 @@ export default connect(null, dispatch => ({
 						<Col
 							className="p-1 text-center"
 							xs={12}
-							sm={this.props.back ? 4 : 6}
+							sm={6}
 						>
 							<FormGroup check>
 								<Label check for="save" className="pt-2">
@@ -179,11 +169,9 @@ export default connect(null, dispatch => ({
 									<a id="saveLabel" className="tooltip-label">
 										Save User
 									</a>
-									<Tooltip
+									<UncontrolledTooltip
 										placement="top"
-										isOpen={this.state.saveTooltipOpen}
 										target="saveLabel"
-										toggle={this.toggleSaveTooltip.bind(this)}
 									>
 										Enabling saving allows you to keep the user saved (no need
 										to retype name & master password on every load), and only
@@ -191,21 +179,14 @@ export default connect(null, dispatch => ({
 										does not store the master password). Disable this if you are
 										using a shared computer and don't want others to generate
 										passwords for you.
-									</Tooltip>
+									</UncontrolledTooltip>
 								</Label>
 							</FormGroup>
 						</Col>
-						{this.props.back && (
-							<Col className="p-1" xs={6} sm={4}>
-								<Button block onClick={this.props.back}>
-									Back
-								</Button>
-							</Col>
-						)}
 						<Col
 							className="p-1"
-							xs={this.props.back ? 6 : 12}
-							sm={this.props.back ? 4 : 6}
+							xs={12}
+							sm={6}
 						>
 							<Button
 								type="submit"

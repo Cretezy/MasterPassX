@@ -5,7 +5,7 @@ import storage from "localforage";
 
 import userReducer from "./reducers/users";
 import sessionReducer from "./reducers/session";
-import createStore from "redux/es/createStore";
+import createStore from "redux/lib/createStore";
 
 export function setupStore() {
 	const store = createStore(

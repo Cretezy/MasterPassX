@@ -1,6 +1,5 @@
 import React from "react";
 import Generate from "./Generate";
-import Settings from "./Settings";
 import AddUser from "./AddUser";
 import {Welcome} from "./Welcome";
 import {connect} from "react-redux";
@@ -14,28 +13,19 @@ export const Router = connect(state => ({users: state.users.users}), dispatch =>
 				<BrowserRouter>
 					<Switch>
 						{Object.keys(this.props.users).length
-							? [
-								<Route
-									key="route-home"
-									exact
-									path="/"
-									component={Generate}
-								/>,
-								<Route
-									key="route-settings"
-									exact
-									path="/settings"
-									component={Settings}
-								/>
-							]
-							: [
-								<Route
-									key="route-welcome"
-									exact
-									path="/"
-									component={Welcome}
-								/>
-							]}
+							?
+							<Route
+								exact
+								path="/"
+								component={Generate}
+							/>
+							:
+							<Route
+								exact
+								path="/"
+								component={Welcome}
+							/>
+						}
 						<Route exact path="/add" component={AddUser}/>
 						<Route exact path="/generate/:domain" component={({match}) => {
 							this.props.setDomain(match.params.domain);
