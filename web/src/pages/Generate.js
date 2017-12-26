@@ -132,8 +132,10 @@ export default connect(
 									<DropdownMenu right>
 										{Object.keys(this.props.users).map(key => {
 											const user = this.props.users[key];
+											const selected = key === this.props.currentUser;
 											return (
 												<DropdownItem
+													active={selected}
 													key={"user-" + key}
 													onClick={this.setCurrentUser(key).bind(this)}
 												>
