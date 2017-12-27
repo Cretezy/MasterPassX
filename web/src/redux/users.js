@@ -1,13 +1,38 @@
-import * as Actions from "../actions/users";
+export const ADD_USER = "ADD_USER";
+export const REMOVE_USER = "REMOVE_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+export function addUser(name, key, save) {
+	return {
+		type: ADD_USER,
+		name,
+		key,
+		save
+	};
+}
+
+export function removeUser(key) {
+	return {
+		type: REMOVE_USER,
+		key
+	};
+}
+
+export function setCurrentUser(key) {
+	return {
+		type: SET_CURRENT_USER,
+		key
+	};
+}
 
 const initialState = {
 	users: {},
 	currentUser: null
 };
 
-export default function(state = initialState, action) {
+export function reducer(state = initialState, action) {
 	switch (action.type) {
-		case Actions.ADD_USER:
+		case ADD_USER:
 			return {
 				...state,
 				users: {
@@ -16,7 +41,7 @@ export default function(state = initialState, action) {
 				},
 				currentUser: action.key
 			};
-		case Actions.REMOVE_USER:
+		case REMOVE_USER:
 			const users = {};
 			Object.keys(state.users).forEach(key => {
 				if (key !== action.key) {
@@ -33,7 +58,7 @@ export default function(state = initialState, action) {
 				currentUser = state.currentUser;
 			}
 			return { ...state, users, currentUser };
-		case Actions.SET_CURRENT_USER:
+		case SET_CURRENT_USER:
 			return { ...state, currentUser: action.key };
 		default:
 			return state;

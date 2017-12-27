@@ -11,14 +11,28 @@ import {
 	Row,
 	InputGroupButton,
 	InputGroup,
-	Tooltip, Navbar, NavbarBrand, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Nav,
-	UncontrolledTooltip
+	Navbar,
+	NavbarBrand,
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
+	UncontrolledDropdown,
+	Nav,
+	UncontrolledTooltip,
+	NavItem,
+	NavLink,
+	Badge,
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter
 } from "reactstrap";
-import {CopyToClipboard} from "react-copy-to-clipboard";
-import {connect} from "react-redux";
-import {createPassword, createSeed, templates} from "masterpassx-core";
-import {removeUser, setCurrentUser} from "../redux/actions/users";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { connect } from "react-redux";
+import { createPassword, createSeed, templates } from "masterpassx-core";
+import { removeUser, setCurrentUser } from "../redux/users";
 
+// TODO: Separate this file into many parts, it's too long
 export default connect(
 	state => ({
 		users: state.users.users,
@@ -41,50 +55,57 @@ export default connect(
 			counter: 1,
 			type: "long",
 			showOptions: false,
-			copied: false
+			copied: false,
+			showHelp: false,
+			deleteUserModalOpen: false
 		};
 
-		constructor(props) {
-			super(props);
-
-			// Load /generate site
-			this.state = {...this.initialState};
-			this.state.site = this.props.domain || "";
-		}
+		state = { ...this.initialState };
 
 		componentDidMount() {
-			this.generate();
+			// Load /generate site
+			this.setState({ site: this.props.domain }, this.generate);
 		}
 
 		onSiteChange(event) {
 			const site = event.target.value;
-			this.setState({site}, this.generate);
+			this.setState({ site }, this.generate);
 		}
 
 		onTypeChange(event) {
 			const type = event.target.value;
-			this.setState({type}, this.generate);
+			this.setState({ type }, this.generate);
 		}
 
 		onCounterChange(event) {
 			const counter = parseInt(event.target.value, 10) || 1;
-			this.setState({counter}, this.generate);
+			this.setState({ counter }, this.generate);
 		}
 
 		onIncrement(increment) {
 			return () =>
 				this.setState(
-					state => ({counter: state.counter + increment}),
+					state => ({ counter: state.counter + increment }),
 					this.generate
 				);
 		}
 
 		onToggleShowOptions() {
-			this.setState(state => ({showOptions: !state.showOptions}));
+			this.setState(state => ({ showOptions: !state.showOptions }));
+		}
+
+		onToggleShowHelp() {
+			this.setState(state => ({ showHelp: !state.showHelp }));
+		}
+
+		onToggleDeleteUserModal() {
+			this.setState(state => ({
+				deleteUserModalOpen: !state.deleteUserModalOpen
+			}));
 		}
 
 		generate() {
-			const {site, type, counter} = this.state;
+			const { site, type, counter } = this.state;
 
 			let password;
 			if (site !== "") {
@@ -108,7 +129,7 @@ export default connect(
 		}
 
 		onCopy() {
-			this.setState({copied: true});
+			this.setState({ copied: true });
 		}
 
 		setCurrentUser(key) {
@@ -124,6 +145,15 @@ export default connect(
 					<Navbar color="dark" dark>
 						<div className="container normal-container">
 							<NavbarBrand href={"#"}>Generate</NavbarBrand>
+							<Nav navbar className="mr-auto">
+								<NavItem>
+									<NavLink onClick={this.onToggleShowHelp.bind(this)}>
+										<Badge color="secondary" pill>
+											?
+										</Badge>
+									</NavLink>
+								</NavItem>
+							</Nav>
 							<Nav navbar>
 								<UncontrolledDropdown nav>
 									<DropdownToggle nav caret>
@@ -140,19 +170,18 @@ export default connect(
 													onClick={this.setCurrentUser(key).bind(this)}
 												>
 													{user.name}
-
 												</DropdownItem>
 											);
 										})}
-										<DropdownItem divider/>
-										<DropdownItem onClick={() => this.props.history.push("/add")}>
+										<DropdownItem divider />
+										<DropdownItem
+											onClick={() => this.props.history.push("/add")}
+										>
 											Add User
 										</DropdownItem>
-										<DropdownItem onClick={() =>
-											window.confirm(
-												"Are you sure you want to delete the current user?"
-											) && this.props.removeUser(this.props.currentUser)
-										}>
+										<DropdownItem
+											onClick={this.onToggleDeleteUserModal.bind(this)}
+										>
 											Delete Current User
 										</DropdownItem>
 									</DropdownMenu>
@@ -160,11 +189,59 @@ export default connect(
 							</Nav>
 						</div>
 					</Navbar>
+					<Modal
+						isOpen={this.state.deleteUserModalOpen}
+						toggle={this.onToggleDeleteUserModal.bind(this)}
+					>
+						<ModalHeader toggle={this.onToggleDeleteUserModal.bind(this)}>
+							Delete User
+						</ModalHeader>
+						<ModalBody>
+							Are you sure you want to delete{" "}
+							{this.props.users[this.props.currentUser].name}?
+						</ModalBody>
+						<ModalFooter>
+							<Button
+								color="danger"
+								onClick={() => {
+									this.props.removeUser(this.props.currentUser);
+									this.onToggleDeleteUserModal();
+								}}
+							>
+								Delete
+							</Button>{" "}
+							<Button
+								color="secondary"
+								onClick={this.onToggleDeleteUserModal.bind(this)}
+							>
+								Cancel
+							</Button>
+						</ModalFooter>
+					</Modal>
 					<div className="normal-container content-navbar">
+						<Collapse isOpen={this.state.showHelp}>
+							<div className="p-1">
+								<Card body>
+									<p className="text-center">
+										Generate a password based off a site URL/domain or it's
+										name. Password generated are{" "}
+										<strong>
+											never stored and never sent over the network
+										</strong>. It generates secure passwords with different
+										templates (lengths/variations of characters), which are
+										always the same based off the same site and options.
+									</p>
+								</Card>
+							</div>
+						</Collapse>
 						<Form noValidate>
 							<Card body className="m-1">
 								<FormGroup row className="">
-									<Label for="site" sm={2} className="text-sm-right text-center">
+									<Label
+										for="site"
+										sm={2}
+										className="text-sm-right text-center"
+									>
 										Site
 									</Label>
 									<Col sm={10}>
@@ -228,79 +305,83 @@ export default connect(
 							</Row>
 
 							<Collapse isOpen={this.state.showOptions}>
-								<Card body className="m-1 mt-3">
-									<FormGroup row className="p-1">
-										<Label
-											for="type"
-											sm={3}
-											className="text-sm-right text-center"
-										>
-											Type
-										</Label>
-										<Col sm={9}>
-											<Input
-												name="type"
-												id="type"
-												type="select"
-												value={this.state.type}
-												onChange={this.onTypeChange.bind(this)}
+								<div className="m-1 mt-3">
+									<Card body>
+										<FormGroup row className="p-1">
+											<Label
+												toggleHelp
+												for="type"
+												sm={3}
+												className="text-sm-right text-center"
 											>
-												{Object.keys(templates).map(type => {
-													const name = templates[type];
-													return (
-														<option key={"type-" + type} value={type}>
-															{name}
-														</option>
-													);
-												})}
-											</Input>
-										</Col>
-									</FormGroup>
-									<FormGroup row className="p-1">
-										<Label
-											for="counter"
-											sm={3}
-											className="text-sm-right text-center"
-										>
-											<a id="counterLabel" className="tooltip-label">
-												Counter
-											</a>
-											<UncontrolledTooltip
-												placement="top"
-												target="counterLabel"
-											>
-												Increment this when needing a new password for the same site
-											</UncontrolledTooltip>
-										</Label>
-										<Col sm={9}>
-											<InputGroup>
+												Type
+											</Label>
+											<Col sm={9}>
 												<Input
-													name="counter"
-													id="counter"
-													type="number"
-													min="1"
-													value={this.state.counter}
-													onChange={this.onCounterChange.bind(this)}
-												/>
-												<InputGroupButton>
-													<Button
-														color="success"
-														onClick={this.onIncrement(1).bind(this)}
-													>
-														+
-													</Button>
-													<Button
-														color="danger"
-														disabled={this.state.counter <= 1}
-														onClick={this.onIncrement(-1).bind(this)}
-													>
-														-
-													</Button>
-												</InputGroupButton>
-											</InputGroup>
-										</Col>
-									</FormGroup>
-								</Card>
+													name="type"
+													id="type"
+													type="select"
+													value={this.state.type}
+													onChange={this.onTypeChange.bind(this)}
+												>
+													{Object.keys(templates).map(type => {
+														const name = templates[type];
+														return (
+															<option key={"type-" + type} value={type}>
+																{name}
+															</option>
+														);
+													})}
+												</Input>
+											</Col>
+										</FormGroup>
+										<FormGroup row className="p-1">
+											<Label
+												for="counter"
+												sm={3}
+												className="text-sm-right text-center"
+											>
+												<a id="counterLabel" className="tooltip-label">
+													Counter
+												</a>
+												<UncontrolledTooltip
+													placement="top"
+													target="counterLabel"
+												>
+													Increment this when needing a new password for the
+													same site
+												</UncontrolledTooltip>
+											</Label>
+											<Col sm={9}>
+												<InputGroup>
+													<Input
+														name="counter"
+														id="counter"
+														type="number"
+														min="1"
+														value={this.state.counter}
+														onChange={this.onCounterChange.bind(this)}
+													/>
+													<InputGroupButton>
+														<Button
+															color="success"
+															onClick={this.onIncrement(1).bind(this)}
+														>
+															+
+														</Button>
+														<Button
+															color="danger"
+															disabled={this.state.counter <= 1}
+															onClick={this.onIncrement(-1).bind(this)}
+														>
+															-
+														</Button>
+													</InputGroupButton>
+												</InputGroup>
+											</Col>
+										</FormGroup>
+									</Card>
+								</div>
 							</Collapse>
 						</Form>
 					</div>

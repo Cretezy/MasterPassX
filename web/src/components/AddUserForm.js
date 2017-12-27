@@ -8,11 +8,12 @@ import {
 	Input,
 	Row,
 	Tooltip,
-	FormText, UncontrolledTooltip
+	FormText,
+	UncontrolledTooltip
 } from "reactstrap";
-import {createKey} from "masterpassx-core";
-import {addUser} from "../redux/actions/users";
-import {connect} from "react-redux";
+import { createKey } from "masterpassx-core";
+import { addUser } from "../redux/users";
+import { connect } from "react-redux";
 
 export default connect(null, dispatch => ({
 	addUser(name, key, save) {
@@ -35,9 +36,9 @@ export default connect(null, dispatch => ({
 
 		onSubmit(event) {
 			event.preventDefault();
-			const {name, master} = this.state;
+			const { name, master } = this.state;
 			if (name.length > 0 && master.length > 0) {
-				this.setState({loading: true});
+				this.setState({ loading: true });
 				// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 				setTimeout(async () => {
 					const key = await createKey(name, master);
@@ -63,10 +64,10 @@ export default connect(null, dispatch => ({
 
 			if (errors.length > 0) {
 				this.nameErrorTimer = setTimeout(() => {
-					this.setState({nameError: errors.join(" ")});
+					this.setState({ nameError: errors.join(" ") });
 				}, 1000);
 			} else {
-				this.setState({nameError: null});
+				this.setState({ nameError: null });
 			}
 		}
 
@@ -92,10 +93,10 @@ export default connect(null, dispatch => ({
 
 			if (errors.length > 0) {
 				this.passwordErrorTimer = setTimeout(() => {
-					this.setState({passwordError: errors.join(" ")});
+					this.setState({ passwordError: errors.join(" ") });
 				}, 1000);
 			} else {
-				this.setState({passwordError: null});
+				this.setState({ passwordError: null });
 			}
 		}
 
@@ -127,7 +128,7 @@ export default connect(null, dispatch => ({
 							/>
 							<FormText>
 								{this.state.nameError ||
-								"This will need to match exactly on other devices."}
+									"This will need to match exactly on other devices."}
 							</FormText>
 						</Col>
 					</FormGroup>
@@ -146,17 +147,13 @@ export default connect(null, dispatch => ({
 							/>
 							<FormText>
 								{this.state.passwordError ||
-								"Use a long and hard to guess password (or passphrase)."}
+									"Use a long and hard to guess password (or passphrase)."}
 							</FormText>
 						</Col>
 					</FormGroup>
 
 					<Row noGutters>
-						<Col
-							className="p-1 text-center"
-							xs={12}
-							sm={6}
-						>
+						<Col className="p-1 text-center" xs={12} sm={6}>
 							<FormGroup check>
 								<Label check for="save" className="pt-2">
 									<Input
@@ -169,10 +166,7 @@ export default connect(null, dispatch => ({
 									<a id="saveLabel" className="tooltip-label">
 										Save User
 									</a>
-									<UncontrolledTooltip
-										placement="top"
-										target="saveLabel"
-									>
+									<UncontrolledTooltip placement="top" target="saveLabel">
 										Enabling saving allows you to keep the user saved (no need
 										to retype name & master password on every load), and only
 										stores the generated key from name & master password (it
@@ -183,11 +177,7 @@ export default connect(null, dispatch => ({
 								</Label>
 							</FormGroup>
 						</Col>
-						<Col
-							className="p-1"
-							xs={12}
-							sm={6}
-						>
+						<Col className="p-1" xs={12} sm={6}>
 							<Button
 								type="submit"
 								block

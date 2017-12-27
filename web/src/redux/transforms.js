@@ -1,4 +1,4 @@
-import {createTransform} from "redux-persist";
+import { createTransform } from "redux-persist";
 
 export const transforms = [
 	createTransform(
@@ -12,7 +12,7 @@ export const transforms = [
 						users[key] = user;
 					}
 				});
-				return {...state, users};
+				return { ...state, users };
 			} else {
 				return state;
 			}
@@ -29,11 +29,11 @@ export const transforms = [
 				} else {
 					currentUser = state.currentUser;
 				}
-				return {...state, currentUser};
+				return { ...state, currentUser };
 			} else {
 				return state;
 			}
 		},
-		{whitelist: ["users"]}
+		{ whitelist: ["users"] }
 	)
 ];

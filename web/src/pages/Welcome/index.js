@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardTitle, Col, Row} from "reactstrap";
+import { Card, CardTitle, Col, Row } from "reactstrap";
 import AddUserForm from "../../components/AddUserForm";
 import ExampleGenerator from "../../components/ExampleGenerator";
 import "./index.css";
@@ -16,7 +16,7 @@ export class Welcome extends React.Component {
 						</h6>
 
 						<Card body className="mt-5">
-							<ExampleGenerator/>
+							<ExampleGenerator />
 						</Card>
 					</div>
 				</div>
@@ -60,18 +60,18 @@ export class Welcome extends React.Component {
 						</Row>
 					</div>
 
-					<br/>
+					<br />
 
 					<div className="normal-container">
 						<Card body>
 							<h6>Never remember another password.</h6>
 							<h6>Get started today.</h6>
 							<div className="mt-2">
-								<AddUserForm hideBackButton/>
+								<AddUserForm hideBackButton />
 							</div>
 						</Card>
 
-						<br/>
+						<br />
 
 						<Card body>
 							<p>

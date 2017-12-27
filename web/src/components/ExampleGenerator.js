@@ -1,6 +1,6 @@
 import React from "react";
-import {Input, Col, Label, FormGroup, Form} from "reactstrap";
-import {createPassword, createSeed} from "masterpassx-core";
+import { Input, Col, Label, FormGroup, Form } from "reactstrap";
+import { createPassword, createSeed } from "masterpassx-core";
 
 export default class ExampleGenerator extends React.Component {
 	state = {
@@ -47,7 +47,7 @@ export default class ExampleGenerator extends React.Component {
 		const seed = createSeed(this.key, site, 1);
 		const password = createPassword(seed, "long");
 
-		this.setState({password, site});
+		this.setState({ password, site });
 	}
 
 	render() {
@@ -66,7 +66,7 @@ export default class ExampleGenerator extends React.Component {
 							value={this.state.site}
 							placeholder="example.com"
 							disabled
-							style={{backgroundColor: "#ffffff"}}
+							style={{ backgroundColor: "#ffffff" }}
 						/>
 					</Col>
 				</FormGroup>

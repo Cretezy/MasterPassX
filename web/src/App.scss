@@ -1,14 +1,14 @@
+@import "./bootstrap/bootstrap.scss";
+
 body {
   background-color: #f0f0f0;
 }
 
-@mixin center-flex{
-  //display: flex;
-  //justify-content: center;
-  //padding: 20px;
+@mixin center-flex {
   margin: 0 auto;
   width: 100%;
 }
+
 .normal-container {
   max-width: 600px;
   @include center-flex;
@@ -19,11 +19,11 @@ body {
   @include center-flex;
 }
 
-.content{
+.content {
   padding: 25px 10px 10px 10px;
 }
 
-.content-navbar{
+.content-navbar {
   padding: 10px;
 }
 
@@ -52,12 +52,6 @@ body {
   box-shadow: none !important;
 }
 
-/* Make text overflow in Bootstrap button */
-.btn {
-  white-space: normal !important;
-  word-wrap: break-word;
-}
-
 .tooltip-label {
   color: #1d588b !important;
   text-decoration: #1d588b underline !important;
@@ -67,14 +61,14 @@ body {
   }
 }
 
-
 /*
 Fix Firefox button/a border
  */
 *::-moz-focus-inner {
   border: 0;
 }
-a,button {
+
+a, button {
   outline: 0;
 }
 
