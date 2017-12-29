@@ -29,11 +29,11 @@
 		frame.src = "https://masterpassx.cretezy.com/generate/" + hostname;
 
 		if (windowed) {
-			frame.width = "600px";
-			frame.height = "350px";
+			frame.style.width = "600px";
+			frame.style.height = "350px";
 		} else {
-			frame.width = "100%";
-			frame.height = "100%";
+			frame.style.width = "100vw";
+			frame.style.height = "100vh";
 		}
 
 		document.body.appendChild(frame);
