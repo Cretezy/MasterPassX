@@ -10,8 +10,9 @@ import {
 	NavLink
 } from "reactstrap";
 import AddUserForm from "../components/AddUserForm";
+import {Footer} from "../components/Footer";
 
-export default class AddUser extends React.Component {
+export class AddUser extends React.Component {
 	state = {
 		showHelp: false
 	};
@@ -64,6 +65,7 @@ export default class AddUser extends React.Component {
 							done={() => this.props.history.push("/")}
 						/>
 					</Card>
+					<Footer />
 				</div>
 			</div>
 		);

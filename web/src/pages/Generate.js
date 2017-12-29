@@ -31,9 +31,10 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createPassword, createSeed, templates } from "masterpassx-core";
 import { removeUser, setCurrentUser } from "../redux/users";
+import {Footer} from "../components/Footer";
 
 // TODO: Separate this file into many parts, it's too long
-export default connect(
+export const Generate = connect(
 	state => ({
 		users: state.users.users,
 		currentUser: state.users.currentUser,
@@ -384,6 +385,7 @@ export default connect(
 								</div>
 							</Collapse>
 						</Form>
+						<Footer />
 					</div>
 				</div>
 			);

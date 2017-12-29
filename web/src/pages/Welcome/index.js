@@ -3,6 +3,7 @@ import { Card, CardTitle, Col, Row } from "reactstrap";
 import AddUserForm from "../../components/AddUserForm";
 import ExampleGenerator from "../../components/ExampleGenerator";
 import "./index.css";
+import {Footer} from "../../components/Footer";
 
 export class Welcome extends React.Component {
 	render() {
@@ -95,6 +96,7 @@ export class Welcome extends React.Component {
 								algorithm and idea.
 							</p>
 						</Card>
+						<Footer />
 					</div>
 				</div>
 			</div>
