@@ -24,8 +24,8 @@ export function About({history}) {
 				</div>
 			</Navbar>
 
-			<div className="normal-container content-navbar p-1">
-				<Card body>
+			<div className="normal-container content-navbar">
+				<Card body className="m-1">
 					<p className="text-center">
 						MasterPassX is free as in beer (no money) and as in freedom
 						(open source). It is shared under the MIT license and can be{" "}
