@@ -5,8 +5,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { setDomain } from "../redux/session";
 
 import { Welcome } from "./Welcome";
-import { Generate } from "./Generate";
-import { AddUser } from "./AddUser";
+import { Generate } from "./Generate/index";
+import { AddUser } from "./AddUser/index";
 import { About } from "./About";
 
 export const Router = connect(

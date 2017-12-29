@@ -11,26 +11,18 @@ import {
 	Row,
 	InputGroupButton,
 	InputGroup,
-	Navbar,
-	NavbarBrand,
-	DropdownItem,
-	DropdownMenu,
-	DropdownToggle,
-	UncontrolledDropdown,
-	Nav,
-	UncontrolledTooltip,
-	NavItem,
-	NavLink,
-	Badge
+	UncontrolledTooltip
 } from "reactstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createPassword, createSeed, templates } from "masterpassx-core";
-import { removeUser, setCurrentUser } from "../redux/users";
-import { Footer } from "../components/Footer";
-import { DeleteUserModel } from "../components/DeleteUserModal";
+import { removeUser, setCurrentUser } from "../../redux/users";
+import { Footer } from "../../components/Footer";
+import { DeleteUserModel } from "../../components/DeleteUserModal";
+import { PasswordDisplay } from "../../components/PasswordDisplay/index";
+import { Header } from "./Header";
+import { Help } from "../../components/Help";
 
-// TODO: Separate this file into many parts, it's too long
 export const Generate = connect(
 	state => ({
 		users: state.users.users,
@@ -61,7 +53,7 @@ export const Generate = connect(
 		state = { ...this.initialState };
 
 		componentDidMount() {
-			// Load /generate site
+			// Load site stored in session from /generate
 			this.setState({ site: this.props.domain }, this.generate);
 		}
 
@@ -92,7 +84,7 @@ export const Generate = connect(
 			this.setState(state => ({ showOptions: !state.showOptions }));
 		}
 
-		onToggleShowHelp() {
+		onToggleHelp() {
 			this.setState(state => ({ showHelp: !state.showHelp }));
 		}
 
@@ -131,10 +123,8 @@ export const Generate = connect(
 		}
 
 		setCurrentUser(key) {
-			return () => {
-				this.props.setCurrentUser(key);
-				this.props.history.push("/");
-			};
+			this.props.setCurrentUser(key);
+			this.props.history.push("/");
 		}
 
 		get currentUser() {
@@ -144,79 +134,35 @@ export const Generate = connect(
 		render() {
 			return (
 				<div>
-					<Navbar color="dark" dark>
-						<div className="container normal-container">
-							<NavbarBrand href={"#"}>Generate</NavbarBrand>
-							<Nav navbar className="mr-auto">
-								<NavItem>
-									<NavLink onClick={this.onToggleShowHelp.bind(this)}>
-										<Badge color="secondary" pill>
-											?
-										</Badge>
-									</NavLink>
-								</NavItem>
-							</Nav>
-							<Nav navbar>
-								<UncontrolledDropdown nav>
-									<DropdownToggle nav caret>
-										Users
-									</DropdownToggle>
-									<DropdownMenu right>
-										{Object.keys(this.props.users).map(key => {
-											const user = this.props.users[key];
-											const selected = key === this.props.currentUser;
-											return (
-												<DropdownItem
-													disabled={selected}
-													key={"user-" + key}
-													onClick={this.setCurrentUser(key).bind(this)}
-												>
-													{user.name}
-												</DropdownItem>
-											);
-										})}
-										<DropdownItem divider />
-										<DropdownItem
-											onClick={() => this.props.history.push("/add")}
-										>
-											Add User
-										</DropdownItem>
-										<DropdownItem
-											onClick={this.onToggleDeleteUserModal.bind(this)}
-										>
-											Delete Current User
-										</DropdownItem>
-									</DropdownMenu>
-								</UncontrolledDropdown>
-							</Nav>
-						</div>
-					</Navbar>
+					<Header
+						onToggleHelp={this.onToggleHelp.bind(this)}
+						setCurrentUser={this.setCurrentUser.bind(this)}
+						addUser={() => this.props.history.push("/add")}
+						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(this)}
+						users={this.props.users}
+						currentUser={this.props.currentUser}
+					/>
+
 					<DeleteUserModel
 						open={this.state.deleteUserModalOpen}
 						onToggle={this.onToggleDeleteUserModal.bind(this)}
 						onDelete={() => {
 							this.props.removeUser(this.props.currentUser);
-							// this.onToggleDeleteUserModal();
 							this.onReset();
 						}}
 						name={this.currentUser.name}
 					/>
+
 					<div className="normal-container content-navbar">
-						<Collapse isOpen={this.state.showHelp}>
-							<div className="p-1">
-								<Card body>
-									<p className="text-center">
-										Generate a password based off a site URL/domain or it's
-										name. Password generated are{" "}
-										<strong>
-											never stored and never sent over the network
-										</strong>. It generates secure passwords with different
-										templates (lengths/variations of characters), which are
-										always the same based off the same site and options.
-									</p>
-								</Card>
-							</div>
-						</Collapse>
+						<Help isOpen={this.state.showHelp}>
+							Generate a password based off a site URL/domain or it's name.
+							Password generated are{" "}
+							<strong>never stored and never sent over the network</strong>. It
+							generates secure passwords with different templates
+							(lengths/variations of characters), which are always the same
+							based off the same site and options.
+						</Help>
+
 						<Form noValidate>
 							<Card body className="m-1">
 								<FormGroup row className="">
@@ -240,16 +186,7 @@ export const Generate = connect(
 										/>
 									</Col>
 								</FormGroup>
-								<div className="password-container w-100 mt-1 text-center">
-									<samp
-										className={
-											"d-inline-block w-100 password " +
-											(this.state.password ? "active" : "idle")
-										}
-									>
-										{this.state.password || "Enter site to start..."}
-									</samp>
-								</div>
+								<PasswordDisplay password={this.state.password} />
 							</Card>
 							<Row noGutters className="pt-2">
 								<Col className="p-1" xs={6} sm={4}>

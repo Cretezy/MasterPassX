@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Col, Label, FormGroup } from "reactstrap";
 import { createPassword, createSeed } from "masterpassx-core";
+import { PasswordDisplay } from "./PasswordDisplay";
 
 export default class ExampleGenerator extends React.Component {
 	state = {
@@ -70,11 +71,7 @@ export default class ExampleGenerator extends React.Component {
 						/>
 					</Col>
 				</FormGroup>
-				<div className="password-container w-100 my-3 text-center">
-					<samp className="d-inline-block w-100 password active">
-						{this.state.password || "Enter site to start..."}
-					</samp>
-				</div>
+				<PasswordDisplay password={this.state.password} />
 			</div>
 		);
 	}

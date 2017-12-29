@@ -4,19 +4,19 @@ body {
   background-color: #f0f0f0;
 }
 
-@mixin center-flex {
+@mixin container {
   margin: 0 auto;
   width: 100%;
 }
 
 .normal-container {
   max-width: 600px;
-  @include center-flex;
+  @include container;
 }
 
 .wide-container {
   max-width: 1000px;
-  @include center-flex;
+  @include container;
 }
 
 .content {
@@ -27,24 +27,6 @@ body {
   padding: 10px;
 }
 
-.password-container {
-  height: 2em;
-
-}
-
-.password {
-  overflow-wrap: break-word;
-
-  &.active {
-    color: #bd4147;
-    font-size: 1.5em;
-  }
-
-  &.idle {
-    color: #f8a9ad;
-    font-size: 1em;
-  }
-}
 
 /* Override Bootstrap button outline for mobile */
 .btn:focus, .btn:active {

@@ -1,0 +1,17 @@
+.password-container {
+  height: 2em;
+}
+
+.password {
+  overflow-wrap: break-word;
+
+  &.active {
+    color: #bd4147;
+    font-size: 1.5em;
+  }
+
+  &.idle {
+    color: #f8a9ad;
+    font-size: 1em;
+  }
+}
