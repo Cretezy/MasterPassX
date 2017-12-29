@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
   "name": "MasterPassX",
-  "version": "0.1.4",
+  "version": "1.0.0",
+  "license": "MIT",
   "description": "A deterministic stateless password generator.",
   "homepage_url": "https://masterpassx.cretezy.com",
   "icons": {
