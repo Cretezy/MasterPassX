@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Col, Label, FormGroup } from "reactstrap";
-import { createPassword, createSeed } from "masterpassx-core";
+import { createPassword } from "masterpassx-core";
 import { PasswordDisplay } from "./PasswordDisplay";
 
 export default class ExampleGenerator extends React.Component {
@@ -11,24 +11,33 @@ export default class ExampleGenerator extends React.Component {
 
 	timer;
 	sitesIndex = 0;
-	sites = ["google.com", "facebook.com", "twitter.com", "reddit.com"];
+	sites = [
+		"google.com",
+		"facebook.com",
+		"twitter.com",
+		"reddit.com",
+		"amazon.com",
+		"netflix.com"
+	];
 
 	componentDidMount() {
-		// Generate a random key
-		this.key = "";
-		const hexChars = "0123456789abcdef";
-		for (let x = 0; x < 128; x++) {
-			this.key += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
-		}
-
 		// Shuffle sites (Fisher-Yates)
 		for (let i = this.sites.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
 			[this.sites[i], this.sites[j]] = [this.sites[j], this.sites[i]];
 		}
 
-		this.timer = setInterval(this.changeSite.bind(this), 3000);
+		this.timer = setInterval(this.changeSite.bind(this), 2500);
 		this.changeSite();
+	}
+
+	static generateNewSeed() {
+		let seed = "";
+		const hexChars = "0123456789abcdef";
+		for (let x = 0; x < 64; x++) {
+			seed += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+		}
+		return seed;
 	}
 
 	componentWillUnmount() {
@@ -45,9 +54,7 @@ export default class ExampleGenerator extends React.Component {
 	}
 
 	generate(site) {
-		const seed = createSeed(this.key, site, 1);
-		const password = createPassword(seed, "long");
-
+		const password = createPassword(ExampleGenerator.generateNewSeed(), "long");
 		this.setState({ password, site });
 	}
 
