@@ -7,7 +7,6 @@ import {
 	Col,
 	Input,
 	Row,
-	Tooltip,
 	FormText,
 	UncontrolledTooltip
 } from "reactstrap";
@@ -21,6 +20,10 @@ export default connect(null, dispatch => ({
 	}
 }))(
 	class AddUserForm extends React.Component {
+		static defaultProps = {
+			done() {}
+		};
+
 		state = {
 			name: "",
 			master: "",

@@ -10,7 +10,7 @@ import {
 	NavLink
 } from "reactstrap";
 import AddUserForm from "../components/AddUserForm";
-import {Footer} from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export class AddUser extends React.Component {
 	state = {

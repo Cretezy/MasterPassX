@@ -21,17 +21,14 @@ import {
 	UncontrolledTooltip,
 	NavItem,
 	NavLink,
-	Badge,
-	Modal,
-	ModalHeader,
-	ModalBody,
-	ModalFooter
+	Badge
 } from "reactstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createPassword, createSeed, templates } from "masterpassx-core";
 import { removeUser, setCurrentUser } from "../redux/users";
-import {Footer} from "../components/Footer";
+import { Footer } from "../components/Footer";
+import { DeleteUserModel } from "../components/DeleteUserModal";
 
 // TODO: Separate this file into many parts, it's too long
 export const Generate = connect(
@@ -140,6 +137,10 @@ export const Generate = connect(
 			};
 		}
 
+		get currentUser() {
+			return this.props.users[this.props.currentUser];
+		}
+
 		render() {
 			return (
 				<div>
@@ -166,7 +167,7 @@ export const Generate = connect(
 											const selected = key === this.props.currentUser;
 											return (
 												<DropdownItem
-													active={selected}
+													disabled={selected}
 													key={"user-" + key}
 													onClick={this.setCurrentUser(key).bind(this)}
 												>
@@ -190,35 +191,16 @@ export const Generate = connect(
 							</Nav>
 						</div>
 					</Navbar>
-					<Modal
-						isOpen={this.state.deleteUserModalOpen}
-						toggle={this.onToggleDeleteUserModal.bind(this)}
-					>
-						<ModalHeader toggle={this.onToggleDeleteUserModal.bind(this)}>
-							Delete User
-						</ModalHeader>
-						<ModalBody>
-							Are you sure you want to delete{" "}
-							{this.props.users[this.props.currentUser].name}?
-						</ModalBody>
-						<ModalFooter>
-							<Button
-								color="danger"
-								onClick={() => {
-									this.props.removeUser(this.props.currentUser);
-									this.onToggleDeleteUserModal();
-								}}
-							>
-								Delete
-							</Button>{" "}
-							<Button
-								color="secondary"
-								onClick={this.onToggleDeleteUserModal.bind(this)}
-							>
-								Cancel
-							</Button>
-						</ModalFooter>
-					</Modal>
+					<DeleteUserModel
+						open={this.state.deleteUserModalOpen}
+						onToggle={this.onToggleDeleteUserModal.bind(this)}
+						onDelete={() => {
+							this.props.removeUser(this.props.currentUser);
+							// this.onToggleDeleteUserModal();
+							this.onReset();
+						}}
+						name={this.currentUser.name}
+					/>
 					<div className="normal-container content-navbar">
 						<Collapse isOpen={this.state.showHelp}>
 							<div className="p-1">
@@ -310,7 +292,6 @@ export const Generate = connect(
 									<Card body>
 										<FormGroup row className="p-1">
 											<Label
-												toggleHelp
 												for="type"
 												sm={3}
 												className="text-sm-right text-center"

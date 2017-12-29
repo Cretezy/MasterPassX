@@ -3,7 +3,8 @@ import { Card, CardTitle, Col, Row } from "reactstrap";
 import AddUserForm from "../../components/AddUserForm";
 import ExampleGenerator from "../../components/ExampleGenerator";
 import "./index.css";
-import {Footer} from "../../components/Footer";
+import { Footer } from "../../components/Footer";
+import { AboutText } from "../../components/AboutText";
 
 export class Welcome extends React.Component {
 	render() {
@@ -74,28 +75,7 @@ export class Welcome extends React.Component {
 
 						<br />
 
-						<Card body>
-							<p>
-								MasterPassX is free as in beer (no money) and as in freedom
-								(open source). It is shared under the MIT license and can be{" "}
-								<a
-									target="_blank"
-									rel="noopener noreferrer"
-									href="https://github.com/Cretezy/MasterPassX"
-								>
-									viewed on Github
-								</a>{" "}
-								with more information. It is based upon the original{" "}
-								<a
-									target="_blank"
-									rel="noopener noreferrer"
-									href="http://masterpasswordapp.com"
-								>
-									MasterPassword
-								</a>{" "}
-								algorithm and idea.
-							</p>
-						</Card>
+						<AboutText />
 						<Footer />
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Col, Label, FormGroup, Form } from "reactstrap";
+import { Input, Col, Label, FormGroup } from "reactstrap";
 import { createPassword, createSeed } from "masterpassx-core";
 
 export default class ExampleGenerator extends React.Component {
