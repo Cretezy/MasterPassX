@@ -122,9 +122,9 @@ export const Generate = connect(
 			this.setState({ copied: true });
 		}
 
-		setCurrentUser(key) {
+		onSwitchUser(key) {
 			this.props.setCurrentUser(key);
-			this.props.history.push("/");
+			this.onReset();
 		}
 
 		get currentUser() {
@@ -136,7 +136,7 @@ export const Generate = connect(
 				<div>
 					<Header
 						onToggleHelp={this.onToggleHelp.bind(this)}
-						setCurrentUser={this.setCurrentUser.bind(this)}
+						onSwitchUser={this.onSwitchUser.bind(this)}
 						addUser={() => this.props.history.push("/add")}
 						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(this)}
 						users={this.props.users}

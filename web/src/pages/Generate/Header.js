@@ -12,7 +12,7 @@ import { NavbarHelpButton } from "../../components/NavbarHelpButton";
 
 export function Header({
 	onToggleHelp,
-	setCurrentUser,
+	                       onSwitchUser,
 	addUser,
 	onToggleDeleteUserModal,
 	users,
@@ -36,7 +36,7 @@ export function Header({
 									<DropdownItem
 										disabled={selected}
 										key={"user-" + key}
-										onClick={() => setCurrentUser(key)}
+										onClick={() => onSwitchUser(key)}
 									>
 										{user.name}
 									</DropdownItem>
