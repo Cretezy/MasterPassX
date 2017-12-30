@@ -8,3 +8,11 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
