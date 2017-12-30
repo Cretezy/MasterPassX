@@ -13,6 +13,6 @@
   for = "/*"
   [headers.values]
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'self' cloudfront.net"
+    Content-Security-Policy = "default-src 'self' *.cloudfront.net"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer"
