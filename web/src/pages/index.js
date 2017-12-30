@@ -8,6 +8,7 @@ import { Welcome } from "./Welcome";
 import { Generate } from "./Generate/index";
 import { AddUser } from "./AddUser/index";
 import { About } from "./About";
+// import {Security} from "./Security";
 
 export const Router = connect(
 	state => ({ users: state.users.users }),
@@ -31,6 +32,7 @@ export const Router = connect(
 							}}
 						/>
 						<Route exact path="/about" component={About} />
+						{/*<Route exact path="/security" component={Security} />*/}
 						<Route
 							path="*"
 							component={() => <Redirect to={{ pathname: "/" }} />}

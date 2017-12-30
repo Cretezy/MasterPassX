@@ -12,7 +12,7 @@ import { NavbarHelpButton } from "../../components/NavbarHelpButton";
 
 export function Header({
 	onToggleHelp,
-	                       onSwitchUser,
+	onSwitchUser,
 	addUser,
 	onToggleDeleteUserModal,
 	users,
