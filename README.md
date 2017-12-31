@@ -5,3 +5,5 @@
 ## [Core](core/README.md)
 
 ## [Extensions](extension/README.md)
+
+## [CLI](cli/README.md)

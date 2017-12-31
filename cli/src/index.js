@@ -11,7 +11,7 @@ const { templates, createKey, createSeed, createPassword } = core;
 (async () => {
 	// Setup program
 	program
-		.version("0.1.0")
+		.version("0.1.3")
 		.usage("[options] <site>")
 		.option("-t, --template <template>", "Set template (default: long)", "long")
 		.option("-c, --counter <counter>", "Set counter (default: 1)", parseInt, 1)
@@ -19,7 +19,7 @@ const { templates, createKey, createSeed, createPassword } = core;
 		.option("-n, --no-save", "Don't save user information", false)
 		.option(
 			"-p, --config-path <path>",
-			"Path to config (default: ~/.config/masterpassx",
+			"Path to config (default: ~/.config/masterpassx)",
 			path.join(os.homedir(), ".config", "masterpassx")
 		)
 		.parse(process.argv);
@@ -36,18 +36,18 @@ const { templates, createKey, createSeed, createPassword } = core;
 		errors.push(
 			"Template is invalid. Choose from: " +
 				Object.keys(templates).join(", ") +
-				"."
+				". (default: long)"
 		);
 	}
 
 	if (isNaN(counter) || counter < 1) {
 		errors.push(
-			"Counter is invalid. Please use an integer higher or equal to 1."
+			"Counter is invalid. Please use an integer higher or equal to 1. (default: 1)"
 		);
 	}
 
 	if (save && !configPath) {
-		errors.push("Config path is invalid.");
+		errors.push("Config path is invalid. (default: ~/.config/masterpassx)");
 	}
 
 	if (errors.length > 0) {
