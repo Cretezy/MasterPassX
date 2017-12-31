@@ -11,7 +11,7 @@ const { templates, createKey, createSeed, createPassword } = core;
 (async () => {
 	// Setup program
 	program
-		.version("0.1.3")
+		.version("0.1.4")
 		.usage("[options] <site>")
 		.option("-t, --template <template>", "Set template (default: long)", "long")
 		.option("-c, --counter <counter>", "Set counter (default: 1)", parseInt, 1)
@@ -55,16 +55,6 @@ const { templates, createKey, createSeed, createPassword } = core;
 		return;
 	}
 
-	let site =
-		program.args[0] ||
-		(await inquirer.prompt([
-			{
-				type: "input",
-				name: "site",
-				message: "Enter Site"
-			}
-		])).site;
-
 	let config = null;
 	if (!reset) {
 		try {
@@ -99,6 +89,21 @@ const { templates, createKey, createSeed, createPassword } = core;
 			await util.promisify(fs.writeFile)(configPath, JSON.stringify(config));
 			console.log("Saved user!");
 		}
+	}
+
+	const site =
+		program.args[0] ||
+		(await inquirer.prompt([
+			{
+				type: "input",
+				name: "site",
+				message: "Enter Site"
+			}
+		])).site;
+
+	if (!site) {
+		console.log("Invalid site.");
+		return;
 	}
 
 	const seed = createSeed(config.key, site, counter);
