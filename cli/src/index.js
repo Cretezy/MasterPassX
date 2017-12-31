@@ -9,6 +9,7 @@ import inquirer from "inquirer";
 const { templates, createKey, createSeed, createPassword } = core;
 
 (async () => {
+	// Setup program
 	program
 		.version("0.1.0")
 		.usage("[options] <site>")
@@ -25,11 +26,13 @@ const { templates, createKey, createSeed, createPassword } = core;
 
 	const reset = !!program.reset;
 	const save = !!program.save;
+	const configPath = program.configPath;
+	const template = program.template || "long";
+	const counter = program.counter;
 
 	const errors = [];
-	const template = program.template || "long";
+
 	if (!Object.keys(templates).includes(template)) {
-		// console.log(template);
 		errors.push(
 			"Template is invalid. Choose from: " +
 				Object.keys(templates).join(", ") +
@@ -37,21 +40,12 @@ const { templates, createKey, createSeed, createPassword } = core;
 		);
 	}
 
-	const counter = program.counter;
 	if (isNaN(counter) || counter < 1) {
 		errors.push(
 			"Counter is invalid. Please use an integer higher or equal to 1."
 		);
 	}
 
-	const site = program.args[0];
-	if (!site || site.length === 0) {
-		errors.push(
-			"Site is invalid or missing. Please enter a domain/URL, for instance 'example.com'"
-		);
-	}
-
-	const configPath = program.configPath;
 	if (save && !configPath) {
 		errors.push("Config path is invalid.");
 	}
@@ -60,6 +54,16 @@ const { templates, createKey, createSeed, createPassword } = core;
 		errors.forEach(error => console.log(error));
 		return;
 	}
+
+	let site =
+		program.args[0] ||
+		(await inquirer.prompt([
+			{
+				type: "input",
+				name: "site",
+				message: "Enter Site"
+			}
+		])).site;
 
 	let config = null;
 	if (!reset) {
@@ -99,6 +103,8 @@ const { templates, createKey, createSeed, createPassword } = core;
 
 	const seed = createSeed(config.key, site, counter);
 	const password = createPassword(seed, template);
+
+	console.log("Password for '" + site + "':");
 	console.log(password);
 })();
 
