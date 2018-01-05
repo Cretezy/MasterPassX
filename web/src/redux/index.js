@@ -11,6 +11,8 @@ import { reducer as userReducer } from "./users";
 import { reducer as sessionReducer } from "./session";
 import createStore from "redux/lib/createStore";
 
+const debug = process.env.NODE_ENV === "development";
+
 export function setupStore() {
 	const store = createStore(
 		persistCombineReducers(
@@ -20,7 +22,7 @@ export function setupStore() {
 				version: 1,
 				transforms,
 				blacklist: ["session"],
-				migrate: createMigrate(migrations, { debug: false })
+				migrate: createMigrate(migrations, { debug })
 			},
 			{
 				users: userReducer,
@@ -28,7 +30,7 @@ export function setupStore() {
 			}
 		),
 		undefined,
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		debug && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	);
 	const persistor = persistStore(store);
 	return { store, persistor };

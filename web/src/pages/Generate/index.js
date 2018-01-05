@@ -21,7 +21,7 @@ import { Footer } from "../../components/Footer";
 import { DeleteUserModel } from "../../components/DeleteUserModal";
 import { PasswordDisplay } from "../../components/PasswordDisplay/index";
 import { Header } from "./Header";
-import { Help } from "../../components/Help";
+import { HelpText } from "../../components/HelpText";
 
 export const Generate = connect(
 	state => ({
@@ -154,14 +154,14 @@ export const Generate = connect(
 					/>
 
 					<div className="normal-container content-navbar">
-						<Help isOpen={this.state.showHelp}>
+						<HelpText isOpen={this.state.showHelp}>
 							Generate a password based off a site URL/domain or it's name.
 							Password generated are{" "}
 							<strong>never stored and never sent over the network</strong>. It
 							generates secure passwords with different templates
 							(lengths/variations of characters), which are always the same
 							based off the same site and options.
-						</Help>
+						</HelpText>
 
 						<Form noValidate>
 							<Card body className="m-1">

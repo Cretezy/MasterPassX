@@ -10,6 +10,7 @@ import { Router } from "./pages";
 export default class App extends React.Component {
 	constructor() {
 		super();
+		// Setup Redux
 		const { store, persistor } = setupStore();
 		this.store = store;
 		this.persistor = persistor;

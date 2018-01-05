@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Collapse } from "reactstrap";
 
-export function Help({ isOpen, children }) {
+export function HelpText({ isOpen, children }) {
 	return (
 		<Collapse isOpen={isOpen}>
 			<div className="p-1">

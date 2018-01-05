@@ -3,7 +3,7 @@ import { Input, Col, Label, FormGroup } from "reactstrap";
 import { createPassword } from "masterpassx-core";
 import { PasswordDisplay } from "./PasswordDisplay";
 
-export default class ExampleGenerator extends React.Component {
+export class ExampleGenerator extends React.Component {
 	state = {
 		password: "",
 		site: ""

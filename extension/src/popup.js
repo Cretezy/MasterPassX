@@ -13,8 +13,9 @@
 			throw new Error("Browser unsupported")
 		}
 
-		// Grab hostname without www.
-		const hostname = (new URL(tab.url)).hostname.replace("www.", "");
+		// Grab domain
+		const hostname = (new URL(tab.url)).hostname.split(".").reverse();
+		const domain = hostname[1] + "." + hostname[0];
 
 		// If Firefox android, full screen
 		let windowed = true;
@@ -26,7 +27,7 @@
 		}
 
 		const frame = document.createElement("iframe");
-		frame.src = "https://masterpassx.cretezy.com/generate/" + hostname;
+		frame.src = "https://masterpassx.org/generate/" + domain;
 
 		if (windowed) {
 			frame.style.width = "600px";

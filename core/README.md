@@ -22,7 +22,7 @@ Core library for MasterPassX, implementation of [original MasterPassword algorit
 
 ## Example
 
-See [`test/index.js`](test/index.js)
+See [`test/AddUser.js`](test/AddUser.js)
 
 ## Tests
 
