@@ -16,6 +16,10 @@ Core library for MasterPassX, implementation of [original MasterPassword algorit
 
 `createPassword(seed, template)` creates a password from a site seed (from `createSeed`) and template (from: 	`maximum`, `long` (default), `medium`, `basic`, `short`, `pin`, `name`, `phrase`).
 
+#### `createNamespace`
+
+`createNamespace(namespace)` creates a full namespace and returns an object with `{createKey, createSeed, createPassword}` using the custom namespace.
+
 ## Example
 
 See [`test/index.js`](test/index.js)
