@@ -2,6 +2,8 @@
   "name": "masterpassx-core",
   "version": "1.1.0",
   "license": "MIT",
+  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "author": "Charles Crete <charles@cretezy.com>",
   "scripts": {
     "test": "mocha --require babel-register",
     "build": "rollup -c",

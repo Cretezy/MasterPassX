@@ -5,6 +5,8 @@
   "license": "MIT",
   "description": "A deterministic stateless password generator.",
   "homepage_url": "https://masterpassx.org",
+  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "author": "Charles Crete <charles@cretezy.com>",
   "icons": {
     "64": "assets/icon64.png",
     "128": "assets/icon128.png",

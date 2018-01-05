@@ -2,7 +2,8 @@
   "name": "masterpassx-web",
   "version": "1.0.1",
   "license": "MIT",
-  "private": true,
+  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "author": "Charles Crete <charles@cretezy.com>",
   "dependencies": {
     "localforage": "^1.5.5",
     "masterpassx-core": "^0.1.4",

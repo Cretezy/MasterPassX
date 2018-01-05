@@ -2,6 +2,8 @@
   "name": "masterpassx-cli",
   "version": "0.1.4",
   "license": "MIT",
+  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "author": "Charles Crete <charles@cretezy.com>",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -cw",
