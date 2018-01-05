@@ -2,7 +2,16 @@ import scrypt from "scrypt-async";
 import crypto from "crypto-js";
 import { Buffer } from "buffer";
 
-const namespace = "com.lyndir.masterpassword";
+const templateNames = {
+	maximum: "Maximum",
+	long: "Long",
+	medium: "Medium",
+	basic: "Basic",
+	short: "Short",
+	pin: "PIN",
+	name: "Name",
+	phrase: "Phrase"
+};
 
 const templatesBase = {
 	maximum: ["anoxxxxxxxxxxxxxxxxx", "axxxxxxxxxxxxxxxxxno"],
@@ -37,17 +46,6 @@ const templatesBase = {
 	phrase: ["cvcc cvc cvccvcv cvc", "cvc cvccvcvcv cvcv", "cv cvccv cvc cvcvccv"]
 };
 
-const templateNames = {
-	maximum: "Maximum",
-	long: "Long",
-	medium: "Medium",
-	basic: "Basic",
-	short: "Short",
-	pin: "PIN",
-	name: "Name",
-	phrase: "Phrase"
-};
-
 const baseV = "AEIOU";
 const baseC = "BCDFGHJKLMNPQRSTVWXYZ";
 const baseN = "0123456789";
@@ -65,72 +63,91 @@ const templateChars = {
 	" ": " "
 };
 
-function createKey(name, master) {
-	let offset = 0;
-	const buf = new Buffer(namespace.length + 4 /* uint32 size */ + name.length);
+function createNamespace(namespace) {
+	return {
+		createKey(name, master) {
+			let offset = 0;
+			const buf = new Buffer(
+				namespace.length + 4 /* uint32 size */ + name.length
+			);
 
-	buf.write(namespace, offset);
-	offset += namespace.length;
+			buf.write(namespace, offset);
+			offset += namespace.length;
 
-	buf.writeUInt32BE(name.length, offset);
-	offset += 4;
+			buf.writeUInt32BE(name.length, offset);
+			offset += 4;
 
-	buf.write(name, offset);
+			buf.write(name, offset);
 
-	return new Promise(resolve => {
-		scrypt(
-			master,
-			buf,
-			{
-				N: 32768,
-				r: 8,
-				p: 2,
-				dkLen: 64,
-				encoding: "hex"
-			},
-			resolve
-		);
-	});
+			return new Promise(resolve => {
+				scrypt(
+					master,
+					buf,
+					{
+						N: 32768,
+						r: 8,
+						p: 2,
+						dkLen: 64,
+						encoding: "hex"
+					},
+					resolve
+				);
+			});
+		},
+
+		createSeed(key, site, counter) {
+			let offset = 0;
+			const buf = new Buffer(
+				namespace.length +
+				4 /* uint32 size */ +
+					site.length +
+					4 /* uint32 size */
+			);
+
+			buf.write(namespace, offset);
+			offset += namespace.length;
+
+			buf.writeUInt32BE(site.length, offset);
+			offset += 4;
+
+			buf.write(site, offset);
+			offset += site.length;
+
+			buf.writeUInt32BE(counter, offset);
+
+			return crypto.enc.Hex.stringify(
+				crypto.HmacSHA256(
+					crypto.enc.Hex.parse(buf.toString("hex")),
+					crypto.enc.Hex.parse(key)
+				)
+			);
+		},
+
+		createPassword(seed, template) {
+			const buf = Buffer.from(seed, "hex");
+
+			const templates = templatesBase[template];
+			const templateBase = templates[buf.readUInt8(0) % templates.length];
+
+			return templateBase
+				.split("")
+				.map((templateChar, index) => {
+					const chars = templateChars[templateChar];
+					return chars[buf.readUInt8(index + 1) % chars.length];
+				})
+				.join("");
+		}
+	};
 }
 
-function createSeed(key, site, counter) {
-	let offset = 0;
-	const buf = new Buffer(
-		namespace.length + 4 /* uint32 size */ + site.length + 4 /* uint32 size */
-	);
+const { createKey, createSeed, createPassword } = createNamespace(
+	"com.lyndir.masterpassword"
+);
 
-	buf.write(namespace, offset);
-	offset += namespace.length;
-
-	buf.writeUInt32BE(site.length, offset);
-	offset += 4;
-
-	buf.write(site, offset);
-	offset += site.length;
-
-	buf.writeUInt32BE(counter, offset);
-
-	return crypto.enc.Hex.stringify(
-		crypto.HmacSHA256(
-			crypto.enc.Hex.parse(buf.toString("hex")),
-			crypto.enc.Hex.parse(key)
-		)
-	);
-}
-
-function createPassword(seed, template) {
-	const buf = Buffer.from(seed, "hex");
-
-	const templates = templatesBase[template];
-	const templateBase = templates[buf.readUInt8(0) % templates.length];
-
-	return templateBase
-		.split("")
-		.map((templateChar, index) => {
-			const chars = templateChars[templateChar];
-			return chars[buf.readUInt8(index + 1) % chars.length];
-		})
-		.join("");
-}
-
-export { createKey, createSeed, createPassword, templateNames as templates };
+export {
+	createKey,
+	createSeed,
+	createPassword,
+	createNamespace,
+	templateNames as templates
+};
