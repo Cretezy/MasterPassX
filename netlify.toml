@@ -4,12 +4,6 @@
   command = "yarn build"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "https://masterpassx.cretezy.com/*"
   to = "https://masterpassx.org/:splat"
   status = 301
@@ -25,6 +19,12 @@
   from = "https://www.masterpassx.org/*"
   to = "https://masterpassx.org/:splat"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
   force = true
 
 [[headers]]
