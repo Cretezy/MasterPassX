@@ -1,4 +1,4 @@
-# [MasterPassX](https://masterpassx.cretezy.com) [![Build Status](https://travis-ci.org/Cretezy/MasterPassX.svg?branch=master)](https://travis-ci.org/Cretezy/MasterPassX)
+# [MasterPassX](https://masterpassx.org) [![Build Status](https://travis-ci.org/Cretezy/MasterPassX.svg?branch=master)](https://travis-ci.org/Cretezy/MasterPassX)
 
 ## [Web](web/README.md)
 
