@@ -1,5 +1,6 @@
 import scrypt from "scrypt-async";
-import crypto from "crypto-js";
+import HmacSHA256 from "crypto-js/hmac-sha256";
+import HexEnc from "crypto-js/enc-hex";
 import { Buffer } from "buffer";
 
 const templateNames = {
@@ -100,8 +101,8 @@ function createNamespace(namespace) {
 			const buf = new Buffer(
 				namespace.length +
 				4 /* uint32 size */ +
-					site.length +
-					4 /* uint32 size */
+				site.length +
+				4 /* uint32 size */
 			);
 
 			buf.write(namespace, offset);
@@ -115,10 +116,10 @@ function createNamespace(namespace) {
 
 			buf.writeUInt32BE(counter, offset);
 
-			return crypto.enc.Hex.stringify(
-				crypto.HmacSHA256(
-					crypto.enc.Hex.parse(buf.toString("hex")),
-					crypto.enc.Hex.parse(key)
+			return HexEnc.stringify(
+				HmacSHA256(
+					HexEnc.parse(buf.toString("hex")),
+					HexEnc.parse(key)
 				)
 			);
 		},

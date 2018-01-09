@@ -1,0 +1,13 @@
+{
+  "name": "masterpassx",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "author": "Charles Crete <charles@cretezy.com>",
+  "license": "MIT",
+  "workspaces":[
+    "core",
+    "web",
+    "cli"
+  ]
+}

@@ -6,7 +6,7 @@ const formats = ["cjs", "es"];
 export default formats.map(format => ({
 	input: 'src/index.js',
 	output: {
-		file: `dist/index.${format}.js`,
+		file: `dist/${format}/index.js`,
 		format
 	},
 	plugins: [
@@ -27,7 +27,7 @@ export default formats.map(format => ({
 			plugins: [
 				"external-helpers"
 			],
-			babelrc: false
+			babelrc: false,
 		})
 	]
 }));
