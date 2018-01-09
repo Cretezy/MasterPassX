@@ -1,6 +1,6 @@
 [build]
   publish = "web/build"
-  command = "cd web && yarn build"
+  command = "cd web && yarn && yarn build"
 
 [[redirects]]
   from = "https://masterpassx.cretezy.com/*"
