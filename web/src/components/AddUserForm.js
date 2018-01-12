@@ -12,8 +12,6 @@ import {
 } from "reactstrap";
 import { createKey } from "masterpassx-core";
 
-// import zxcvbn from "zxcvbn";
-
 export class AddUserForm extends React.Component {
 	static defaultProps = {
 		done() {}
@@ -33,9 +31,9 @@ export class AddUserForm extends React.Component {
 	async componentDidMount() {
 		// Lazy load large library
 		this.zxcvbn = await import("zxcvbn");
-		
-		if(this.state.master.length > 0) {
-			this.updateMaster()
+
+		if (this.state.master.length > 0) {
+			this.updateMaster();
 		}
 	}
 

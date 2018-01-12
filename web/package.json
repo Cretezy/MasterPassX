@@ -30,7 +30,7 @@
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "start": "npm-run-all -p start-css start-js",
     "build": "npm-run-all build-css build-js",
-    "test": "npm run build-css && react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "prettier": "prettier --use-tabs --write \"src/**/*.js\""
   }
 }
