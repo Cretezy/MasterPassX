@@ -5,9 +5,18 @@
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
   "license": "MIT",
-  "workspaces":[
+  "workspaces": [
     "core",
     "web",
     "cli"
-  ]
+  ],
+  "scripts": {
+    "prettier": "(cd web && npm run prettier) && (cd core && npm run prettier) && (cd cli && npm run prettier)"
+  },
+  "pre-commit": [
+    "prettier"
+  ],
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
+  }
 }

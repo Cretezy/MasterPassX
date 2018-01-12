@@ -10,13 +10,13 @@ import {
 	FormText,
 	UncontrolledTooltip
 } from "reactstrap";
-import {createKey} from "masterpassx-core";
+import { createKey } from "masterpassx-core";
 
+// import zxcvbn from "zxcvbn";
 
 export class AddUserForm extends React.Component {
 	static defaultProps = {
-		done() {
-		}
+		done() {}
 	};
 
 	state = {
@@ -25,18 +25,24 @@ export class AddUserForm extends React.Component {
 		loading: false,
 		save: true,
 		nameError: null,
-		passwordError: null,
-		passwordErrorTimer: null
+		passwordStrength: "",
+		passwordStrengthColor: null,
+		passwordStrengthScore: null
 	};
 
+	async componentDidMount() {
+		// Lazy load large library
+		this.zxcvbn = await import("zxcvbn");
+	}
+
+	zxcvbn;
 	nameErrorTimer;
-	passwordErrorTimer;
 
 	onSubmit(event) {
 		event.preventDefault();
-		const {name, master} = this.state;
-		if (name.length > 0 && master.length > 0) {
-			this.setState({loading: true});
+		const { name, master, passwordStrengthScore } = this.state;
+		if (name.length > 0 && master.length > 0 && passwordStrengthScore >= 2) {
+			this.setState({ loading: true });
 			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 			setTimeout(async () => {
 				const key = await createKey(name, master);
@@ -61,40 +67,69 @@ export class AddUserForm extends React.Component {
 
 		if (errors.length > 0) {
 			this.nameErrorTimer = setTimeout(() => {
-				this.setState({nameError: errors.join(" ")});
+				this.setState({ nameError: errors.join(" ") });
 			}, 1000);
 		} else {
-			this.setState({nameError: null});
+			this.setState({ nameError: null });
 		}
 	}
 
 	onChangeMaster(event) {
 		const master = event.target.value;
+		this.updateMaster(master);
+	}
+
+	updateMaster(master = this.state.master) {
+		const strengthState = {};
+		if (this.zxcvbn) {
+			const strength = this.zxcvbn(master, [
+				...this.state.name.split(" "),
+				this.state.name,
+				"master",
+				"masterpassx"
+			]);
+
+			strengthState.passwordStrength = `Would take ${
+				strength.crack_times_display.offline_slow_hashing_1e4_per_second
+			} to crack.`;
+
+			if (strength.feedback)
+				if (strength.feedback.warning) {
+					strengthState.passwordStrength += " " + strength.feedback.warning;
+				}
+			if (strength.feedback.suggestions) {
+				strengthState.passwordStrength +=
+					" " + strength.feedback.suggestions.join(". ") + ".";
+			}
+
+			switch (strength.score) {
+				case 0:
+					strengthState.passwordStrengthColor = "danger";
+					break;
+				case 1:
+					strengthState.passwordStrengthColor = "danger";
+					break;
+				case 2:
+					strengthState.passwordStrengthColor = "warning";
+					break;
+				case 3:
+					strengthState.passwordStrengthColor = "primary";
+					break;
+				case 4:
+					strengthState.passwordStrengthColor = "success";
+					break;
+				default:
+					strengthState.passwordStrengthColor = null;
+					break;
+			}
+
+			strengthState.passwordStrengthScore = strength.score;
+		}
+
 		this.setState({
-			master
+			master,
+			...strengthState
 		});
-		if (this.passwordErrorTimer) {
-			clearTimeout(this.passwordErrorTimer);
-		}
-
-		const errors = [];
-		if (master.length < 6) {
-			errors.push(
-				"Careful! Password is too short. We recommend at least 12 characters."
-			);
-		} else if (master.length < 10) {
-			errors.push(
-				"Careful! Password is short, but will work. We recommend at least 12 characters."
-			);
-		}
-
-		if (errors.length > 0) {
-			this.passwordErrorTimer = setTimeout(() => {
-				this.setState({passwordError: errors.join(" ")});
-			}, 1000);
-		} else {
-			this.setState({passwordError: null});
-		}
 	}
 
 	onSaveChange() {
@@ -125,7 +160,7 @@ export class AddUserForm extends React.Component {
 						/>
 						<FormText>
 							{this.state.nameError ||
-							"This will need to match exactly on other devices."}
+								"This will need to match exactly on other devices."}
 						</FormText>
 					</Col>
 				</FormGroup>
@@ -139,12 +174,17 @@ export class AddUserForm extends React.Component {
 							id="master"
 							type="password"
 							autoComplete="new-password"
+							valid={
+								this.state.passwordStrengthScore !== null
+									? this.state.passwordStrengthScore >= 2
+									: null
+							}
 							value={this.state.master}
 							onChange={this.onChangeMaster.bind(this)}
 						/>
-						<FormText>
-							{this.state.passwordError ||
-							"Use a long and hard to guess password (or passphrase)."}
+						<FormText color={this.state.passwordStrengthColor || undefined}>
+							{this.state.passwordStrength ||
+								"Use a long and hard to guess password (or passphrase)."}
 						</FormText>
 					</Col>
 				</FormGroup>
@@ -164,12 +204,12 @@ export class AddUserForm extends React.Component {
 									Save User
 								</a>
 								<UncontrolledTooltip placement="top" target="saveLabel">
-									Enabling saving allows you to keep the user saved (no need
-									to retype name & master password on every load), and only
-									stores the generated key from name & master password (it
-									does not store the master password). Disable this if you are
-									using a shared computer and don't want others to generate
-									passwords for you.
+									Enabling saving allows you to keep the user saved (no need to
+									retype name & master password on every load), and only stores
+									the generated key from name & master password (it does not
+									store the master password). Disable this if you are using a
+									shared computer and don't want others to generate passwords
+									for you.
 								</UncontrolledTooltip>
 							</Label>
 						</FormGroup>

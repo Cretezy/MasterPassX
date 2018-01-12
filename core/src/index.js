@@ -101,8 +101,8 @@ function createNamespace(namespace) {
 			const buf = new Buffer(
 				namespace.length +
 				4 /* uint32 size */ +
-				site.length +
-				4 /* uint32 size */
+					site.length +
+					4 /* uint32 size */
 			);
 
 			buf.write(namespace, offset);
@@ -117,10 +117,7 @@ function createNamespace(namespace) {
 			buf.writeUInt32BE(counter, offset);
 
 			return HexEnc.stringify(
-				HmacSHA256(
-					HexEnc.parse(buf.toString("hex")),
-					HexEnc.parse(key)
-				)
+				HmacSHA256(HexEnc.parse(buf.toString("hex")), HexEnc.parse(key))
 			);
 		},
 

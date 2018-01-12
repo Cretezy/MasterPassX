@@ -30,7 +30,10 @@ export function setupStore() {
 			}
 		),
 		undefined,
-		debug ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : undefined
+		debug
+			? window.__REDUX_DEVTOOLS_EXTENSION__ &&
+				window.__REDUX_DEVTOOLS_EXTENSION__()
+			: undefined
 	);
 	const persistor = persistStore(store);
 	return { store, persistor };

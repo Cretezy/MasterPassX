@@ -5,16 +5,16 @@ import {
 	DropdownToggle,
 	UncontrolledDropdown
 } from "reactstrap";
-import {Navbar} from "../../components/Navbar";
+import { Navbar } from "../../components/Navbar";
 
 export function Header({
-	                       onToggleHelp,
-	                       onSwitchUser,
-	                       addUser,
-	                       onToggleDeleteUserModal,
-	                       users,
-	                       currentUser
-                       }) {
+	onToggleHelp,
+	onSwitchUser,
+	addUser,
+	onToggleDeleteUserModal,
+	users,
+	currentUser
+}) {
 	return (
 		<Navbar title="Generate" onToggleHelp={onToggleHelp}>
 			<UncontrolledDropdown nav>
@@ -35,7 +35,7 @@ export function Header({
 							</DropdownItem>
 						);
 					})}
-					<DropdownItem divider/>
+					<DropdownItem divider />
 					<DropdownItem onClick={addUser}>Add User</DropdownItem>
 					<DropdownItem onClick={onToggleDeleteUserModal}>
 						Delete Current User
@@ -43,6 +43,5 @@ export function Header({
 				</DropdownMenu>
 			</UncontrolledDropdown>
 		</Navbar>
-
 	);
 }

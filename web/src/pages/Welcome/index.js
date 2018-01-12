@@ -1,18 +1,18 @@
 import React from "react";
-import {Card, CardTitle, Col, Row} from "reactstrap";
-import {AddUserForm} from "../../components/AddUserForm";
-import {ExampleGenerator} from "../../components/ExampleGenerator";
+import { Card, CardTitle, Col, Row } from "reactstrap";
+import { AddUserForm } from "../../components/AddUserForm";
+import { ExampleGenerator } from "../../components/ExampleGenerator";
 import "./index.css";
-import {Footer} from "../../components/Footer";
-import {AboutText} from "../../components/AboutText";
-import {connect} from "react-redux";
-import {addUser} from "../../redux/users";
+import { Footer } from "../../components/Footer";
+import { AboutText } from "../../components/AboutText";
+import { connect } from "react-redux";
+import { addUser } from "../../redux/users";
 
 export const Welcome = connect(null, dispatch => ({
 	addUser(name, key, save) {
-		dispatch(addUser(name, key, save))
+		dispatch(addUser(name, key, save));
 	}
-}))(function Welcome({addUser, history}) {
+}))(function Welcome({ addUser, history }) {
 	return (
 		<div className="text-center">
 			<div id="banner">
@@ -23,7 +23,7 @@ export const Welcome = connect(null, dispatch => ({
 					</h6>
 
 					<Card body className="mt-5">
-						<ExampleGenerator/>
+						<ExampleGenerator />
 					</Card>
 				</div>
 			</div>
@@ -67,7 +67,7 @@ export const Welcome = connect(null, dispatch => ({
 					</Row>
 				</div>
 
-				<br/>
+				<br />
 
 				<div className="normal-container">
 					<Card body>
@@ -83,10 +83,10 @@ export const Welcome = connect(null, dispatch => ({
 						</div>
 					</Card>
 
-					<br/>
+					<br />
 
-					<AboutText/>
-					<Footer/>
+					<AboutText />
+					<Footer />
 				</div>
 			</div>
 		</div>
