@@ -50,7 +50,7 @@ const templatesBase = {
 const baseV = "AEIOU";
 const baseC = "BCDFGHJKLMNPQRSTVWXYZ";
 const baseN = "0123456789";
-const baseO = "@&%?,=[]_:-+*$#!'^~;()/.";
+const baseO = "!@#$%^&*()";
 const templateChars = {
 	V: baseV,
 	C: baseC,
