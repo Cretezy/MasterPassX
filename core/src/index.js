@@ -50,7 +50,8 @@ const templatesBase = {
 const baseV = "AEIOU";
 const baseC = "BCDFGHJKLMNPQRSTVWXYZ";
 const baseN = "0123456789";
-const baseO = "!@#$%^&*()";
+const baseO = "@&%?,=[]_:-+*$#!'^~;()/.";
+
 const templateChars = {
 	V: baseV,
 	C: baseC,
@@ -60,7 +61,13 @@ const templateChars = {
 	a: baseV + baseV.toLowerCase() + baseC + baseC.toLowerCase(),
 	n: baseN,
 	o: baseO,
-	x: baseV + baseV.toLowerCase() + baseC + baseC.toLowerCase() + baseN + baseO,
+	x:
+		baseV +
+		baseV.toLowerCase() +
+		baseC +
+		baseC.toLowerCase() +
+		baseN +
+		"!@#$%^&*()",
 	" ": " "
 };
 
