@@ -5,8 +5,8 @@ export function AboutText() {
 	return (
 		<Card body className="text-center">
 			<p>
-				MasterPassX is free as in beer (no money) and as in freedom (open
-				source). It is shared under the MIT license and can be{" "}
+				MasterPassX is free as in beer (no money) and as in freedom
+				(open source). It is shared under the MIT license and can be{" "}
 				<ExternalLink href="https://github.com/Cretezy/MasterPassX">
 					viewed on Github
 				</ExternalLink>{" "}

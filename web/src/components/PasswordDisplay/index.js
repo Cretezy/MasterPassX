@@ -6,7 +6,8 @@ export function PasswordDisplay({ password }) {
 		<div className="password-container w-100 mt-1 text-center">
 			<samp
 				className={
-					"d-inline-block w-100 password " + (password ? "active" : "idle")
+					"d-inline-block w-100 password " +
+					(password ? "active" : "idle")
 				}
 			>
 				{password || "Enter site to start..."}

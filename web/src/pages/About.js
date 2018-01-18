@@ -10,7 +10,9 @@ export function About({ history }) {
 					<NavbarBrand href="#">About</NavbarBrand>
 					<Nav navbar>
 						<NavItem>
-							<NavLink onClick={() => history.push("/")}>Back</NavLink>
+							<NavLink onClick={() => history.push("/")}>
+								Back
+							</NavLink>
 						</NavItem>
 					</Nav>
 				</div>

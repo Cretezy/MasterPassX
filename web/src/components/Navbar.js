@@ -7,7 +7,9 @@ export function Navbar({ title, onToggleHelp, children }) {
 		<BSNavbar color="dark" dark>
 			<div className="container normal-container">
 				<NavbarBrand href={"#"}>{title}</NavbarBrand>
-				{onToggleHelp && <NavbarHelpButton onToggleHelp={onToggleHelp} />}
+				{onToggleHelp && (
+					<NavbarHelpButton onToggleHelp={onToggleHelp} />
+				)}
 				<Nav navbar>{children}</Nav>
 			</div>
 		</BSNavbar>

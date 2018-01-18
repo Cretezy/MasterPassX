@@ -11,7 +11,9 @@ export function Security({ history }) {
 					<NavbarBrand href="#">Security</NavbarBrand>
 					<Nav navbar>
 						<NavItem>
-							<NavLink onClick={() => history.push("/")}>Back</NavLink>
+							<NavLink onClick={() => history.push("/")}>
+								Back
+							</NavLink>
 						</NavItem>
 					</Nav>
 				</div>
