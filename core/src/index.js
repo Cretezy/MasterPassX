@@ -44,7 +44,11 @@ const templatesBase = {
 	short: ["Cvcn"],
 	pin: ["nnnn"],
 	name: ["cvccvcvcv"],
-	phrase: ["cvcc cvc cvccvcv cvc", "cvc cvccvcvcv cvcv", "cv cvccv cvc cvcvccv"]
+	phrase: [
+		"cvcc cvc cvccvcv cvc",
+		"cvc cvccvcvcv cvcv",
+		"cv cvccv cvc cvcvccv"
+	]
 };
 
 const baseV = "AEIOU";
