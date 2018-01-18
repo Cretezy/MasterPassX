@@ -35,7 +35,9 @@ export class ExampleGenerator extends React.Component {
 		let seed = "";
 		const hexChars = "0123456789abcdef";
 		for (let x = 0; x < 64; x++) {
-			seed += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+			seed += hexChars.charAt(
+				Math.floor(Math.random() * hexChars.length)
+			);
 		}
 		return seed;
 	}
@@ -54,7 +56,10 @@ export class ExampleGenerator extends React.Component {
 	}
 
 	generate(site) {
-		const password = createPassword(ExampleGenerator.generateNewSeed(), "long");
+		const password = createPassword(
+			ExampleGenerator.generateNewSeed(),
+			"long"
+		);
 		this.setState({ password, site });
 	}
 
@@ -62,7 +67,11 @@ export class ExampleGenerator extends React.Component {
 		return (
 			<div>
 				<FormGroup row className="p-1">
-					<Label for="site" sm={2} className="text-sm-right text-center">
+					<Label
+						for="site"
+						sm={2}
+						className="text-sm-right text-center"
+					>
 						Site
 					</Label>
 					<Col sm={10}>

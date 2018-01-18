@@ -34,21 +34,28 @@ export const Welcome = connect(null, dispatch => ({
 							<Card body>
 								<CardTitle>Deterministic</CardTitle>
 								<p>
-									MasterPassX is a password generator that deterministically
-									creates password based off your name, and a single master
-									password. It will always generate the same output (password)
-									with the same input (site/service you are making a password
-									for).
+									MasterPassX is a password generator that
+									deterministically creates password based off
+									your name, and a single master password. It
+									will always generate the same output
+									(password) with the same input (site/service
+									you are making a password for).
 								</p>
 							</Card>
 						</Col>
-						<Col xs={12} md={4} className="my-3 my-md-0 mx-0 px-md-1">
+						<Col
+							xs={12}
+							md={4}
+							className="my-3 my-md-0 mx-0 px-md-1"
+						>
 							<Card body>
 								<CardTitle>Trustless</CardTitle>
 								<p>
-									Never trust anything. MasterPassX never stores or transmits
-									any of your passwords (including your master password).
-									Passwords are only generated, displayed, and never stored.
+									Never trust anything. MasterPassX never
+									stores or transmits any of your passwords
+									(including your master password). Passwords
+									are only generated, displayed, and never
+									stored.
 								</p>
 							</Card>
 						</Col>
@@ -56,11 +63,13 @@ export const Welcome = connect(null, dispatch => ({
 							<Card body>
 								<CardTitle>Safe</CardTitle>
 								<p>
-									MasterPass X is not a password manager, it is a password
-									generator. This makes it sync-less, while allowing multiple
-									devices to generate the same password using the determisitic
-									algorithm. This technology also makes it never rely on any
-									third-party services.
+									MasterPass X is not a password manager, it
+									is a password generator. This makes it
+									sync-less, while allowing multiple devices
+									to generate the same password using the
+									determisitic algorithm. This technology also
+									makes it never rely on any third-party
+									services.
 								</p>
 							</Card>
 						</Col>

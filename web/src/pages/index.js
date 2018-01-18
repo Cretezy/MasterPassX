@@ -18,7 +18,11 @@ export const Router = connect(
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={hasUsers ? Generate : Welcome} />
+				<Route
+					exact
+					path="/"
+					component={hasUsers ? Generate : Welcome}
+				/>
 				<Route exact path="/add" component={AddUser} />
 				<Route
 					exact
@@ -31,7 +35,10 @@ export const Router = connect(
 				/>
 				<Route exact path="/about" component={About} />
 				{/*<Route exact path="/security" component={Security} />*/}
-				<Route path="*" component={() => <Redirect to={{ pathname: "/" }} />} />
+				<Route
+					path="*"
+					component={() => <Redirect to={{ pathname: "/" }} />}
+				/>
 			</Switch>
 		</BrowserRouter>
 	);
