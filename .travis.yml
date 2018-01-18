@@ -2,21 +2,22 @@ language: node_js
 node_js:
   - "node"
   - "stable"
-cache:
-  yarn: true
-  directories:
-  - web/node_modules
-  - core/node_modules
-addons:
-  apt:
-    sources:
-      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
-        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
-    packages:
-      - yarn
+cache: yarn
 env:
   - PACKAGE=core
   - PACKAGE=web
-install: true
+
 script:
-  - cd $PACKAGE && yarn && yarn test
+  - "(cd $PACKAGE && yarn test)"
+
+jobs:
+  include:
+    - stage: deploy
+      env: DEPLOY=netlify
+      cache: yarn
+      script: "(cd web && yarn build)"
+      before_deploy: "npm i -g netlify-cli" # can't use yarn global?!
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: "netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p web/build"
