@@ -24,9 +24,14 @@ export const AddUser = connect(null, dispatch => ({
 		render() {
 			return (
 				<div>
-					<Navbar title="Add User" onToggleHelp={this.onToggleHelp.bind(this)}>
+					<Navbar
+						title="Add User"
+						onToggleHelp={this.onToggleHelp.bind(this)}
+					>
 						<NavItem>
-							<NavLink onClick={() => this.props.history.push("/")}>
+							<NavLink
+								onClick={() => this.props.history.push("/")}
+							>
 								Back
 							</NavLink>
 						</NavItem>
@@ -34,9 +39,10 @@ export const AddUser = connect(null, dispatch => ({
 
 					<div className="normal-container content-navbar">
 						<HelpText isOpen={this.state.showHelp}>
-							By adding a user to MasterPassX, it creating a master key to which
-							it derives passwords from. This key is <i>only</i> store on this
-							local device and <strong>never</strong> sent over the network.
+							By adding a user to MasterPassX, it creating a
+							master key to which it derives passwords from. This
+							key is <i>only</i> store on this local device and{" "}
+							<strong>never</strong> sent over the network.
 						</HelpText>
 
 						<Card body className="m-1">

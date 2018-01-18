@@ -138,7 +138,9 @@ export const Generate = connect(
 						onToggleHelp={this.onToggleHelp.bind(this)}
 						onSwitchUser={this.onSwitchUser.bind(this)}
 						addUser={() => this.props.history.push("/add")}
-						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(this)}
+						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(
+							this
+						)}
 						users={this.props.users}
 						currentUser={this.props.currentUser}
 					/>
@@ -155,12 +157,14 @@ export const Generate = connect(
 
 					<div className="normal-container content-navbar">
 						<HelpText isOpen={this.state.showHelp}>
-							Generate a password based off a site URL/domain or it's name.
-							Password generated are{" "}
-							<strong>never stored and never sent over the network</strong>. It
-							generates secure passwords with different templates
-							(lengths/variations of characters), which are always the same
-							based off the same site and options.
+							Generate a password based off a site URL/domain or
+							it's name. Password generated are{" "}
+							<strong>
+								never stored and never sent over the network
+							</strong>. It generates secure passwords with
+							different templates (lengths/variations of
+							characters), which are always the same based off the
+							same site and options.
 						</HelpText>
 
 						<Form noValidate>
@@ -181,12 +185,16 @@ export const Generate = connect(
 											className="site"
 											noValidate
 											value={this.state.site}
-											onChange={this.onSiteChange.bind(this)}
+											onChange={this.onSiteChange.bind(
+												this
+											)}
 											placeholder="example.com"
 										/>
 									</Col>
 								</FormGroup>
-								<PasswordDisplay password={this.state.password} />
+								<PasswordDisplay
+									password={this.state.password}
+								/>
 							</Card>
 							<Row noGutters className="pt-2">
 								<Col className="p-1" xs={6} sm={4}>
@@ -197,7 +205,10 @@ export const Generate = connect(
 										<Button
 											block
 											color="primary"
-											disabled={!this.state.password || this.state.copied}
+											disabled={
+												!this.state.password ||
+												this.state.copied
+											}
 										>
 											Copy {this.state.copied && "✓"}
 										</Button>
@@ -209,17 +220,28 @@ export const Generate = connect(
 										color="danger"
 										onClick={this.onReset.bind(this)}
 										disabled={
-											this.state.site === this.initialState.site &&
-											this.state.type === this.initialState.type &&
-											this.state.counter === this.initialState.counter
+											this.state.site ===
+												this.initialState.site &&
+											this.state.type ===
+												this.initialState.type &&
+											this.state.counter ===
+												this.initialState.counter
 										}
 									>
 										Reset
 									</Button>
 								</Col>
 								<Col className="p-1" xs={12} sm={4}>
-									<Button block onClick={this.onToggleShowOptions.bind(this)}>
-										{this.state.showOptions ? "Hide" : "Show"} Options
+									<Button
+										block
+										onClick={this.onToggleShowOptions.bind(
+											this
+										)}
+									>
+										{this.state.showOptions
+											? "Hide"
+											: "Show"}{" "}
+										Options
 									</Button>
 								</Col>
 							</Row>
@@ -241,16 +263,27 @@ export const Generate = connect(
 													id="type"
 													type="select"
 													value={this.state.type}
-													onChange={this.onTypeChange.bind(this)}
+													onChange={this.onTypeChange.bind(
+														this
+													)}
 												>
-													{Object.keys(templates).map(type => {
-														const name = templates[type];
-														return (
-															<option key={"type-" + type} value={type}>
-																{name}
-															</option>
-														);
-													})}
+													{Object.keys(templates).map(
+														type => {
+															const name =
+																templates[type];
+															return (
+																<option
+																	key={
+																		"type-" +
+																		type
+																	}
+																	value={type}
+																>
+																	{name}
+																</option>
+															);
+														}
+													)}
 												</Input>
 											</Col>
 										</FormGroup>
@@ -260,15 +293,19 @@ export const Generate = connect(
 												sm={3}
 												className="text-sm-right text-center"
 											>
-												<a id="counterLabel" className="tooltip-label">
+												<a
+													id="counterLabel"
+													className="tooltip-label"
+												>
 													Counter
 												</a>
 												<UncontrolledTooltip
 													placement="top"
 													target="counterLabel"
 												>
-													Increment this when needing a new password for the
-													same site
+													Increment this when needing
+													a new password for the same
+													site
 												</UncontrolledTooltip>
 											</Label>
 											<Col sm={9}>
@@ -278,20 +315,32 @@ export const Generate = connect(
 														id="counter"
 														type="number"
 														min="1"
-														value={this.state.counter}
-														onChange={this.onCounterChange.bind(this)}
+														value={
+															this.state.counter
+														}
+														onChange={this.onCounterChange.bind(
+															this
+														)}
 													/>
 													<InputGroupButton>
 														<Button
 															color="success"
-															onClick={this.onIncrement(1).bind(this)}
+															onClick={this.onIncrement(
+																1
+															).bind(this)}
 														>
 															+
 														</Button>
 														<Button
 															color="danger"
-															disabled={this.state.counter <= 1}
-															onClick={this.onIncrement(-1).bind(this)}
+															disabled={
+																this.state
+																	.counter <=
+																1
+															}
+															onClick={this.onIncrement(
+																-1
+															).bind(this)}
 														>
 															-
 														</Button>

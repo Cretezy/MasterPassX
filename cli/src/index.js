@@ -13,8 +13,17 @@ const { templates, createKey, createSeed, createPassword } = core;
 	program
 		.version("0.1.4")
 		.usage("[options] <site>")
-		.option("-t, --template <template>", "Set template (default: long)", "long")
-		.option("-c, --counter <counter>", "Set counter (default: 1)", parseInt, 1)
+		.option(
+			"-t, --template <template>",
+			"Set template (default: long)",
+			"long"
+		)
+		.option(
+			"-c, --counter <counter>",
+			"Set counter (default: 1)",
+			parseInt,
+			1
+		)
 		.option("-r, --reset", "Reset user information", false)
 		.option("-n, --no-save", "Don't save user information", false)
 		.option(
@@ -86,7 +95,10 @@ const { templates, createKey, createSeed, createPassword } = core;
 		config = { name, key };
 		if (save) {
 			await mkdirp(configPath);
-			await util.promisify(fs.writeFile)(configPath, JSON.stringify(config));
+			await util.promisify(fs.writeFile)(
+				configPath,
+				JSON.stringify(config)
+			);
 			console.log("Saved user!");
 		}
 	}

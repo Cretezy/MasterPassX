@@ -43,7 +43,11 @@ export class AddUserForm extends React.Component {
 	onSubmit(event) {
 		event.preventDefault();
 		const { name, master, passwordStrengthScore } = this.state;
-		if (name.length > 0 && master.length > 0 && passwordStrengthScore >= 2) {
+		if (
+			name.length > 0 &&
+			master.length > 0 &&
+			passwordStrengthScore >= 2
+		) {
 			this.setState({ loading: true });
 			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 			setTimeout(async () => {
@@ -97,7 +101,8 @@ export class AddUserForm extends React.Component {
 
 			if (strength.feedback)
 				if (strength.feedback.warning) {
-					strengthState.passwordStrength += " " + strength.feedback.warning;
+					strengthState.passwordStrength +=
+						" " + strength.feedback.warning;
 				}
 			if (strength.feedback.suggestions) {
 				strengthState.passwordStrength +=
@@ -148,7 +153,11 @@ export class AddUserForm extends React.Component {
 				className="text-left"
 			>
 				<FormGroup row>
-					<Label for="name" sm={4} className="text-sm-right text-center">
+					<Label
+						for="name"
+						sm={4}
+						className="text-sm-right text-center"
+					>
 						Full Name
 					</Label>
 					<Col sm={8}>
@@ -167,7 +176,11 @@ export class AddUserForm extends React.Component {
 					</Col>
 				</FormGroup>
 				<FormGroup row>
-					<Label for="master" sm={4} className="text-sm-right text-center">
+					<Label
+						for="master"
+						sm={4}
+						className="text-sm-right text-center"
+					>
 						Master Password
 					</Label>
 					<Col sm={8}>
@@ -184,7 +197,11 @@ export class AddUserForm extends React.Component {
 							value={this.state.master}
 							onChange={this.onChangeMaster.bind(this)}
 						/>
-						<FormText color={this.state.passwordStrengthColor || undefined}>
+						<FormText
+							color={
+								this.state.passwordStrengthColor || undefined
+							}
+						>
 							{this.state.passwordStrength ||
 								"Use a long and hard to guess password (or passphrase)."}
 						</FormText>
@@ -205,13 +222,18 @@ export class AddUserForm extends React.Component {
 								<a id="saveLabel" className="tooltip-label">
 									Save User
 								</a>
-								<UncontrolledTooltip placement="top" target="saveLabel">
-									Enabling saving allows you to keep the user saved (no need to
-									retype name & master password on every load), and only stores
-									the generated key from name & master password (it does not
-									store the master password). Disable this if you are using a
-									shared computer and don't want others to generate passwords
-									for you.
+								<UncontrolledTooltip
+									placement="top"
+									target="saveLabel"
+								>
+									Enabling saving allows you to keep the user
+									saved (no need to retype name & master
+									password on every load), and only stores the
+									generated key from name & master password
+									(it does not store the master password).
+									Disable this if you are using a shared
+									computer and don't want others to generate
+									passwords for you.
 								</UncontrolledTooltip>
 							</Label>
 						</FormGroup>
