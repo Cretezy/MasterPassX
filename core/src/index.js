@@ -44,13 +44,18 @@ const templatesBase = {
 	short: ["Cvcn"],
 	pin: ["nnnn"],
 	name: ["cvccvcvcv"],
-	phrase: ["cvcc cvc cvccvcv cvc", "cvc cvccvcvcv cvcv", "cv cvccv cvc cvcvccv"]
+	phrase: [
+		"cvcc cvc cvccvcv cvc",
+		"cvc cvccvcvcv cvcv",
+		"cv cvccv cvc cvcvccv"
+	]
 };
 
 const baseV = "AEIOU";
 const baseC = "BCDFGHJKLMNPQRSTVWXYZ";
 const baseN = "0123456789";
 const baseO = "@&%?,=[]_:-+*$#!'^~;()/.";
+
 const templateChars = {
 	V: baseV,
 	C: baseC,
@@ -60,7 +65,13 @@ const templateChars = {
 	a: baseV + baseV.toLowerCase() + baseC + baseC.toLowerCase(),
 	n: baseN,
 	o: baseO,
-	x: baseV + baseV.toLowerCase() + baseC + baseC.toLowerCase() + baseN + baseO,
+	x:
+		baseV +
+		baseV.toLowerCase() +
+		baseC +
+		baseC.toLowerCase() +
+		baseN +
+		"!@#$%^&*()",
 	" ": " "
 };
 
