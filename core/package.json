@@ -7,9 +7,9 @@
   "scripts": {
     "test": "jest --env=node",
     "build": "rollup -c",
-    "start": "rollup -cw",
+    "watch": "rollup -cw",
     "prepublishOnly": "npm test && npm run build",
-    "prettier": "prettier --use-tabs --write \"src/**/*.js\""
+    "prettier": "prettier --write 'src/**/*.js'"
   },
   "jest": {
     "verbose": true,

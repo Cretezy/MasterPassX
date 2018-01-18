@@ -6,9 +6,10 @@
   "author": "Charles Crete <charles@cretezy.com>",
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -cw",
+    "watch": "rollup -cw",
+    "build-start": "npm run build && node dist/index.js",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier --use-tabs --write \"src/**/*.js\""
+    "prettier": "prettier --write 'src/**/*.js'"
   },
   "main": "dist/index.js",
   "bin": {

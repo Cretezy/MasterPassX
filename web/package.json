@@ -24,13 +24,14 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start-js": "react-scripts start",
+    "watch-js": "react-scripts start",
     "build-js": "react-scripts build",
-    "start-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "start": "npm-run-all -p start-css start-js",
+    "watch": "npm-run-all -p watch-css watch-js",
     "build": "npm-run-all build-css build-js",
-    "test": "react-scripts test --env=jsdom",
-    "prettier": "prettier --use-tabs --write \"src/**/*.js\""
+    "test": "npm-run-all build-css test-only",
+    "test-only": "react-scripts test --env=jsdom",
+    "prettier": "prettier --write \"src/**/*.js\""
   }
 }

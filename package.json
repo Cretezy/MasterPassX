@@ -11,7 +11,7 @@
     "cli"
   ],
   "scripts": {
-    "prettier": "(cd web && npm run prettier) && (cd core && npm run prettier) && (cd cli && npm run prettier)"
+    "prettier": "npm --prefix web run prettier && npm --prefix core run prettier && npm --prefix cli run prettier"
   },
   "pre-commit": [
     "prettier"
