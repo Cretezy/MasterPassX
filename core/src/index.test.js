@@ -19,8 +19,13 @@ describe("MasterPassX", () => {
 		);
 	});
 
-	it("should generate master", () => {
+	it("should generate master (long)", () => {
 		password = createPassword(seed, "long");
 		expect(password).toBe("ZedaFaxcZaso9*");
+	});
+
+	it("should generate master (maximum)", () => {
+		password = createPassword(seed, "maximum");
+		expect(password).toBe("pf4zS1LjCg&LjhsZ7T2~");
 	});
 });
