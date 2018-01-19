@@ -14,8 +14,7 @@ import { createKey } from "masterpassx-core";
 
 export class AddUserForm extends React.Component {
 	static defaultProps = {
-		done() {
-		}
+		done() {}
 	};
 
 	state = {
@@ -98,7 +97,7 @@ export class AddUserForm extends React.Component {
 
 			strengthState.passwordStrength = `Could take ~${
 				strength.crack_times_display.offline_slow_hashing_1e4_per_second
-				} to crack.`;
+			} to crack.`;
 
 			if (strength.feedback) {
 				if (strength.feedback.warning) {
@@ -172,7 +171,7 @@ export class AddUserForm extends React.Component {
 						/>
 						<FormText>
 							{this.state.nameError ||
-							"This will need to match exactly on other devices."}
+								"This will need to match exactly on other devices."}
 						</FormText>
 					</Col>
 				</FormGroup>
@@ -204,7 +203,7 @@ export class AddUserForm extends React.Component {
 							}
 						>
 							{this.state.passwordStrength ||
-							"Use a long and hard to guess password (or passphrase)."}
+								"Use a long and hard to guess password (or passphrase)."}
 						</FormText>
 					</Col>
 				</FormGroup>
