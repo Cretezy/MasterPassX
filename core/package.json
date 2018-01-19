@@ -1,6 +1,6 @@
 {
   "name": "masterpassx-core",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "MIT",
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
@@ -22,13 +22,11 @@
     "README.md",
     "LICENSE",
     "dist",
-    "src"
+    "src/index.js"
   ],
   "dependencies": {
     "buffer": "^5.0.8",
     "crypto-js": "^3.1.9-1",
-    "global": "^4.3.2",
-    "jest-cli": "^22.0.4",
     "scrypt-async": "^1.3.1"
   },
   "devDependencies": {
