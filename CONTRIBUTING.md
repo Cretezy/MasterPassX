@@ -7,18 +7,38 @@ Install [yarn](https://yarnpkg.com/). MasterPassX makes use of yarn's workspaces
 3) Code!
 
 ## Web
-
-To run the front-end, simply `cd web`, then `yarn watch`.
-
-You may run tests with `yarn test`.
-
-## Cli
-
-To run the CLI version, execute the following:
-
+```bash
+cd web
 ```
+
+Run development mode:
+```bash
+yarn watch
+```
+
+Run tests:
+```bash
+yarn test
+```
+
+Build to `build`:
+```bash
+yarn build
+```
+
+## CLI
+```bash
 cd cli
-yarn && yarn build-start
+```
+
+Build & run:
+```bash
+yarn build-start <args>
+```
+
+Build to `dist`:
+```bash
+yarn build
 ```
 
 ## Committing
