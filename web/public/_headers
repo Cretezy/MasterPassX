@@ -1,0 +1,6 @@
+/*
+    X-XSS-Protection: 1; mode=block
+    Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self'; child-src 'self'; connect-src 'self'
+    X-Content-Type-Options: nosniff
+    Referrer-Policy: no-referrer
+
