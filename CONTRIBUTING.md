@@ -12,6 +12,15 @@ To run the front-end, simply `cd web`, then `yarn watch`.
 
 You may run tests with `yarn test`.
 
+## Cli
+
+To run the CLI version, execute the following:
+
+```
+cd cli
+yarn && yarn build-start
+```
+
 ## Committing
 
 Before committing, run `yarn prettier` (in the root or in any submodules) to format the files with Prettier.
