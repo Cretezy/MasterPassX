@@ -18,7 +18,7 @@
   "dependencies": {
     "commander": "^2.12.2",
     "inquirer": "^4.0.1",
-    "masterpassx-core": "^0.1.4"
+    "masterpassx-core": "^1.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
