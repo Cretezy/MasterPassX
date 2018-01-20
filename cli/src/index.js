@@ -36,10 +36,47 @@ const { templates, createKey, createSeed, createPassword } = core;
 	const reset = !!program.reset;
 	const save = !!program.save;
 	const configPath = program.configPath;
-	const template = program.template || "long";
+	let template = program.template || "long";
 	const counter = program.counter;
 
 	const errors = [];
+
+	if (template.startsWith("-")) template = template.substring(1);
+
+	switch (template) {
+		case "x":
+			template = "maximum";
+			break;
+		case "l":
+			template = "long";
+			break;
+		case "m":
+			template = "medium";
+			break;
+		case "b":
+			template = "basic";
+			break;
+		case "s":
+			template = "short";
+			break;
+		case "i":
+			template = "pin";
+			break;
+		case "n":
+			template = "name";
+			break;
+		case "p":
+			template = "phrase";
+			break;
+		case "K":
+			// TODO: not implemented
+			template = "key";
+			break;
+		case "P":
+			// TODO: not implemented
+			template = "personal";
+			break;
+	}
 
 	if (!Object.keys(templates).includes(template)) {
 		errors.push(

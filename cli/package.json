@@ -1,6 +1,6 @@
 {
   "name": "masterpassx-cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
@@ -18,7 +18,7 @@
   "dependencies": {
     "commander": "^2.12.2",
     "inquirer": "^4.0.1",
-    "masterpassx-core": "^1.0.1"
+    "masterpassx-core": "^1.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
