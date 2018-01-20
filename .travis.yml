@@ -8,7 +8,7 @@ env:
   - PACKAGE=web
 
 script:
-  - "(cd $PACKAGE && yarn test)"
+  - "(cd $PACKAGE && yean && yarn test)"
 
 jobs:
   include:

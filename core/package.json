@@ -5,15 +5,14 @@
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
   "scripts": {
-    "test": "jest --env=node",
+    "test": "jest",
     "build": "rollup -c",
     "watch": "rollup -cw",
     "prepublishOnly": "npm test && npm run build",
     "prettier": "prettier --write 'src/**/*.js'"
   },
   "jest": {
-    "verbose": true,
-    "bail": true
+    "testEnvironment": "node"
   },
   "main": "dist/cjs/index.js",
   "js:next": "dist/es/index.js",
