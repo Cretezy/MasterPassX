@@ -3,7 +3,7 @@ import path from "path";
 import os from "os";
 import fs from "fs";
 import util from "util";
-import core from "masterpassx-core/dist/index.cjs";
+import core from "masterpassx-core/dist/cjs";
 import inquirer from "inquirer";
 
 const { templates, createKey, createSeed, createPassword } = core;
