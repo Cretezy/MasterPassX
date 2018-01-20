@@ -167,7 +167,10 @@ export const Generate = connect(
 							same site and options.
 						</HelpText>
 
-						<Form noValidate>
+						<Form
+							noValidate
+							onSubmit={event => event.preventDefault()}
+						>
 							<Card body className="m-1">
 								<FormGroup row className="">
 									<Label
@@ -189,6 +192,7 @@ export const Generate = connect(
 												this
 											)}
 											placeholder="example.com"
+											autoFocus
 										/>
 									</Col>
 								</FormGroup>
@@ -209,6 +213,7 @@ export const Generate = connect(
 												!this.state.password ||
 												this.state.copied
 											}
+											type="submit"
 										>
 											Copy {this.state.copied && "✓"}
 										</Button>
