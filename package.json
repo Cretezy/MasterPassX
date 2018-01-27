@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "prettier": "npm --prefix web run prettier && npm --prefix core run prettier && npm --prefix cli run prettier",
-    "test": "npm --prefix web run test && npm --prefix core run test",
+    "test": "npm --prefix core run test && npm --prefix core run build && npm --prefix web run test",
     "build": "npm --prefix web run test && npm --prefix core run test"
   },
   "pre-commit": [
