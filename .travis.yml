@@ -3,19 +3,13 @@ node_js:
   - "node"
   - "stable"
 cache: yarn
-env:
-  - PACKAGE=core
-  - PACKAGE=web
-
-script:
-  - "(cd $PACKAGE && yarn && yarn test)"
 
 jobs:
   include:
     - stage: deploy
       env: DEPLOY=netlify
       cache: yarn
-      script: "(cd web && yarn build)"
+      script: "npm --prefix web run build"
       before_deploy: "npm i -g netlify-cli" # can't use yarn global?!
       deploy:
         provider: script
