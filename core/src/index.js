@@ -1,4 +1,4 @@
-import scrypt from "scrypt-async";
+import scrypt from "scrypt-async-modern";
 import HmacSHA256 from "crypto-js/hmac-sha256";
 import HexEnc from "crypto-js/enc-hex";
 import { Buffer } from "buffer";
@@ -91,19 +91,12 @@ function createNamespace(namespace) {
 
 			buf.write(name, offset);
 
-			return new Promise(resolve => {
-				scrypt(
-					master,
-					buf,
-					{
-						N: 32768,
-						r: 8,
-						p: 2,
-						dkLen: 64,
-						encoding: "hex"
-					},
-					resolve
-				);
+			return scrypt(master, buf, {
+				N: 32768,
+				r: 8,
+				p: 2,
+				dkLen: 64,
+				encoding: "hex"
 			});
 		},
 

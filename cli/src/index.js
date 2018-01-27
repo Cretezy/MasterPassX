@@ -11,7 +11,7 @@ const { templates, createKey, createSeed, createPassword } = core;
 (async () => {
 	// Setup program
 	program
-		.version("0.1.4")
+		.version("0.1.7")
 		.usage("[options] <site>")
 		.option(
 			"-t, --template <template>",

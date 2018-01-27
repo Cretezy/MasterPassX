@@ -6,7 +6,7 @@
   "author": "Charles Crete <charles@cretezy.com>",
   "dependencies": {
     "localforage": "^1.5.5",
-    "masterpassx-core": "^0.1.4",
+    "masterpassx-core": "^1.1.3",
     "react": "^16.2.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
