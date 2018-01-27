@@ -1,9 +1,20 @@
 # [MasterPassX](https://masterpassx.org) [![Build Status](https://travis-ci.org/Cretezy/MasterPassX.svg?branch=master)](https://travis-ci.org/Cretezy/MasterPassX)
 
-## [Web](web/README.md)
+MasterPassX is separated into many modules. It is based fully in JavaScript.
 
-## [Core](core/README.md)
+## [Web](web)
 
-## [Extensions](extension/README.md)
+The [main MasterPassX site](https://masterpassx.org).
 
-## [CLI](cli/README.md)
+## [Core](core)
+
+The core module is the base algorithm of MasterPassX.
+It's a simple and very fast implementation of the Master Password algorithm.
+
+## [Extensions](extension)
+
+The [Firefox](https://addons.mozilla.org/en-US/firefox/addon/masterpassx/)/[Chrome](https://chrome.google.com/webstore/detail/masterpassx/acocljodaoecblhjggkadfhnbjcfgbbb) extensions.
+
+## [CLI](cli)
+
+A simple command line interface for the MasterPassX algorithm.
