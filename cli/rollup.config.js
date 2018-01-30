@@ -5,7 +5,7 @@ import json from 'rollup-plugin-json';
 import shebang from 'rollup-plugin-shebang';
 
 export default [{
-	input: 'src/index.js',
+	input: 'src/WelcomeScreen.js',
 	output: {
 		file: `dist/index.js`,
 		format: "cjs"
