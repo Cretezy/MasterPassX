@@ -16,7 +16,6 @@ export const migrations = {
 		};
 	},
 	2: state => {
-		console.log("AAA", state);
 		// Move to array of users, change currentUser to currentUserKey
 		const users = [];
 		Object.keys(state.users.users).forEach(key => {
