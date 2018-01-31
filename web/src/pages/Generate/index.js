@@ -16,18 +16,25 @@ import {
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createPassword, createSeed, templates } from "masterpassx-core";
-import { removeUser, setCurrentUser } from "../../redux/users";
+import { removeUser, setCurrentUser } from "../../store/users.actions";
 import { Footer } from "../../components/Footer";
 import { DeleteUserModel } from "../../components/DeleteUserModal";
 import { PasswordDisplay } from "../../components/PasswordDisplay/index";
 import { Header } from "./Header";
 import { HelpText } from "../../components/HelpText";
+import {
+	getCurrentUser,
+	getCurrentUserKey,
+	getUsers
+} from "../../store/users.selectors";
+import { getDomain } from "../../store/session";
 
 export const Generate = connect(
 	state => ({
-		users: state.users.users,
-		currentUser: state.users.currentUser,
-		domain: state.session.domain
+		users: getUsers(state),
+		currentUserKey: getCurrentUserKey(state),
+		currentUser: getCurrentUser(state),
+		domain: getDomain(state)
 	}),
 	dispatch => ({
 		setCurrentUser(key) {
@@ -99,7 +106,11 @@ export const Generate = connect(
 
 			let password;
 			if (site !== "") {
-				const seed = createSeed(this.props.currentUser, site, counter);
+				const seed = createSeed(
+					this.props.currentUserKey,
+					site,
+					counter
+				);
 				password = createPassword(seed, type);
 			} else {
 				password = "";
@@ -127,10 +138,6 @@ export const Generate = connect(
 			this.onReset();
 		}
 
-		get currentUser() {
-			return this.props.users[this.props.currentUser];
-		}
-
 		render() {
 			return (
 				<div>
@@ -142,17 +149,17 @@ export const Generate = connect(
 							this
 						)}
 						users={this.props.users}
-						currentUser={this.props.currentUser}
+						currentUserKey={this.props.currentUserKey}
 					/>
 
 					<DeleteUserModel
 						open={this.state.deleteUserModalOpen}
 						onToggle={this.onToggleDeleteUserModal.bind(this)}
 						onDelete={() => {
-							this.props.removeUser(this.props.currentUser);
+							this.props.removeUser(this.props.currentUserKey);
 							this.onReset();
 						}}
-						name={this.currentUser.name}
+						name={this.props.currentUser.name}
 					/>
 
 					<div className="normal-container content-navbar">

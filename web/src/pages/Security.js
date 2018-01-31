@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
-import { AboutText } from "../components/AboutText";
+// import { AboutText } from "../components/AboutText";
 
 // TODO
 export function Security({ history }) {

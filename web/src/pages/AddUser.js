@@ -4,7 +4,7 @@ import { AddUserForm } from "../components/AddUserForm";
 import { Footer } from "../components/Footer";
 import { HelpText } from "../components/HelpText";
 import { connect } from "react-redux";
-import { addUser } from "../redux/users";
+import { addUser } from "../store/users.actions";
 import { Navbar } from "../components/Navbar";
 
 export const AddUser = connect(null, dispatch => ({
@@ -46,12 +46,7 @@ export const AddUser = connect(null, dispatch => ({
 						</HelpText>
 
 						<Card body className="m-1">
-							<AddUserForm
-								done={(name, key, save) => {
-									this.props.addUser(name, key, save);
-									this.props.history.push("/");
-								}}
-							/>
+							<AddUserForm />
 						</Card>
 						<Footer />
 					</div>

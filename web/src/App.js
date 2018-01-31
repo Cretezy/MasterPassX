@@ -4,7 +4,7 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import "./App.css";
 
 import { Provider } from "react-redux";
-import { setupStore } from "./redux";
+import { setupStore } from "./store";
 import { Router } from "./pages";
 
 export default class App extends React.Component {
