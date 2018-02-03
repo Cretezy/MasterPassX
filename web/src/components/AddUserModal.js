@@ -1,13 +1,5 @@
 import React from "react";
-import {
-	Button,
-	Modal,
-	ModalBody,
-	ModalFooter,
-	ModalHeader,
-	Row,
-	Col
-} from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { AddUserForm, SaveToggle } from "./AddUserForm";
 
 export class AddUserModel extends React.Component {
