@@ -9,8 +9,8 @@ export function reducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_USER:
 			// Don't allow dupes
-			if(state.users.find(user => user.key === action.key)){
-				return state
+			if (state.users.find(user => user.key === action.key)) {
+				return state;
 			}
 			return {
 				...state,

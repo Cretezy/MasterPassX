@@ -21,9 +21,7 @@ export class AddUserModel extends React.Component {
 	render() {
 		return (
 			<Modal isOpen={this.props.open} toggle={this.props.onToggle}>
-				<ModalHeader toggle={this.props.onToggle}>
-					Add User
-				</ModalHeader>
+				<ModalHeader toggle={this.props.onToggle}>Add User</ModalHeader>
 				<ModalBody>
 					<AddUserForm
 						hide
@@ -32,22 +30,24 @@ export class AddUserModel extends React.Component {
 						// the ref is null???
 						wrappedComponentRef={ref => {
 							if (ref) {
-								this.form = ref.getWrappedInstance()
+								this.form = ref.getWrappedInstance();
 							}
 						}}
 						onSetLoading={() => this.setState({ loading: true })}
 						onSetSave={save => this.setState({ save })}
 						done={() => {
 							this.props.onAdd();
-							this.setState({ save: true, loading: false })
+							this.setState({ save: true, loading: false });
 							this.form = null;
 						}}
 					/>
 				</ModalBody>
 				<ModalFooter>
 					<div className="mr-auto text-center text-md-left">
-						<SaveToggle save={this.state.save}
-						            onSaveChange={() => this.form.onChangeSave()} />
+						<SaveToggle
+							save={this.state.save}
+							onSaveChange={() => this.form.onChangeSave()}
+						/>
 					</div>
 					<div className="text-right">
 						<Button
@@ -58,9 +58,10 @@ export class AddUserModel extends React.Component {
 						>
 							Create User
 						</Button>{" "}
-						<Button color="secondary"
-						        onClick={this.props.onToggle}
-						        className="mt-1 mt-sm-0"
+						<Button
+							color="secondary"
+							onClick={this.props.onToggle}
+							className="mt-1 mt-sm-0"
 						>
 							Cancel
 						</Button>

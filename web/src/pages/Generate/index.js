@@ -251,11 +251,11 @@ export const Generate = connect(
 										onClick={this.onReset.bind(this)}
 										disabled={
 											this.state.site ===
-											this.initialState.site &&
+												this.initialState.site &&
 											this.state.type ===
-											this.initialState.type &&
+												this.initialState.type &&
 											this.state.counter ===
-											this.initialState.counter
+												this.initialState.counter
 										}
 									>
 										Reset

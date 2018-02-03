@@ -16,21 +16,22 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 export const AddUserForm = withRouter(
-	connect(null, dispatch => ({
-		addUser(name, key, save) {
-			dispatch(addUser(name, key, save));
-		}
-	}), null, { withRef: true })(
+	connect(
+		null,
+		dispatch => ({
+			addUser(name, key, save) {
+				dispatch(addUser(name, key, save));
+			}
+		}),
+		null,
+		{ withRef: true }
+	)(
 		class AddUserForm extends React.Component {
 			static defaultProps = {
 				hide: false,
-				onSetLoading() {
-				},
-				done() {
-				},
-				onSetSave() {
-
-				}
+				onSetLoading() {},
+				done() {},
+				onSetSave() {}
 			};
 
 			state = {
@@ -75,7 +76,7 @@ export const AddUserForm = withRouter(
 						const key = await createKey(name, master);
 						this.props.addUser(name, key, save);
 						this.props.history.push("/");
-						this.props.done()
+						this.props.done();
 					}, 25);
 				}
 			};
@@ -123,7 +124,7 @@ export const AddUserForm = withRouter(
 					strengthState.passwordStrength = `Could take ~${
 						strength.crack_times_display
 							.offline_slow_hashing_1e4_per_second
-						} to crack.`;
+					} to crack.`;
 
 					if (strength.feedback) {
 						if (strength.feedback.warning) {
@@ -167,10 +168,10 @@ export const AddUserForm = withRouter(
 
 			onChangeSave() {
 				const save = !this.state.save;
-				this.setState(({
+				this.setState({
 					save
-				}));
-				this.props.onSetSave(save)
+				});
+				this.props.onSetSave(save);
 			}
 
 			render() {
@@ -202,7 +203,7 @@ export const AddUserForm = withRouter(
 								/>
 								<FormText>
 									{this.state.nameError ||
-									"This will need to match exactly on other devices."}
+										"This will need to match exactly on other devices."}
 								</FormText>
 							</Col>
 						</FormGroup>
@@ -224,7 +225,7 @@ export const AddUserForm = withRouter(
 										this.state.passwordStrengthScore !==
 										null
 											? this.state
-											.passwordStrengthScore >= 2
+													.passwordStrengthScore >= 2
 											: null
 									}
 									value={this.state.master}
@@ -237,7 +238,7 @@ export const AddUserForm = withRouter(
 									}
 								>
 									{this.state.passwordStrength ||
-									"Use a long and hard to guess password (or passphrase)."}
+										"Use a long and hard to guess password (or passphrase)."}
 								</FormText>
 							</Col>
 						</FormGroup>
@@ -245,7 +246,12 @@ export const AddUserForm = withRouter(
 						{!this.props.hide ? (
 							<Row noGutters>
 								<Col className="p-1 text-center" xs={12} sm={6}>
-									<SaveToggle save={this.state.save} onSaveChange={this.onChangeSave.bind(this)} />
+									<SaveToggle
+										save={this.state.save}
+										onSaveChange={this.onChangeSave.bind(
+											this
+										)}
+									/>
 								</Col>
 								<Col className="p-1" xs={12} sm={6}>
 									<Button
@@ -258,7 +264,9 @@ export const AddUserForm = withRouter(
 									</Button>
 								</Col>
 							</Row>
-						) : <input type="submit" style={{ display: "none" }} />}
+						) : (
+							<input type="submit" style={{ display: "none" }} />
+						)}
 					</Form>
 				);
 			}
@@ -280,19 +288,15 @@ export function SaveToggle({ onSaveChange, save }) {
 				<a id="saveLabel" className="tooltip-label">
 					Save User
 				</a>
-				<UncontrolledTooltip
-					placement="top"
-					target="saveLabel"
-				>
-					Enabling saving allows you to keep the user
-					saved (no need to retype name & master password
-					on every load), and only stores the generated
-					key from name & master password (it does not
-					store the master password). Disable this if you
-					are using a shared computer and don't want
-					others to generate passwords for you.
+				<UncontrolledTooltip placement="top" target="saveLabel">
+					Enabling saving allows you to keep the user saved (no need
+					to retype name & master password on every load), and only
+					stores the generated key from name & master password (it
+					does not store the master password). Disable this if you are
+					using a shared computer and don't want others to generate
+					passwords for you.
 				</UncontrolledTooltip>
 			</Label>
 		</FormGroup>
-	)
+	);
 }
