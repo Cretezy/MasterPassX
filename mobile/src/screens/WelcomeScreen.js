@@ -1,7 +1,7 @@
 import React from "react";
 import { AddUserForm } from "../components/AddUserForm";
 import { ExampleGenerator } from "../components/ExampleGenerator";
-import { Text } from "react-native-elements";
+import { Button, Text } from "react-native-elements";
 import { View } from "react-native";
 
 // export function WelcomeScreen() {
@@ -89,10 +89,11 @@ import { View } from "react-native";
 // 	);
 // }
 
-export function WelcomeScreen() {
+export function WelcomeScreen({ navigation }) {
 	return (
 		<View style={{ padding: 10 }}>
 			<AddUserForm />
+			<Button title="Scan" onPress={() => navigation.navigate("Scan")} />
 		</View>
 	);
 }

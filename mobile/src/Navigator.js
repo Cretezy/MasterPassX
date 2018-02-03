@@ -5,6 +5,7 @@ import { WelcomeScreen } from "./screens/WelcomeScreen";
 import { StackNavigator } from "react-navigation";
 import { GenerateScreen } from "./screens/GenerateScreen";
 import { UsersScreen } from "./screens/UsersScreen";
+import { ScanScreen } from "./screens/ScanScreen";
 
 const cardStyle = { backgroundColor: "white" };
 
@@ -15,6 +16,9 @@ const MainStackNavigator = StackNavigator(
 		},
 		Users: {
 			screen: UsersScreen
+		},
+		Scan: {
+			screen: ScanScreen
 		}
 	},
 	{ cardStyle }
@@ -24,6 +28,9 @@ const WelcomeStackNavigator = StackNavigator(
 	{
 		Welcome: {
 			screen: WelcomeScreen
+		},
+		Scan: {
+			screen: ScanScreen
 		}
 	},
 	{ cardStyle }

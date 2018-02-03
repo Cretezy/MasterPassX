@@ -1,6 +1,22 @@
 {
   "expo": {
     "sdkVersion": "25.0.0",
-
+    "name": "MasterPassX",
+    "slug": "masterpassx",
+    "privacy": "public",
+    "githubUrl": "https://github.com/Cretezy/MasterPassX/tree/master/mobile",
+    "orientation": "portrait",
+    "primaryColor": "#343a40",
+    "icon": "assets/icon256.png",
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#ffffff"
+    },
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "assets/*"
+    ]
   }
 }

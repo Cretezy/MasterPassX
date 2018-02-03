@@ -8,13 +8,14 @@ import {
 import { Navbar } from "../../components/Navbar";
 
 export function Header({
-	onToggleHelp,
-	onSwitchUser,
-	addUser,
-	onToggleDeleteUserModal,
-	users,
-	currentUser
-}) {
+	                       onToggleHelp,
+	                       onSwitchUser,
+	                       addUser,
+	                       onToggleDeleteUserModal,
+	                       onToggleScanModal,
+	                       users,
+	                       currentUser
+                       }) {
 	return (
 		<Navbar title="Generate" onToggleHelp={onToggleHelp}>
 			<UncontrolledDropdown nav>
@@ -35,6 +36,10 @@ export function Header({
 							</DropdownItem>
 						);
 					})}
+					<DropdownItem divider />
+					<DropdownItem onClick={onToggleScanModal}>
+						Show Scan Code
+					</DropdownItem>
 					<DropdownItem divider />
 					<DropdownItem onClick={addUser}>Add User</DropdownItem>
 					<DropdownItem onClick={onToggleDeleteUserModal}>
