@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { hasUsers } from "./store/users.selectors";
+import { getHasUsers } from "./store/users.selectors";
 import { WelcomeScreen } from "./screens/WelcomeScreen";
 import { StackNavigator } from "react-navigation";
 import { GenerateScreen } from "./screens/GenerateScreen";
 import { UsersScreen } from "./screens/UsersScreen";
 import { ScanScreen } from "./screens/ScanScreen";
 
-const cardStyle = { backgroundColor: "white" };
+const cardStyle = {/* backgroundColor: "white"*/ };
 
 const MainStackNavigator = StackNavigator(
 	{
@@ -36,7 +36,7 @@ const WelcomeStackNavigator = StackNavigator(
 	{ cardStyle }
 );
 
-@connect(state => ({ hasUsers: hasUsers(state) }))
+@connect(state => ({ hasUsers: getHasUsers(state) }))
 export class RootNavigator extends React.PureComponent {
 	render() {
 		if (this.props.hasUsers) {

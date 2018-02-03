@@ -172,7 +172,7 @@ export const Generate = connect(
 					<ScanModal
 						open={this.state.scanModelOpen}
 						onToggle={this.onToggleScanModal.bind(this)}
-						name={this.currentUser.name}
+						user={this.props.currentUser}
 					/>
 
 					<div className="normal-container content-navbar">

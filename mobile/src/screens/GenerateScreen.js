@@ -3,14 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { createPassword, createSeed, templates } from "masterpassx-core";
 import { PasswordDisplay } from "../components/PasswordDisplay";
-import { getCurrentUserKey, getUsers } from "../store/users.selectors";
+import { getCurrentUserKey } from "../store/users.selectors";
 import { View, Clipboard, Platform, Picker, ScrollView } from "react-native";
 import { Button, FormLabel, FormInput, Card } from "react-native-elements";
 import autobind from "autobind-decorator";
-import { Col, Grid, Row } from "react-native-easy-grid";
 
 @connect(state => ({
-	users: getUsers(state),
 	currentUserKey: getCurrentUserKey(state)
 }))
 export class GenerateScreen extends React.Component {

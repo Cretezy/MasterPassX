@@ -1,40 +1,38 @@
 import { ADD_USER, REMOVE_USER, SET_CURRENT_USER } from "./users.actions";
 
 const initialState = {
-	users: {},
-	currentUser: null
+	users: [],
+	currentUserKey: null
 };
 
 export function reducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_USER:
+			// Don't allow same key twice
+			if (state.users.find(user => user.key === action.key)) {
+				return state;
+			}
 			return {
 				...state,
-				users: {
+				users: [
 					...state.users,
-					[action.key]: { name: action.name, key: action.key }
-				},
-				currentUser: action.key
+					{ name: action.name, save: action.save, key: action.key }
+				],
+				currentUserKey: action.key
 			};
 		case REMOVE_USER:
-			const users = {};
-			Object.keys(state.users).forEach(key => {
-				if (key !== action.key) {
-					users[key] = state.users[key];
-				}
-			});
-
-			let currentUser;
-			if (Object.keys(users).length === 0) {
-				currentUser = null;
-			} else if (state.currentUser === action.key) {
-				currentUser = Object.keys(users)[0];
+			const users = state.users.filter(user => user.key !== action.key);
+			let currentUserKey;
+			if (users.length === 0) {
+				currentUserKey = null; // No more users
+			} else if (!users.find(user => user.key === state.currentUserKey)) {
+				currentUserKey = users[0].key; // Deleted current user
 			} else {
-				currentUser = state.currentUser;
+				currentUserKey = state.currentUserKey; // No change
 			}
-			return { ...state, users, currentUser };
+			return { ...state, users, currentUserKey };
 		case SET_CURRENT_USER:
-			return { ...state, currentUser: action.key };
+			return { ...state, currentUserKey: action.key };
 		default:
 			return state;
 	}

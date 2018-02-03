@@ -29,6 +29,7 @@ export class ScanScreen extends React.Component {
 			const scanned = JSON.parse(data);
 			const { name, key } = scanned;
 			this.props.addUser(name, key);
+			this.props.navigation.goBack();
 		} catch (error) {
 			console.error(error)
 		}
@@ -46,7 +47,7 @@ export class ScanScreen extends React.Component {
 				<View style={{ flex: 1 }}>
 					<BarCodeScanner
 						onBarCodeRead={this.onScan}
-						// style={StyleSheet.absoluteFill}
+						style={StyleSheet.absoluteFill}
 					/>
 				</View>
 			);

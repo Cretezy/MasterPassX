@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { addUser, setCurrentUser } from "../store/users.actions";
 import { View } from "react-native";
 import { Card, List, ListItem } from "react-native-elements";
-import { getCurrentUserKey, getUsersList } from "../store/users.selectors";
+import { getCurrentUserKey, getUsers } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
 
 @connect(
 	state => ({
-		usersList: getUsersList(state),
+		users: getUsers(state),
 		currentUserKey: getCurrentUserKey(state)
 	}),
 	dispatch => ({
@@ -26,15 +26,16 @@ export class UsersScreen extends React.Component {
 		return (
 			<View>
 				<List containerStyle={{ marginBottom: 20 }}>
-					{this.props.usersList.map(user => (
+					{this.props.users.map(user => (
 						<ListItem
 							onPress={() => {
 								this.props.setCurrentUser(user.key);
-								this.props.navigation.navigate(
-									"Generate",
-									null,
-									NavigationActions.reset
-								);
+								this.props.navigation.dispatch(NavigationActions.reset({
+									index: 0,
+									actions: [
+										NavigationActions.navigate({ routeName: 'Generate' })
+									]
+								}))
 							}}
 							key={"user-" + user.key}
 							title={user.name}

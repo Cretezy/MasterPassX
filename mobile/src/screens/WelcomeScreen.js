@@ -93,7 +93,6 @@ export function WelcomeScreen({ navigation }) {
 	return (
 		<View style={{ padding: 10 }}>
 			<AddUserForm />
-			<Button title="Scan" onPress={() => navigation.navigate("Scan")} />
 		</View>
 	);
 }
