@@ -16,8 +16,8 @@ import { withNavigation } from "react-navigation";
 }))
 export class AddUserForm extends React.Component {
 	state = {
-		name: "user",
-		master: "password",
+		name: "",
+		master: "",
 		loading: false,
 		nameError: null,
 		passwordStrength: "",
@@ -32,8 +32,8 @@ export class AddUserForm extends React.Component {
 		const { name, master, passwordStrengthScore } = this.state;
 		if (
 			name.length > 0 &&
-			master.length > 0 /*&&
-			passwordStrengthScore >= 2*/
+			master.length > 0 &&
+			passwordStrengthScore >= 2
 		) {
 			this.setState({ loading: true });
 			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
@@ -98,7 +98,7 @@ export class AddUserForm extends React.Component {
 			}
 		}
 		const danger = "red";
-		const warning = "warning";
+		const warning = "yellow";
 		const primary = "blue";
 		const success = "green";
 
@@ -171,7 +171,7 @@ export class AddUserForm extends React.Component {
 					backgroundColor="purple"
 					disabled={this.state.loading}
 					title="Scan"
-					onPress={() => this.props.navigation.navigate("Scan", )} />
+					onPress={() => this.props.navigation.navigate("Scan")} />
 			</View>
 		);
 	}

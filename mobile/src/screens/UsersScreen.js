@@ -1,16 +1,17 @@
 import React from "react";
 import { AddUserForm } from "../components/AddUserForm";
 import { connect } from "react-redux";
-import { addUser, setCurrentUser } from "../store/users.actions";
-import { View } from "react-native";
-import { Card, List, ListItem } from "react-native-elements";
-import { getCurrentUserKey, getUsers } from "../store/users.selectors";
+import { addUser, removeUser, setCurrentUser } from "../store/users.actions";
+import { View, Platform, Alert } from "react-native";
+import { Button, Card, List, ListItem } from "react-native-elements";
+import { getCurrentUser, getUsers } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
+
 
 @connect(
 	state => ({
 		users: getUsers(state),
-		currentUserKey: getCurrentUserKey(state)
+		currentUser: getCurrentUser(state)
 	}),
 	dispatch => ({
 		addUser(name, key, save) {
@@ -18,6 +19,9 @@ import { NavigationActions } from "react-navigation";
 		},
 		setCurrentUser(key) {
 			dispatch(setCurrentUser(key));
+		},
+		removeUser(key) {
+			dispatch(removeUser(key));
 		}
 	})
 )
@@ -39,13 +43,39 @@ export class UsersScreen extends React.Component {
 							}}
 							key={"user-" + user.key}
 							title={user.name}
-							disabled={user.key === this.props.currentUserKey}
+							rightIconOnPress={() => {
+								this.props.removeUser(user.key);
+							}}
+							disabled={user.key === this.props.currentUser.key}
 						/>
 					))}
 				</List>
 				<Card style={{ margin: 10 }} title="Add user">
 					<AddUserForm />
 				</Card>
+				<Button
+					backgroundColor="red"
+					icon={{ type: "ionicon", name: (Platform.OS === "ios" ? "ios" : "md") + "-trash" }}
+					title="Delete Current User"
+					onPress={() => {
+						Alert.alert(
+							'Delete User',
+							`Are you sure you want to delete ${this.props.currentUser.name}?`,
+							[
+								{
+									text: 'Cancel', onPress: () => {
+									}, style: 'cancel'
+								},
+								{
+									text: 'OK', onPress: () => {
+										this.props.removeUser(this.props.currentUser.key);
+									}
+								},
+							],
+							{ cancelable: false }
+						)
+					}}
+				/>
 			</View>
 		);
 	}
