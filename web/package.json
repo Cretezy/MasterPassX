@@ -5,6 +5,7 @@
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "localforage": "^1.5.6",
     "masterpassx-core": "^1.1.4",
     "react": "^16.2.0",
@@ -12,7 +13,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "reactstrap": "^5.0.0-alpha.4",
+    "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
     "redux-persist": "^5.4.0",
     "reselect": "^3.0.1",
@@ -22,13 +23,13 @@
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.9.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.1.0"
   },
   "scripts": {
     "watch-js": "react-scripts start",
     "build-js": "react-scripts build",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules --include-path ../node_modules src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules --include-path ../node_modules src/ -o src/",
     "watch": "npm-run-all -p watch-css watch-js",
     "build": "npm-run-all build-css build-js",
     "test": "npm-run-all build-css test-only",

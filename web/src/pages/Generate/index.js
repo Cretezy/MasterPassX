@@ -9,7 +9,7 @@ import {
 	Collapse,
 	Card,
 	Row,
-	InputGroupButton,
+	InputGroupAddon,
 	InputGroup,
 	UncontrolledTooltip
 } from "reactstrap";
@@ -334,7 +334,7 @@ export const Generate = connect(
 															this
 														)}
 													/>
-													<InputGroupButton>
+													<InputGroupAddon addonType="append">
 														<Button
 															color="success"
 															onClick={this.onIncrement(
@@ -356,7 +356,7 @@ export const Generate = connect(
 														>
 															-
 														</Button>
-													</InputGroupButton>
+													</InputGroupAddon>
 												</InputGroup>
 											</Col>
 										</FormGroup>
