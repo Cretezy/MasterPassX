@@ -6,7 +6,7 @@ import "./index.css";
 import { Footer } from "../../components/Footer";
 import { AboutText } from "../../components/AboutText";
 
-export function Welcome({ history }) {
+export function Welcome() {
 	return (
 		<div className="text-center">
 			<div id="banner">

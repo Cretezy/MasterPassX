@@ -28,6 +28,7 @@ import {
 	getUsers
 } from "../../store/users.selectors";
 import { getDomain } from "../../store/session";
+import { AddUserModel } from "../../components/AddUserModal";
 
 export const Generate = connect(
 	state => ({
@@ -54,7 +55,8 @@ export const Generate = connect(
 			showOptions: false,
 			copied: false,
 			showHelp: false,
-			deleteUserModalOpen: false
+			deleteUserModalOpen: false,
+			addUserModalOpen: false
 		};
 
 		state = { ...this.initialState };
@@ -101,6 +103,12 @@ export const Generate = connect(
 			}));
 		}
 
+		onToggleAddUserModal() {
+			this.setState(state => ({
+				addUserModalOpen: !state.addUserModalOpen
+			}));
+		}
+
 		generate() {
 			const { site, type, counter } = this.state;
 
@@ -144,8 +152,10 @@ export const Generate = connect(
 					<Header
 						onToggleHelp={this.onToggleHelp.bind(this)}
 						onSwitchUser={this.onSwitchUser.bind(this)}
-						addUser={() => this.props.history.push("/add")}
 						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(
+							this
+						)}
+						onToggleAddUserModal={this.onToggleAddUserModal.bind(
 							this
 						)}
 						users={this.props.users}
@@ -160,6 +170,14 @@ export const Generate = connect(
 							this.onReset();
 						}}
 						name={this.props.currentUser.name}
+					/>
+
+					<AddUserModel
+						open={this.state.addUserModalOpen}
+						onToggle={this.onToggleAddUserModal.bind(this)}
+						onAdd={() => {
+							this.onReset();
+						}}
 					/>
 
 					<div className="normal-container content-navbar">
@@ -233,11 +251,11 @@ export const Generate = connect(
 										onClick={this.onReset.bind(this)}
 										disabled={
 											this.state.site ===
-												this.initialState.site &&
+											this.initialState.site &&
 											this.state.type ===
-												this.initialState.type &&
+											this.initialState.type &&
 											this.state.counter ===
-												this.initialState.counter
+											this.initialState.counter
 										}
 									>
 										Reset

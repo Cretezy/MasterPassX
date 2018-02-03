@@ -22,7 +22,7 @@ export const transforms = [
 					} else if (
 						!users.find(user => user.key === state.currentUserKey)
 					) {
-						currentUserKey = users[0];
+						currentUserKey = users[0].key;
 					} else {
 						currentUserKey = state.currentUserKey;
 					}

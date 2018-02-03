@@ -8,13 +8,13 @@ import {
 import { Navbar } from "../../components/Navbar";
 
 export function Header({
-	onToggleHelp,
-	onSwitchUser,
-	addUser,
-	onToggleDeleteUserModal,
-	users,
-	currentUserKey
-}) {
+	                       onToggleHelp,
+	                       onSwitchUser,
+	                       onToggleAddUserModal,
+	                       onToggleDeleteUserModal,
+	                       users,
+	                       currentUserKey
+                       }) {
 	return (
 		<Navbar title="Generate" onToggleHelp={onToggleHelp}>
 			<UncontrolledDropdown nav>
@@ -35,7 +35,7 @@ export function Header({
 						);
 					})}
 					<DropdownItem divider />
-					<DropdownItem onClick={addUser}>Add User</DropdownItem>
+					<DropdownItem onClick={onToggleAddUserModal}>Add User</DropdownItem>
 					<DropdownItem onClick={onToggleDeleteUserModal}>
 						Delete Current User
 					</DropdownItem>

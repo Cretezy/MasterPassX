@@ -20,8 +20,19 @@ export const AddUserForm = withRouter(
 		addUser(name, key, save) {
 			dispatch(addUser(name, key, save));
 		}
-	}))(
+	}), null, { withRef: true })(
 		class AddUserForm extends React.Component {
+			static defaultProps = {
+				hide: false,
+				onSetLoading() {
+				},
+				done() {
+				},
+				onSetSave() {
+
+				}
+			};
+
 			state = {
 				name: "",
 				master: "",
@@ -45,8 +56,7 @@ export const AddUserForm = withRouter(
 			zxcvbn;
 			nameErrorTimer;
 
-			onSubmit(event) {
-				event.preventDefault();
+			onSubmit = () => {
 				const {
 					name,
 					master,
@@ -59,14 +69,16 @@ export const AddUserForm = withRouter(
 					passwordStrengthScore >= 2
 				) {
 					this.setState({ loading: true });
+					this.props.onSetLoading();
 					// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 					setTimeout(async () => {
 						const key = await createKey(name, master);
 						this.props.addUser(name, key, save);
 						this.props.history.push("/");
+						this.props.done()
 					}, 25);
 				}
-			}
+			};
 
 			onChangeName(event) {
 				const name = event.target.value;
@@ -111,7 +123,7 @@ export const AddUserForm = withRouter(
 					strengthState.passwordStrength = `Could take ~${
 						strength.crack_times_display
 							.offline_slow_hashing_1e4_per_second
-					} to crack.`;
+						} to crack.`;
 
 					if (strength.feedback) {
 						if (strength.feedback.warning) {
@@ -153,16 +165,21 @@ export const AddUserForm = withRouter(
 				});
 			}
 
-			onSaveChange() {
-				this.setState(state => ({
-					save: !state.save
+			onChangeSave() {
+				const save = !this.state.save;
+				this.setState(({
+					save
 				}));
+				this.props.onSetSave(save)
 			}
 
 			render() {
 				return (
 					<Form
-						onSubmit={this.onSubmit.bind(this)}
+						onSubmit={event => {
+							event.preventDefault();
+							this.onSubmit(this);
+						}}
 						autoComplete="new-password"
 						className="text-left"
 					>
@@ -185,7 +202,7 @@ export const AddUserForm = withRouter(
 								/>
 								<FormText>
 									{this.state.nameError ||
-										"This will need to match exactly on other devices."}
+									"This will need to match exactly on other devices."}
 								</FormText>
 							</Col>
 						</FormGroup>
@@ -207,7 +224,7 @@ export const AddUserForm = withRouter(
 										this.state.passwordStrengthScore !==
 										null
 											? this.state
-													.passwordStrengthScore >= 2
+											.passwordStrengthScore >= 2
 											: null
 									}
 									value={this.state.master}
@@ -220,62 +237,62 @@ export const AddUserForm = withRouter(
 									}
 								>
 									{this.state.passwordStrength ||
-										"Use a long and hard to guess password (or passphrase)."}
+									"Use a long and hard to guess password (or passphrase)."}
 								</FormText>
 							</Col>
 						</FormGroup>
 
-						<Row noGutters>
-							<Col className="p-1 text-center" xs={12} sm={6}>
-								<FormGroup check>
-									<Label check for="save" className="pt-2">
-										<Input
-											type="checkbox"
-											name="save"
-											id="save"
-											checked={this.state.save}
-											onChange={this.onSaveChange.bind(
-												this
-											)}
-										/>
-										<a
-											id="saveLabel"
-											className="tooltip-label"
-										>
-											Save User
-										</a>
-										<UncontrolledTooltip
-											placement="top"
-											target="saveLabel"
-										>
-											Enabling saving allows you to keep
-											the user saved (no need to retype
-											name & master password on every
-											load), and only stores the generated
-											key from name & master password (it
-											does not store the master password).
-											Disable this if you are using a
-											shared computer and don't want
-											others to generate passwords for
-											you.
-										</UncontrolledTooltip>
-									</Label>
-								</FormGroup>
-							</Col>
-							<Col className="p-1" xs={12} sm={6}>
-								<Button
-									type="submit"
-									block
-									color="success"
-									disabled={this.state.loading}
-								>
-									Create User
-								</Button>
-							</Col>
-						</Row>
+						{!this.props.hide ? (
+							<Row noGutters>
+								<Col className="p-1 text-center" xs={12} sm={6}>
+									<SaveToggle save={this.state.save} onSaveChange={this.onChangeSave.bind(this)} />
+								</Col>
+								<Col className="p-1" xs={12} sm={6}>
+									<Button
+										type="submit"
+										block
+										color="success"
+										disabled={this.state.loading}
+									>
+										Create User
+									</Button>
+								</Col>
+							</Row>
+						) : <input type="submit" style={{ display: "none" }} />}
 					</Form>
 				);
 			}
 		}
 	)
 );
+
+export function SaveToggle({ onSaveChange, save }) {
+	return (
+		<FormGroup check>
+			<Label check for="save" className="pt-2">
+				<Input
+					type="checkbox"
+					name="save"
+					id="save"
+					checked={save}
+					onChange={onSaveChange}
+				/>
+				<a id="saveLabel" className="tooltip-label">
+					Save User
+				</a>
+				<UncontrolledTooltip
+					placement="top"
+					target="saveLabel"
+				>
+					Enabling saving allows you to keep the user
+					saved (no need to retype name & master password
+					on every load), and only stores the generated
+					key from name & master password (it does not
+					store the master password). Disable this if you
+					are using a shared computer and don't want
+					others to generate passwords for you.
+				</UncontrolledTooltip>
+			</Label>
+		</FormGroup>
+	)
+}
