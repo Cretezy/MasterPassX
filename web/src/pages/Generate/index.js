@@ -148,9 +148,7 @@ export const Generate = connect(
 						onToggleDeleteUserModal={this.onToggleDeleteUserModal.bind(
 							this
 						)}
-						onToggleScanModal={this.onToggleScanModal.bind(
-							this
-						)}
+						onToggleScanModal={this.onToggleScanModal.bind(this)}
 						users={this.props.users}
 						currentUser={this.props.currentUser}
 					/>

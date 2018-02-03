@@ -8,14 +8,14 @@ import {
 import { Navbar } from "../../components/Navbar";
 
 export function Header({
-	                       onToggleHelp,
-	                       onSwitchUser,
-	                       addUser,
-	                       onToggleDeleteUserModal,
-	                       onToggleScanModal,
-	                       users,
-	                       currentUser
-                       }) {
+	onToggleHelp,
+	onSwitchUser,
+	addUser,
+	onToggleDeleteUserModal,
+	onToggleScanModal,
+	users,
+	currentUser
+}) {
 	return (
 		<Navbar title="Generate" onToggleHelp={onToggleHelp}>
 			<UncontrolledDropdown nav>

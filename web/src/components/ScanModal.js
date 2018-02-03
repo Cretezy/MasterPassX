@@ -9,7 +9,6 @@ export function ScanModal({ open, onToggle, name, key }) {
 				<QRCode value={JSON.stringify({ name, key })} />,
 			</ModalBody>
 			<ModalFooter>
-
 				<Button color="secondary" onClick={onToggle}>
 					Close
 				</Button>
