@@ -5,14 +5,8 @@ import { ExampleGenerator } from "../../components/ExampleGenerator";
 import "./index.css";
 import { Footer } from "../../components/Footer";
 import { AboutText } from "../../components/AboutText";
-import { connect } from "react-redux";
-import { addUser } from "../../redux/users";
 
-export const Welcome = connect(null, dispatch => ({
-	addUser(name, key, save) {
-		dispatch(addUser(name, key, save));
-	}
-}))(function Welcome({ addUser, history }) {
+export function Welcome({ history }) {
 	return (
 		<div className="text-center">
 			<div id="banner">
@@ -83,12 +77,7 @@ export const Welcome = connect(null, dispatch => ({
 						<h6>Never remember another password.</h6>
 						<h6>Get started today.</h6>
 						<div className="mt-2">
-							<AddUserForm
-								done={(name, key, save) => {
-									addUser(name, key, save);
-									history.push("/");
-								}}
-							/>
+							<AddUserForm />
 						</div>
 					</Card>
 
@@ -100,4 +89,4 @@ export const Welcome = connect(null, dispatch => ({
 			</div>
 		</div>
 	);
-});
+}

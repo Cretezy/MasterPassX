@@ -5,7 +5,7 @@
   "repository": "git@github.com:Cretezy/MasterPassX.git",
   "author": "Charles Crete <charles@cretezy.com>",
   "dependencies": {
-    "localforage": "^1.5.5",
+    "localforage": "^1.5.6",
     "masterpassx-core": "^1.1.4",
     "qrcode.react": "^0.7.2",
     "react": "^16.2.0",
@@ -16,6 +16,7 @@
     "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.7.2",
     "redux-persist": "^5.4.0",
+    "reselect": "^3.0.1",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

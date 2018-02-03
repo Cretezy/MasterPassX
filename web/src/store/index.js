@@ -1,33 +1,30 @@
 import { migrations } from "./migrations";
 import { transforms } from "./transforms";
-import {
-	createMigrate,
-	persistCombineReducers,
-	persistStore
-} from "redux-persist";
+import { createMigrate, persistReducer, persistStore } from "redux-persist";
 import storage from "localforage";
 
 import { reducer as userReducer } from "./users";
 import { reducer as sessionReducer } from "./session";
-import createStore from "redux/lib/createStore";
+import { combineReducers, createStore } from "redux";
 
 const debug = process.env.NODE_ENV === "development";
 
 export function setupStore() {
 	const store = createStore(
-		persistCombineReducers(
+		persistReducer(
 			{
 				key: "masterpassx",
 				storage,
-				version: 1,
+				version: 2,
 				transforms,
 				blacklist: ["session"],
-				migrate: createMigrate(migrations, { debug })
+				migrate: createMigrate(migrations, { debug }),
+				debug
 			},
-			{
+			combineReducers({
 				users: userReducer,
 				session: sessionReducer
-			}
+			})
 		),
 		undefined,
 		debug

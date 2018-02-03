@@ -14,7 +14,7 @@ export function Header({
 	onToggleDeleteUserModal,
 	onToggleScanModal,
 	users,
-	currentUser
+	currentUserKey
 }) {
 	return (
 		<Navbar title="Generate" onToggleHelp={onToggleHelp}>
@@ -23,14 +23,13 @@ export function Header({
 					Users
 				</DropdownToggle>
 				<DropdownMenu right>
-					{Object.keys(users).map(key => {
-						const user = users[key];
-						const selected = key === currentUser;
+					{users.map(user => {
+						const selected = user.key === currentUserKey;
 						return (
 							<DropdownItem
 								disabled={selected}
-								key={"user-" + key}
-								onClick={() => onSwitchUser(key)}
+								key={"user-" + user.key}
+								onClick={() => onSwitchUser(user.key)}
 							>
 								{user.name}
 							</DropdownItem>

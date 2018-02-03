@@ -2,19 +2,19 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { setDomain } from "../redux/session";
+import { setDomain } from "../store/session";
 
 import { Welcome } from "./Welcome";
 import { Generate } from "./Generate";
 import { AddUser } from "./AddUser";
 import { About } from "./About";
+import { getHasUsers } from "../store/users.selectors";
 // import {Security} from "./Security";
 
 export const Router = connect(
-	state => ({ users: state.users.users }),
+	state => ({ hasUsers: getHasUsers(state) }),
 	dispatch => ({ setDomain: domain => dispatch(setDomain(domain)) })
-)(function Router({ users, setDomain }) {
-	const hasUsers = !!Object.keys(users).length;
+)(function Router({ hasUsers, setDomain }) {
 	return (
 		<BrowserRouter>
 			<Switch>
