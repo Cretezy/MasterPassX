@@ -5,8 +5,11 @@ import zxcvbn from "zxcvbn";
 import autobind from "autobind-decorator";
 import { addUser } from "../store/users.actions";
 import { View } from "react-native";
-import { Button, FormInput, FormLabel, Text } from "react-native-elements";
+import { FormInput, FormLabel, Text } from "react-native-elements";
 import { withNavigation } from "react-navigation";
+import { colors, primary, secondary, textColor } from "../color";
+import { Item, Row } from "./Grid";
+import { Button } from "./Button";
 
 @withNavigation
 @connect(null, dispatch => ({
@@ -97,10 +100,10 @@ export class AddUserForm extends React.Component {
 					" " + strength.feedback.suggestions.join(" ");
 			}
 		}
-		const danger = "red";
-		const warning = "yellow";
-		const primary = "blue";
-		const success = "green";
+		const danger = colors.red["a200"];
+		const warning = colors.orange["a200"];
+		const primary = colors.blue["a200"];
+		const success = colors.green["a700"];
 
 		switch (strength.score) {
 			case 0:
@@ -139,8 +142,9 @@ export class AddUserForm extends React.Component {
 					value={this.state.name}
 					onChangeText={this.onChangeName}
 					placeholder="John Smith"
+					autoFocus={this.props.autoFocus}
 				/>
-				<Text>
+				<Text style={{ color: textColor.muted }}>
 					{this.state.nameError ||
 					"This will need to match exactly on other devices."}
 				</Text>
@@ -153,25 +157,36 @@ export class AddUserForm extends React.Component {
 				/>
 				<Text
 					style={{
-						color: this.state.passwordStrengthColor || "black"
+						color: this.state.passwordStrengthColor || textColor.muted
 					}}
 				>
 					{this.state.passwordStrength ||
 					"Use a long and hard to guess password (or passphrase)."}
 				</Text>
 
-				<Button
-					backgroundColor="green"
-					disabled={this.state.loading}
-					onPress={this.onSubmit}
-					title={this.state.loading ? "Creating User..." : "Create User"}
-				/>
+				<Row>
+					<Item>
+						<Button
+							block
+							icon={{ name: "create" }}
+							backgroundColor={primary[500]}
+							disabled={this.state.loading}
+							onPress={this.onSubmit}
+							title={"Create"}
+						/>
+					</Item>
 
-				<Button
-					backgroundColor="purple"
-					disabled={this.state.loading}
-					title="Scan"
-					onPress={() => this.props.navigation.navigate("Scan")} />
+					<Item>
+						<Button
+							block
+							icon={{ name: "linked-camera" }}
+							backgroundColor={colors.purple[500]}
+							disabled={this.state.loading}
+							title="Scan"
+							onPress={() => this.props.navigation.navigate("Scan")}
+						/>
+					</Item>
+				</Row>
 			</View>
 		);
 	}

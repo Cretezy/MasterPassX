@@ -91,8 +91,8 @@ import { View } from "react-native";
 
 export function WelcomeScreen({ navigation }) {
 	return (
-		<View style={{ padding: 10 }}>
-			<AddUserForm />
+		<View>
+			<AddUserForm autoFocus/>
 		</View>
 	);
 }

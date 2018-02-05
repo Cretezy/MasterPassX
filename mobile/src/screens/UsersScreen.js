@@ -3,9 +3,11 @@ import { AddUserForm } from "../components/AddUserForm";
 import { connect } from "react-redux";
 import { addUser, removeUser, setCurrentUser } from "../store/users.actions";
 import { View, Platform, Alert } from "react-native";
-import { Button, Card, List, ListItem } from "react-native-elements";
+import {  Card, List, ListItem } from "react-native-elements";
 import { getCurrentUser, getUsers } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
+import { Button } from "../components/Button";
+import { colors } from "../color";
 
 
 @connect(
@@ -26,10 +28,14 @@ import { NavigationActions } from "react-navigation";
 	})
 )
 export class UsersScreen extends React.Component {
+	static navigationOptions={
+		title:"Users"
+	};
+
 	render() {
 		return (
 			<View>
-				<List containerStyle={{ marginBottom: 20 }}>
+				<List containerStyle={{ marginBottom: 10 }}>
 					{this.props.users.map(user => (
 						<ListItem
 							onPress={() => {
@@ -50,12 +56,13 @@ export class UsersScreen extends React.Component {
 						/>
 					))}
 				</List>
-				<Card style={{ margin: 10 }} title="Add user">
+				<Card  title="Add user">
 					<AddUserForm />
 				</Card>
+				<View style={{height: 20}}/>
 				<Button
-					backgroundColor="red"
-					icon={{ type: "ionicon", name: (Platform.OS === "ios" ? "ios" : "md") + "-trash" }}
+					backgroundColor={colors.red[500]}
+					icon={{name: "delete" }}
 					title="Delete Current User"
 					onPress={() => {
 						Alert.alert(

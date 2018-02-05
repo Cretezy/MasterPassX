@@ -5,8 +5,10 @@ import { createPassword, createSeed, templates } from "masterpassx-core";
 import { PasswordDisplay } from "../components/PasswordDisplay";
 import { getCurrentUserKey } from "../store/users.selectors";
 import { View, Clipboard, Platform, Picker, ScrollView } from "react-native";
-import { Button, FormLabel, FormInput, Card } from "react-native-elements";
+import { FormLabel, FormInput, Card } from "react-native-elements";
 import autobind from "autobind-decorator";
+import { Item, Row } from "../components/Grid";
+import { Button } from "../components/Button";
 
 @connect(state => ({
 	currentUserKey: getCurrentUserKey(state)
@@ -90,7 +92,7 @@ export class GenerateScreen extends React.Component {
 
 	render() {
 		return (
-			<View style={{ padding: 10 }}>
+			<View>
 				<FormLabel>Site</FormLabel>
 				<FormInput
 					keyboardType={
@@ -104,28 +106,35 @@ export class GenerateScreen extends React.Component {
 					autoFocus
 				/>
 				<PasswordDisplay password={this.state.password} />
-				{/*<Grid>*/}
-				{/*<Col>*/}
-				<Button
-					backgroundColor="blue"
-					disabled={!this.state.password || this.state.copied}
-					onPress={this.onCopy}
-					title={"Copy " + (this.state.copied ? "✓" : "")}
-				/>
-				{/*</Col>*/}
-				{/*<Col>*/}
-				<Button
-					backgroundColor="red"
-					onPress={this.onReset}
-					disabled={
-						this.state.site === this.initialState.site &&
-						this.state.type === this.initialState.type &&
-						this.state.counter === this.initialState.counter
-					}
-					title="Reset"
-				/>
-				{/*</Col>*/}
-				{/*</Grid>*/}
+
+				<Row>
+					<Item>
+						<Button
+							icon={{
+								type: "material-community",
+								name: this.state.copied ? "clipboard-check" : "clipboard"
+							}}
+							backgroundColor="blue"
+							disabled={!this.state.password || this.state.copied}
+							onPress={this.onCopy}
+							title={"Copy"}
+						/>
+					</Item>
+					<Item>
+						<Button
+							icon={{ name: "clear" }}
+							backgroundColor="red"
+							onPress={this.onReset}
+							disabled={
+								this.state.site === this.initialState.site &&
+								this.state.type === this.initialState.type &&
+								this.state.counter === this.initialState.counter
+							}
+							title="Reset"
+						/>
+					</Item>
+				</Row>
+				<View style={{ height: 20 }} />
 				<Button
 					backgroundColor="grey"
 					onPress={this.onToggleShowOptions}
@@ -149,26 +158,34 @@ export class GenerateScreen extends React.Component {
 									/>
 								))}
 							</Picker>
+
 							<FormLabel>Counter</FormLabel>
 							<FormInput
 								value={this.state.counter.toString()}
 								onChangeText={this.onCounterChange}
 								keyboardType="numeric"
 							/>
-							<Button
-								backgroundColor="green"
-								onPress={this.onIncrement(1)}
-								title="+"
-							/>
-							<Button
-								backgroundColor="red"
-								disabled={this.state.counter <= 1}
-								onPress={this.onIncrement(-1)}
-								title="-"
-							/>
+							<Row>
+								<Item>
+									<Button
+										backgroundColor="green"
+										onPress={this.onIncrement(1)}
+										title="+"
+									/>
+								</Item>
+								<Item>
+									<Button
+										backgroundColor="red"
+										disabled={this.state.counter <= 1}
+										onPress={this.onIncrement(-1)}
+										title="-"
+									/>
+								</Item>
+							</Row>
 						</Card>
 					</View>
 				)}
+				<View style={{ height: 20 }} />
 				<Button
 					backgroundColor="grey"
 					onPress={() => this.props.navigation.navigate("Users")}

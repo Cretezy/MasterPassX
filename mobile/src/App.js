@@ -1,11 +1,11 @@
 import React from "react";
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Provider } from "react-redux";
 import { setupStore } from "./store";
 import { AppLoading, Asset, Font } from "expo";
 import { StatusBar, View, StyleSheet } from "react-native";
 import { RootNavigator } from "./Navigator";
-
+import { primary } from "./color";
 
 export default class App extends React.Component {
 	static defaultProps = {
@@ -40,7 +40,7 @@ export default class App extends React.Component {
 			return (
 				<Provider store={this.store}>
 					<View style={styles.container}>
-						<StatusBar translucent barStyle="dark-content" backgroundColor="#ffffff" />
+						<StatusBar translucent barStyle="light-content" backgroundColor={primary[700]} />
 						<RootNavigator />
 					</View>
 				</Provider>
@@ -53,7 +53,8 @@ export default class App extends React.Component {
 		return Promise.all([
 			Asset.loadAsync([]),
 			Font.loadAsync({
-				...Ionicons.font,
+				...MaterialIcons.font,
+				...MaterialCommunityIcons.font
 			})
 		]);
 	};

@@ -14,7 +14,7 @@ export function setupStore(callback) {
 	const store = createStore(
 		persistCombineReducers(
 			{
-				key: "masterpassx",
+				key: "masterpassx-1", // temp key while debugging
 				storage: createSecureStore(),
 				version: 0,
 				migrate: createMigrate(migrations, { debug })
@@ -29,7 +29,7 @@ export function setupStore(callback) {
 				window.__REDUX_DEVTOOLS_EXTENSION__()
 			: undefined
 	);
-	// persistStore(store, null, callback);
+	persistStore(store, null, callback);
 	setTimeout(callback, 25);
 	return store;
 }
