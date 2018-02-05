@@ -293,10 +293,11 @@ export const colors = {
 	}
 };
 export const primary = colors.indigo;
-export const secondary = colors.lightgreen;
+export const secondary = colors.teal;
 
-export const textColor = {
+export const textColors = {
 	white: "#ffffff",
 	black: "#000000",
+	dark: "#1f2328",
 	muted: "#6c757d"
-}
+};

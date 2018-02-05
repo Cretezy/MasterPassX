@@ -7,7 +7,7 @@ import { addUser } from "../store/users.actions";
 import { View, Keyboard } from "react-native";
 import { FormInput, FormLabel, Text } from "react-native-elements";
 import { withNavigation } from "react-navigation";
-import { colors, primary, secondary, textColor } from "../color";
+import { colors, primary, secondary, textColors } from "../color";
 import { Item, Row } from "./Grid";
 import { Button } from "./Button";
 import { CenterText } from "./CenterText";
@@ -141,18 +141,18 @@ export class AddUserForm extends React.Component {
 	render() {
 		return (
 			<View>
-				<FormLabel>Full Name</FormLabel>
+				<CenterText component={FormLabel}>Full Name</CenterText>
 				<FormInput
 					value={this.state.name}
 					onChangeText={this.onChangeName}
 					placeholder="John Smith"
 					autoFocus={this.props.autoFocus}
 				/>
-				<CenterText style={{ color: textColor.muted }}>
+				<CenterText style={{ color: textColors.muted }}>
 					{this.state.nameError ||
 						"This will need to match exactly on other devices."}
 				</CenterText>
-				<FormLabel>Master Password</FormLabel>
+				<CenterText component={FormLabel}>Master Password</CenterText>
 				<FormInput
 					secureTextEntry
 					value={this.state.master}
@@ -162,7 +162,7 @@ export class AddUserForm extends React.Component {
 				<CenterText
 					style={{
 						color:
-							this.state.passwordStrengthColor || textColor.muted
+							this.state.passwordStrengthColor || textColors.muted
 					}}
 				>
 					{this.state.passwordStrength ||

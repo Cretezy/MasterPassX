@@ -8,6 +8,7 @@ import { UsersScreen } from "./screens/UsersScreen";
 import { ScanScreen } from "./screens/ScanScreen";
 import { primary } from "./color";
 import { Keyboard } from "react-native";
+import { AddUserScreen } from "./screens/AddUserScreen";
 
 const navigatorOptions = {
 	onTransitionStart() {
@@ -34,6 +35,9 @@ const MainStackNavigator = StackNavigator(
 		},
 		Scan: {
 			screen: ScanScreen
+		},
+		AddUser: {
+			screen: AddUserScreen
 		}
 	},
 	navigatorOptions

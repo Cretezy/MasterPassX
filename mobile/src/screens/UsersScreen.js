@@ -1,13 +1,10 @@
 import React from "react";
-import { AddUserForm } from "../components/AddUserForm";
 import { connect } from "react-redux";
-import { addUser, removeUser, setCurrentUser } from "../store/users.actions";
-import { View, Platform, Alert, ScrollView } from "react-native";
-import { Card, List, ListItem } from "react-native-elements";
+import { removeUser, setCurrentUser } from "../store/users.actions";
+import { View, Alert } from "react-native";
+import { List, ListItem } from "react-native-elements";
 import { getCurrentUser, getUsers } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
-import { Button } from "../components/Button";
-import { colors } from "../color";
 
 @connect(
 	state => ({
@@ -15,9 +12,6 @@ import { colors } from "../color";
 		currentUser: getCurrentUser(state)
 	}),
 	dispatch => ({
-		addUser(name, key, save) {
-			dispatch(addUser(name, key, save));
-		},
 		setCurrentUser(key) {
 			dispatch(setCurrentUser(key));
 		},
@@ -32,8 +26,9 @@ export class UsersScreen extends React.Component {
 	};
 
 	render() {
+		// TODO: move to flatlist
 		return (
-			<ScrollView>
+			<View>
 				<List containerStyle={{ marginBottom: 10 }}>
 					{this.props.users.map(user => (
 						<ListItem
@@ -52,48 +47,54 @@ export class UsersScreen extends React.Component {
 							}}
 							key={"user-" + user.key}
 							title={user.name}
-							rightIconOnPress={() => {
-								this.props.removeUser(user.key);
-							}}
 							disabled={user.key === this.props.currentUser.key}
 						/>
 					))}
-				</List>
-				<Card title="Add user">
-					<AddUserForm />
-				</Card>
-				<View style={{ height: 20 }} />
-				<Button
-					backgroundColor={colors.red[500]}
-					icon={{ name: "delete" }}
-					title="Delete Current User"
-					onPress={() => {
-						Alert.alert(
-							"Delete User",
-							`Are you sure you want to delete ${
-								this.props.currentUser.name
-							}?`,
-							[
-								{
-									text: "Cancel",
-									onPress: () => {},
-									style: "cancel"
-								},
-								{
-									text: "OK",
-									onPress: () => {
-										this.props.removeUser(
-											this.props.currentUser.key
-										);
+					<ListItem
+						key="add-user"
+						title={"Add User"}
+						leftIcon={{
+							type: "material-community",
+							name: "account-plus"
+						}}
+						onPress={() => {
+							this.props.navigation.navigate("AddUser");
+						}}
+					/>
+					<ListItem
+						key="remove-user"
+						title={"Remove Current User"}
+						leftIcon={{
+							type: "material-community",
+							name: "delete"
+						}}
+						onPress={() => {
+							Alert.alert(
+								"Delete User",
+								`Are you sure you want to delete ${
+									this.props.currentUser.name
+								}?`,
+								[
+									{
+										text: "Cancel",
+										onPress: () => {},
+										style: "cancel"
+									},
+									{
+										text: "OK",
+										onPress: () => {
+											this.props.removeUser(
+												this.props.currentUser.key
+											);
+										}
 									}
-								}
-							],
-							{ cancelable: false }
-						);
-					}}
-				/>
-				<View style={{ height: 20 }} />
-			</ScrollView>
+								],
+								{ cancelable: false }
+							);
+						}}
+					/>
+				</List>
+			</View>
 		);
 	}
 }
