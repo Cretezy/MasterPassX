@@ -10,6 +10,7 @@ import autobind from "autobind-decorator";
 import { Item, Row } from "../components/Grid";
 import { Button } from "../components/Button";
 import { primary, secondary } from "../color";
+import Collapsible from "react-native-collapsible";
 
 @connect(state => ({
 	currentUserKey: getCurrentUserKey(state)
@@ -42,7 +43,7 @@ export class GenerateScreen extends React.Component {
 
 	@autobind
 	onCounterChange(count) {
-		const counter = parseInt(count, 10) || 1;
+		const counter = parseInt(count, 10);
 		this.setState({ counter }, this.generate);
 	}
 
@@ -50,7 +51,7 @@ export class GenerateScreen extends React.Component {
 	onIncrement(increment) {
 		return () =>
 			this.setState(
-				state => ({ counter: state.counter + increment }),
+				state => ({ counter: (state.counter || 0) + increment }),
 				this.generate
 			);
 	}
@@ -69,7 +70,7 @@ export class GenerateScreen extends React.Component {
 				const seed = createSeed(
 					this.props.currentUserKey,
 					site,
-					counter
+					counter || 1
 				);
 				password = createPassword(seed, type);
 			} else {
@@ -151,49 +152,72 @@ export class GenerateScreen extends React.Component {
 						(this.state.showOptions ? "Hide" : "Show") + " Options"
 					}
 				/>
-				{this.state.showOptions && (
-					<View style={{ marginBottom: 10 }}>
-						<Card>
-							<FormLabel>Type</FormLabel>
-							<Picker
-								selectedValue={this.state.type}
-								onValueChange={this.onTypeChange}
-							>
-								{Object.keys(templates).map(type => (
-									<Picker.Item
-										label={templates[type]}
-										key={"type-" + type}
-										value={type}
-									/>
-								))}
-							</Picker>
 
-							<FormLabel>Counter</FormLabel>
-							<FormInput
-								value={this.state.counter.toString()}
-								onChangeText={this.onCounterChange}
-								keyboardType="numeric"
-							/>
-							<Row>
-								<Item>
-									<Button
-										backgroundColor="green"
-										onPress={this.onIncrement(1)}
-										title="+"
-									/>
-								</Item>
-								<Item>
-									<Button
-										backgroundColor="red"
-										disabled={this.state.counter <= 1}
-										onPress={this.onIncrement(-1)}
-										title="-"
-									/>
-								</Item>
-							</Row>
-						</Card>
-					</View>
-				)}
+				<Collapsible collapsed={!this.state.showOptions} duration={500}>
+					<Card style={{ marginButton: 10 }}>
+						<Row>
+							<Item>
+								<FormLabel>Type</FormLabel>
+							</Item>
+							<Item>
+								<Picker
+									selectedValue={this.state.type}
+									onValueChange={this.onTypeChange}
+								>
+									{Object.keys(templates).map(type => (
+										<Picker.Item
+											label={templates[type]}
+											key={"type-" + type}
+											value={type}
+										/>
+									))}
+								</Picker>
+							</Item>
+						</Row>
+						<Row>
+							<Item size={2}>
+								<FormLabel>Counter</FormLabel>
+							</Item>
+							<Item size={2}>
+								<FormInput
+									textAlign="center"
+									value={
+										isNaN(this.state.counter)
+											? ""
+											: this.state.counter.toString()
+									}
+									onChangeText={this.onCounterChange}
+									keyboardType="numeric"
+									inputStyle={{ width: 50 }}
+								/>
+							</Item>
+							<Item>
+								<Button
+									backgroundColor="green"
+									onPress={this.onIncrement(1)}
+									title="+"
+									containerViewStyle={{
+										marginRight: 2,
+										marginHorizontal: 0
+									}}
+								/>
+							</Item>
+							<Item>
+								<Button
+									backgroundColor="red"
+									disabled={(this.state.counter || 1) <= 1}
+									onPress={this.onIncrement(-1)}
+									title="-"
+									containerViewStyle={{
+										marginLeft: 2,
+										marginHorizontal: 0
+									}}
+								/>
+							</Item>
+						</Row>
+					</Card>
+				</Collapsible>
+
 				<View style={{ height: 20 }} />
 				<Button
 					backgroundColor={secondary[500]}
