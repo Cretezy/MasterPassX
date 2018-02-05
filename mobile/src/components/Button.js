@@ -7,7 +7,10 @@ export function Button(props) {
 		<BaseButton
 			{...props}
 			borderRadius={radius}
-			containerViewStyle={[{ borderRadius: radius }, props.containerViewStyle]}
+			containerViewStyle={[
+				{ borderRadius: radius },
+				props.containerViewStyle
+			]}
 		/>
 	);
 }

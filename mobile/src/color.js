@@ -293,7 +293,7 @@ export const colors = {
 	}
 };
 export const primary = colors.indigo;
-export const secondary = colors.pink;
+export const secondary = colors.lightgreen;
 
 export const textColor = {
 	white: "#ffffff",

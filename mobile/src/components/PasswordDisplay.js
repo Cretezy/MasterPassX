@@ -1,11 +1,17 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "react-native-elements";
+import { Platform } from "react-native";
+import { CenterText } from "./CenterText";
 
 export function PasswordDisplay({ password }) {
 	return (
-		<View>
-			<Text>{password || "Enter site to start..."}</Text>
-		</View>
+		<CenterText
+			style={{
+				fontFamily: Platform.OS === "ios" ? "Courier New" : "monospace",
+				fontSize: 24
+			}}
+		>
+			{password || "Enter site to start..."}
+		</CenterText>
 	);
 }

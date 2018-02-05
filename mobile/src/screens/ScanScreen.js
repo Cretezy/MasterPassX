@@ -15,7 +15,7 @@ export class ScanScreen extends React.Component {
 	static navigationOptions = { title: "Scan" };
 
 	state = {
-		hasCameraPermission: null,
+		hasCameraPermission: null
 	};
 
 	async componentWillMount() {
@@ -31,7 +31,7 @@ export class ScanScreen extends React.Component {
 			this.props.addUser(name, key);
 			this.props.navigation.goBack();
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		}
 	}
 
@@ -54,4 +54,3 @@ export class ScanScreen extends React.Component {
 		}
 	}
 }
-

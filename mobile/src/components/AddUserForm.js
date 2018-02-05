@@ -10,6 +10,7 @@ import { withNavigation } from "react-navigation";
 import { colors, primary, secondary, textColor } from "../color";
 import { Item, Row } from "./Grid";
 import { Button } from "./Button";
+import { CenterText } from "./CenterText";
 
 @withNavigation
 @connect(null, dispatch => ({
@@ -88,7 +89,7 @@ export class AddUserForm extends React.Component {
 
 		strengthState.passwordStrength = `Could take ~${
 			strength.crack_times_display.offline_slow_hashing_1e4_per_second
-			} to crack.`;
+		} to crack.`;
 
 		if (strength.feedback) {
 			if (strength.feedback.warning) {
@@ -144,10 +145,10 @@ export class AddUserForm extends React.Component {
 					placeholder="John Smith"
 					autoFocus={this.props.autoFocus}
 				/>
-				<Text style={{ color: textColor.muted }}>
+				<CenterText style={{ color: textColor.muted }}>
 					{this.state.nameError ||
-					"This will need to match exactly on other devices."}
-				</Text>
+						"This will need to match exactly on other devices."}
+				</CenterText>
 				<FormLabel>Master Password</FormLabel>
 				<FormInput
 					secureTextEntry
@@ -155,16 +156,29 @@ export class AddUserForm extends React.Component {
 					onChangeText={this.updateMaster}
 					placeholder="*************"
 				/>
-				<Text
+				<CenterText
 					style={{
-						color: this.state.passwordStrengthColor || textColor.muted
+						color:
+							this.state.passwordStrengthColor || textColor.muted
 					}}
 				>
 					{this.state.passwordStrength ||
-					"Use a long and hard to guess password (or passphrase)."}
-				</Text>
+						"Use a long and hard to guess password (or passphrase)."}
+				</CenterText>
 
 				<Row>
+					<Item>
+						<Button
+							block
+							icon={{ name: "linked-camera" }}
+							backgroundColor={secondary[500]}
+							disabled={this.state.loading}
+							title="Scan"
+							onPress={() =>
+								this.props.navigation.navigate("Scan")
+							}
+						/>
+					</Item>
 					<Item>
 						<Button
 							block
@@ -172,18 +186,9 @@ export class AddUserForm extends React.Component {
 							backgroundColor={primary[500]}
 							disabled={this.state.loading}
 							onPress={this.onSubmit}
-							title={"Create"}
-						/>
-					</Item>
-
-					<Item>
-						<Button
-							block
-							icon={{ name: "linked-camera" }}
-							backgroundColor={colors.purple[500]}
-							disabled={this.state.loading}
-							title="Scan"
-							onPress={() => this.props.navigation.navigate("Scan")}
+							title={
+								this.state.loading ? "Creating..." : "Create"
+							}
 						/>
 					</Item>
 				</Row>

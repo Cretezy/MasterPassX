@@ -9,6 +9,7 @@ import { FormLabel, FormInput, Card } from "react-native-elements";
 import autobind from "autobind-decorator";
 import { Item, Row } from "../components/Grid";
 import { Button } from "../components/Button";
+import { primary, secondary } from "../color";
 
 @connect(state => ({
 	currentUserKey: getCurrentUserKey(state)
@@ -60,20 +61,26 @@ export class GenerateScreen extends React.Component {
 	}
 
 	generate() {
-		const { site, type, counter } = this.state;
+		setTimeout(() => {
+			const { site, type, counter } = this.state;
 
-		let password;
-		if (site !== "") {
-			const seed = createSeed(this.props.currentUserKey, site, counter);
-			password = createPassword(seed, type);
-		} else {
-			password = "";
-		}
+			let password;
+			if (site !== "") {
+				const seed = createSeed(
+					this.props.currentUserKey,
+					site,
+					counter
+				);
+				password = createPassword(seed, type);
+			} else {
+				password = "";
+			}
 
-		this.setState(state => ({
-			password,
-			copied: password !== "" && state.password === password
-		}));
+			this.setState(state => ({
+				password,
+				copied: password !== "" && state.password === password
+			}));
+		});
 	}
 
 	@autobind
@@ -112,7 +119,9 @@ export class GenerateScreen extends React.Component {
 						<Button
 							icon={{
 								type: "material-community",
-								name: this.state.copied ? "clipboard-check" : "clipboard"
+								name: this.state.copied
+									? "clipboard-check"
+									: "clipboard"
 							}}
 							backgroundColor="blue"
 							disabled={!this.state.password || this.state.copied}
@@ -136,7 +145,7 @@ export class GenerateScreen extends React.Component {
 				</Row>
 				<View style={{ height: 20 }} />
 				<Button
-					backgroundColor="grey"
+					backgroundColor={primary[500]}
 					onPress={this.onToggleShowOptions}
 					title={
 						(this.state.showOptions ? "Hide" : "Show") + " Options"
@@ -187,7 +196,7 @@ export class GenerateScreen extends React.Component {
 				)}
 				<View style={{ height: 20 }} />
 				<Button
-					backgroundColor="grey"
+					backgroundColor={secondary[500]}
 					onPress={() => this.props.navigation.navigate("Users")}
 					title="Users"
 				/>

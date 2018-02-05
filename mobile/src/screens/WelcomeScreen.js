@@ -92,7 +92,7 @@ import { View } from "react-native";
 export function WelcomeScreen({ navigation }) {
 	return (
 		<View>
-			<AddUserForm autoFocus/>
+			<AddUserForm autoFocus />
 		</View>
 	);
 }
