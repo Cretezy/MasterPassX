@@ -2,7 +2,7 @@ import React from "react";
 import { AddUserForm } from "../components/AddUserForm";
 import { connect } from "react-redux";
 import { addUser, removeUser, setCurrentUser } from "../store/users.actions";
-import { View, Platform, Alert } from "react-native";
+import { View, Platform, Alert, ScrollView } from "react-native";
 import { Card, List, ListItem } from "react-native-elements";
 import { getCurrentUser, getUsers } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
@@ -33,7 +33,7 @@ export class UsersScreen extends React.Component {
 
 	render() {
 		return (
-			<View>
+			<ScrollView>
 				<List containerStyle={{ marginBottom: 10 }}>
 					{this.props.users.map(user => (
 						<ListItem
@@ -92,7 +92,8 @@ export class UsersScreen extends React.Component {
 						);
 					}}
 				/>
-			</View>
+				<View style={{ height: 20 }} />
+			</ScrollView>
 		);
 	}
 }

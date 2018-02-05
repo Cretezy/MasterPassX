@@ -100,7 +100,7 @@ export class GenerateScreen extends React.Component {
 
 	render() {
 		return (
-			<View>
+			<ScrollView>
 				<FormLabel>Site</FormLabel>
 				<FormInput
 					keyboardType={
@@ -225,7 +225,8 @@ export class GenerateScreen extends React.Component {
 					icon={{ name: "account-multiple" }}
 					title="Users"
 				/>
-			</View>
+				<View style={{ height: 20 }} />
+			</ScrollView>
 		);
 	}
 }
