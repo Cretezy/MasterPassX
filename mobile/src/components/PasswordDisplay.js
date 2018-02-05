@@ -7,7 +7,7 @@ export function PasswordDisplay({ password }) {
 	return (
 		<CenterText
 			style={{
-				fontFamily: Platform.OS === "ios" ? "Courier New" : "monospace",
+				fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace",
 				fontSize: 24
 			}}
 		>

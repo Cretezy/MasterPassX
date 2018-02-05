@@ -1,5 +1,5 @@
 import React from "react";
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Provider } from "react-redux";
 import { setupStore } from "./store";
 import { AppLoading, Asset, Font } from "expo";
@@ -53,7 +53,6 @@ export default class App extends React.Component {
 		return Promise.all([
 			Asset.loadAsync([]),
 			Font.loadAsync({
-				...MaterialIcons.font,
 				...MaterialCommunityIcons.font
 			})
 		]);

@@ -118,7 +118,6 @@ export class GenerateScreen extends React.Component {
 					<Item>
 						<Button
 							icon={{
-								type: "material-community",
 								name: this.state.copied
 									? "clipboard-check"
 									: "clipboard"
@@ -131,7 +130,7 @@ export class GenerateScreen extends React.Component {
 					</Item>
 					<Item>
 						<Button
-							icon={{ name: "clear" }}
+							icon={{ name: "close" }}
 							backgroundColor="red"
 							onPress={this.onReset}
 							disabled={
@@ -147,6 +146,7 @@ export class GenerateScreen extends React.Component {
 				<Button
 					backgroundColor={primary[500]}
 					onPress={this.onToggleShowOptions}
+					icon={{ name: "settings" }}
 					title={
 						(this.state.showOptions ? "Hide" : "Show") + " Options"
 					}
@@ -198,6 +198,7 @@ export class GenerateScreen extends React.Component {
 				<Button
 					backgroundColor={secondary[500]}
 					onPress={() => this.props.navigation.navigate("Users")}
+					icon={{ name: "account-multiple" }}
 					title="Users"
 				/>
 			</View>

@@ -11,6 +11,9 @@ export function Button(props) {
 				{ borderRadius: radius },
 				props.containerViewStyle
 			]}
+			{...props.icon && {
+				icon: { ...props.icon, type: "material-community" }
+			}}
 		/>
 	);
 }

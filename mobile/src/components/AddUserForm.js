@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import zxcvbn from "zxcvbn";
 import autobind from "autobind-decorator";
 import { addUser } from "../store/users.actions";
-import { View } from "react-native";
+import { View, Keyboard } from "react-native";
 import { FormInput, FormLabel, Text } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { colors, primary, secondary, textColor } from "../color";
@@ -19,6 +19,10 @@ import { CenterText } from "./CenterText";
 	}
 }))
 export class AddUserForm extends React.Component {
+	static defaultProps = {
+		done() {}
+	};
+
 	state = {
 		name: "",
 		master: "",
@@ -40,15 +44,14 @@ export class AddUserForm extends React.Component {
 			passwordStrengthScore >= 2
 		) {
 			this.setState({ loading: true });
+			Keyboard.dismiss();
 			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 			setTimeout(async () => {
 				// Is very slow on development mode...
 				const key = await createKey(name, master);
 				this.setState({ loading: false });
 				this.props.addUser(name, key);
-				if (this.props.done) {
-					this.props.done();
-				}
+				this.props.done();
 			}, 25);
 		}
 	}
@@ -170,7 +173,7 @@ export class AddUserForm extends React.Component {
 					<Item>
 						<Button
 							block
-							icon={{ name: "linked-camera" }}
+							icon={{ name: "camera-party-mode" }}
 							backgroundColor={secondary[500]}
 							disabled={this.state.loading}
 							title="Scan"
@@ -182,7 +185,7 @@ export class AddUserForm extends React.Component {
 					<Item>
 						<Button
 							block
-							icon={{ name: "create" }}
+							icon={{ name: "pencil" }}
 							backgroundColor={primary[500]}
 							disabled={this.state.loading}
 							onPress={this.onSubmit}
