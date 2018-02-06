@@ -11,7 +11,7 @@
     "cli"
   ],
   "scripts": {
-    "prettier": "npm --prefix web run prettier && npm --prefix core run prettier && npm --prefix cli run prettier",
+    "prettier": "npm --prefix web run prettier && npm --prefix core run prettier && npm --prefix cli run prettier && npm --prefix mobile run prettier",
     "test": "npm --prefix core run test && npm --prefix core run build && npm --prefix web run test",
     "build": "npm --prefix web run test && npm --prefix core run test"
   },

@@ -12,6 +12,7 @@ export function Header({
 	onSwitchUser,
 	onToggleAddUserModal,
 	onToggleDeleteUserModal,
+	onToggleScanModal,
 	users,
 	currentUserKey
 }) {
@@ -34,6 +35,10 @@ export function Header({
 							</DropdownItem>
 						);
 					})}
+					<DropdownItem divider />
+					<DropdownItem onClick={onToggleScanModal}>
+						Show Scan Code
+					</DropdownItem>
 					<DropdownItem divider />
 					<DropdownItem onClick={onToggleAddUserModal}>
 						Add User

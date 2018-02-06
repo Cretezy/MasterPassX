@@ -6,7 +6,9 @@ Core library for MasterPassX, implementation of [original MasterPassword algorit
 
 ### `createKey`
 
-`createKey(name, master)` creates an base key for a user from name & master password.
+`createKey(name, master[, options])` creates an base key for a user from name & master password.
+
+Options is `{interruptStep}`. See [scrypt-async-modern](https://github.com/Cretezy/scrypt-async-modern). Recommended to not supply this value, unless you are having issues with your runtime crashing. Then I suggest use of `4096`.
 
 ### `createSeed`
 

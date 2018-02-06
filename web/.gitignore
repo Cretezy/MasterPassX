@@ -21,4 +21,8 @@ yarn-error.log*
 # scss
 /src/**/*.css
 
+<<<<<<< HEAD
 .netlify
+=======
+.netlify
+>>>>>>> mobile

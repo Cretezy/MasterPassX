@@ -19,6 +19,7 @@ import { createPassword, createSeed, templates } from "masterpassx-core";
 import { removeUser, setCurrentUser } from "../../store/users.actions";
 import { Footer } from "../../components/Footer";
 import { DeleteUserModel } from "../../components/DeleteUserModal";
+import { ScanModal } from "../../components/ScanModal";
 import { PasswordDisplay } from "../../components/PasswordDisplay/index";
 import { Header } from "./Header";
 import { HelpText } from "../../components/HelpText";
@@ -55,8 +56,9 @@ export const Generate = connect(
 			showOptions: false,
 			copied: false,
 			showHelp: false,
-			deleteUserModalOpen: false,
-			addUserModalOpen: false
+			addUserModalOpen: false,
+			scanModelOpen: false,
+			deleteUserModalOpen: false
 		};
 
 		state = { ...this.initialState };
@@ -100,6 +102,12 @@ export const Generate = connect(
 		onToggleDeleteUserModal() {
 			this.setState(state => ({
 				deleteUserModalOpen: !state.deleteUserModalOpen
+			}));
+		}
+
+		onToggleScanModal() {
+			this.setState(state => ({
+				scanModelOpen: !state.scanModelOpen
 			}));
 		}
 
@@ -158,6 +166,7 @@ export const Generate = connect(
 						onToggleAddUserModal={this.onToggleAddUserModal.bind(
 							this
 						)}
+						onToggleScanModal={this.onToggleScanModal.bind(this)}
 						users={this.props.users}
 						currentUserKey={this.props.currentUserKey}
 					/>
@@ -170,6 +179,11 @@ export const Generate = connect(
 							this.onReset();
 						}}
 						name={this.props.currentUser.name}
+					/>
+					<ScanModal
+						open={this.state.scanModelOpen}
+						onToggle={this.onToggleScanModal.bind(this)}
+						user={this.props.currentUser}
 					/>
 
 					<AddUserModel
