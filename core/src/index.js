@@ -77,7 +77,7 @@ const templateChars = {
 
 function createNamespace(namespace) {
 	return {
-		createKey(name, master) {
+		createKey(name, master, { interruptStep } = {}) {
 			let offset = 0;
 			const buf = new Buffer(
 				namespace.length + 4 /* uint32 size */ + name.length
@@ -96,7 +96,8 @@ function createNamespace(namespace) {
 				r: 8,
 				p: 2,
 				dkLen: 64,
-				encoding: "hex"
+				encoding: "hex",
+				interruptStep
 			});
 		},
 

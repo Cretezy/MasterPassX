@@ -3908,9 +3908,9 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
-masterpassx-core@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/masterpassx-core/-/masterpassx-core-1.1.4.tgz#4d34ba4bd2598ae800bd9a1b0d01ac9e60b2a0a6"
+masterpassx-core@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/masterpassx-core/-/masterpassx-core-1.1.5.tgz#8aaf1b7721ba5a2fcbad6f136003f4c0f67ef60a"
   dependencies:
     buffer "^5.0.8"
     crypto-js "^3.1.9-1"

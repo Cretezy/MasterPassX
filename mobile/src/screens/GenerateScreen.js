@@ -132,7 +132,6 @@ export class GenerateScreen extends React.Component {
 									: "clipboard"
 							}}
 							backgroundColor={primary.a700}
-							disabled={!this.state.password || this.state.copied}
 							onPress={this.onCopy}
 							title={"Copy"}
 						/>

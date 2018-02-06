@@ -45,10 +45,11 @@ export class AddUserForm extends React.Component {
 		) {
 			this.setState({ loading: true });
 			Keyboard.dismiss();
-			// Let UI update before creating key (CPU intensive, blocks for ~0.5s)
 			setTimeout(async () => {
-				// Is very slow on development mode...
-				const key = await createKey(name, master);
+				// Is very slow?
+				const key = await createKey(name, master, {
+					interruptStep: 4096
+				});
 				this.setState({ loading: false });
 				this.props.addUser(name, key);
 				this.props.done();
