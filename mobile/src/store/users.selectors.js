@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 
+export const getHidePasswords = state => state.users.hidePasswords;
 export const getUsers = state => state.users.users;
 
 export const getCurrentUserKey = state => state.users.currentUserKey;

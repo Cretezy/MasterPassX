@@ -301,3 +301,6 @@ export const textColors = {
 	dark: "#1f2328",
 	muted: "#6c757d"
 };
+
+
+export const radius = 4;

@@ -174,7 +174,7 @@ export class AddUserForm extends React.Component {
 						<Button
 							block
 							icon={{ name: "camera-party-mode" }}
-							backgroundColor={secondary[500]}
+							backgroundColor={secondary.a700}
 							disabled={this.state.loading}
 							title="Scan"
 							onPress={() =>
@@ -186,7 +186,7 @@ export class AddUserForm extends React.Component {
 						<Button
 							block
 							icon={{ name: "pencil" }}
-							backgroundColor={primary[500]}
+							backgroundColor={primary.a700}
 							disabled={this.state.loading}
 							onPress={this.onSubmit}
 							title={

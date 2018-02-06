@@ -1,8 +1,14 @@
-import { ADD_USER, REMOVE_USER, SET_CURRENT_USER } from "./users.actions";
+import {
+	ADD_USER,
+	REMOVE_USER,
+	SET_CURRENT_USER,
+	TOGGLE_HIDE_PASSWORDS
+} from "./users.actions";
 
 const initialState = {
 	users: [],
-	currentUserKey: null
+	currentUserKey: null,
+	hidePasswords: false
 };
 
 export function reducer(state = initialState, action) {
@@ -33,6 +39,8 @@ export function reducer(state = initialState, action) {
 			return { ...state, users, currentUserKey };
 		case SET_CURRENT_USER:
 			return { ...state, currentUserKey: action.key };
+		case TOGGLE_HIDE_PASSWORDS:
+			return { ...state, hidePasswords: !state.hidePasswords };
 		default:
 			return state;
 	}

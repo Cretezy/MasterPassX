@@ -1,20 +1,21 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { createPassword, createSeed, templates } from "masterpassx-core";
+import { createPassword, createSeed } from "masterpassx-core";
 import { PasswordDisplay } from "../components/PasswordDisplay";
-import { getCurrentUserKey } from "../store/users.selectors";
-import { View, Clipboard, Platform, Picker, ScrollView } from "react-native";
+import { getCurrentUserKey, getHidePasswords } from "../store/users.selectors";
+import { View, Clipboard, Platform, ScrollView } from "react-native";
 import { FormLabel, FormInput, Card } from "react-native-elements";
 import autobind from "autobind-decorator";
 import { Item, Row } from "../components/Grid";
 import { Button } from "../components/Button";
-import { primary, secondary } from "../color";
-import Collapsible from "react-native-collapsible";
+import { colors, radius, secondary } from "../color";
 import { CenterText } from "../components/CenterText";
+import { TypePicker } from "../components/TypePicker";
 
 @connect(state => ({
-	currentUserKey: getCurrentUserKey(state)
+	currentUserKey: getCurrentUserKey(state),
+	hidePasswords: getHidePasswords(state)
 }))
 export class GenerateScreen extends React.Component {
 	static navigationOptions = {
@@ -114,7 +115,13 @@ export class GenerateScreen extends React.Component {
 					placeholder="example.com"
 					autoFocus
 				/>
-				<PasswordDisplay password={this.state.password} />
+				<PasswordDisplay
+					password={
+						this.props.hidePasswords
+							? this.state.password.replace(/./g, "*")
+							: this.state.password
+					}
+				/>
 
 				<Row>
 					<Item>
@@ -144,90 +151,74 @@ export class GenerateScreen extends React.Component {
 						/>
 					</Item>
 				</Row>
-				<View style={{ height: 20 }} />
-				<Button
-					backgroundColor={primary[500]}
-					onPress={this.onToggleShowOptions}
-					icon={{ name: "settings" }}
-					title={
-						(this.state.showOptions ? "Hide" : "Show") + " Options"
-					}
-				/>
 
-				<Collapsible collapsed={!this.state.showOptions} duration={500}>
-					<Card style={{ marginButton: 10 }}>
-						<Row>
-							<Item>
-								<CenterText component={FormLabel}>
-									Type
-								</CenterText>
+				<Card
+					style={{ marginButton: 10 }}
+					containerStyle={{ borderRadius: radius }}
+				>
+					<Row>
+						<Item>
+							<CenterText component={FormLabel}>Type</CenterText>
 
-								<Picker
-									selectedValue={this.state.type}
-									onValueChange={this.onTypeChange}
-								>
-									{Object.keys(templates).map(type => (
-										<Picker.Item
-											label={templates[type]}
-											key={"type-" + type}
-											value={type}
-										/>
-									))}
-								</Picker>
-							</Item>
-
+							<TypePicker
+								value={this.state.type}
+								onChange={this.onTypeChange}
+							/>
+						</Item>
+						<Item>
 							<Item>
 								<CenterText component={FormLabel}>
 									Counter
 								</CenterText>
-
-								<Row>
-									<Item>
-										<FormInput
-											underlineColorAndroid="rgba(0,0,0,0)"
-											value={
-												isNaN(this.state.counter)
-													? ""
-													: this.state.counter.toString()
-											}
-											onChangeText={this.onCounterChange}
-											keyboardType="numeric"
-										/>
-									</Item>
-									<Item>
-										<Button
-											backgroundColor="green"
-											onPress={this.onIncrement(1)}
-											title="+"
-											containerViewStyle={{
-												marginRight: 2,
-												marginHorizontal: 0
-											}}
-										/>
-									</Item>
-									<Item>
-										<Button
-											backgroundColor="red"
-											disabled={
-												(this.state.counter || 1) <= 1
-											}
-											onPress={this.onIncrement(-1)}
-											title="-"
-											containerViewStyle={{
-												marginLeft: 2,
-												marginHorizontal: 0
-											}}
-										/>
-									</Item>
-								</Row>
 							</Item>
-						</Row>
-					</Card>
-				</Collapsible>
+							<Row>
+								<Item size={1.5}>
+									<FormInput
+										underlineColorAndroid="transparent"
+										value={
+											isNaN(this.state.counter)
+												? ""
+												: this.state.counter.toString()
+										}
+										onChangeText={this.onCounterChange}
+										keyboardType="numeric"
+									/>
+								</Item>
+								<Item>
+									<Button
+										backgroundColor={colors.green.a700}
+										onPress={this.onIncrement(1)}
+										title="+"
+										containerViewStyle={{
+											marginLeft: 0,
+											marginRight: 2,
+											marginHorizontal: 0
+										}}
+									/>
+								</Item>
+								<Item>
+									<Button
+										backgroundColor={colors.red.a700}
+										disabled={
+											(this.state.counter || 1) <= 1
+										}
+										onPress={this.onIncrement(-1)}
+										title="-"
+										containerViewStyle={{
+											marginLeft: 2,
+											marginRight: 0,
+											marginHorizontal: 0
+										}}
+									/>
+								</Item>
+							</Row>
+						</Item>
+					</Row>
+				</Card>
 
 				<View style={{ height: 20 }} />
 				<Button
-					backgroundColor={secondary[500]}
+					backgroundColor={secondary.a700}
 					onPress={() => this.props.navigation.navigate("Users")}
 					icon={{ name: "account-multiple" }}
 					title="Users"

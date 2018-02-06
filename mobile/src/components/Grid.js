@@ -6,5 +6,5 @@ export function Row(props) {
 }
 
 export function Item({ size = 1, ...props }) {
-	return <View {...props} style={[{ flex: 1 }, props.style]} />;
+	return <View {...props} style={[{ flex: size }, props.style]} />;
 }

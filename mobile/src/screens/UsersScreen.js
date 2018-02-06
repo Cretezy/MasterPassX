@@ -1,15 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeUser, setCurrentUser } from "../store/users.actions";
+import {
+	removeUser,
+	setCurrentUser,
+	toggleHidePasswords
+} from "../store/users.actions";
 import { View, Alert } from "react-native";
 import { List, ListItem } from "react-native-elements";
-import { getCurrentUser, getUsers } from "../store/users.selectors";
+import {
+	getCurrentUser,
+	getHidePasswords,
+	getUsers
+} from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
 
 @connect(
 	state => ({
 		users: getUsers(state),
-		currentUser: getCurrentUser(state)
+		currentUser: getCurrentUser(state),
+		hidePasswords: getHidePasswords(state)
 	}),
 	dispatch => ({
 		setCurrentUser(key) {
@@ -17,6 +26,9 @@ import { NavigationActions } from "react-navigation";
 		},
 		removeUser(key) {
 			dispatch(removeUser(key));
+		},
+		toggleHidePasswords() {
+			dispatch(toggleHidePasswords());
 		}
 	})
 )
@@ -29,7 +41,7 @@ export class UsersScreen extends React.Component {
 		// TODO: move to flatlist
 		return (
 			<View>
-				<List containerStyle={{ marginBottom: 10 }}>
+				<List>
 					{this.props.users.map(user => (
 						<ListItem
 							onPress={() => {
@@ -50,6 +62,18 @@ export class UsersScreen extends React.Component {
 							disabled={user.key === this.props.currentUser.key}
 						/>
 					))}
+				</List>
+				<List>
+					<ListItem
+						key="hide-passwords"
+						title={"Hide Passwords"}
+						switchButton
+						hideChevron
+						switched={this.props.hidePasswords}
+						onSwitch={() => {
+							this.props.toggleHidePasswords();
+						}}
+					/>
 					<ListItem
 						key="add-user"
 						title={"Add User"}

@@ -1,8 +1,8 @@
 import React from "react";
 import { Button as BaseButton } from "react-native-elements";
+import { radius } from "../color";
 
 export function Button(props) {
-	const radius = 3;
 	return (
 		<BaseButton
 			{...props}
