@@ -5,7 +5,7 @@ import {
 	setCurrentUser,
 	toggleHidePasswords
 } from "../store/users.actions";
-import { View, Alert } from "react-native";
+import { View, Alert, StatusBar } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import {
 	getCurrentUser,
@@ -13,6 +13,7 @@ import {
 	getUsers
 } from "../store/users.selectors";
 import { NavigationActions } from "react-navigation";
+import { secondary } from "../color";
 
 @connect(
 	state => ({
@@ -34,13 +35,21 @@ import { NavigationActions } from "react-navigation";
 )
 export class UsersScreen extends React.Component {
 	static navigationOptions = {
-		title: "Users"
+		title: "Users",
+		headerStyle: {
+			backgroundColor: secondary[500]
+		}
 	};
 
 	render() {
 		// TODO: move to flatlist
 		return (
 			<View>
+				<StatusBar
+					translucent
+					barStyle="light-content"
+					backgroundColor={secondary[700]}
+				/>
 				<List>
 					{this.props.users.map(user => (
 						<ListItem

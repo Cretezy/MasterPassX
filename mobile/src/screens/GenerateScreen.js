@@ -9,7 +9,7 @@ import { FormLabel, FormInput, Card } from "react-native-elements";
 import autobind from "autobind-decorator";
 import { Item, Row } from "../components/Grid";
 import { Button } from "../components/Button";
-import { colors, radius, secondary } from "../color";
+import { primary, colors, radius, secondary } from "../color";
 import { CenterText } from "../components/CenterText";
 import { TypePicker } from "../components/TypePicker";
 
@@ -131,7 +131,7 @@ export class GenerateScreen extends React.Component {
 									? "clipboard-check"
 									: "clipboard"
 							}}
-							backgroundColor="blue"
+							backgroundColor={primary.a700}
 							disabled={!this.state.password || this.state.copied}
 							onPress={this.onCopy}
 							title={"Copy"}
@@ -140,7 +140,7 @@ export class GenerateScreen extends React.Component {
 					<Item>
 						<Button
 							icon={{ name: "close" }}
-							backgroundColor="red"
+							backgroundColor={colors.red.a700}
 							onPress={this.onReset}
 							disabled={
 								this.state.site === this.initialState.site &&
@@ -186,7 +186,7 @@ export class GenerateScreen extends React.Component {
 								</Item>
 								<Item>
 									<Button
-										backgroundColor={colors.green.a700}
+										backgroundColor={colors.green.a400}
 										onPress={this.onIncrement(1)}
 										title="+"
 										containerViewStyle={{
@@ -198,7 +198,7 @@ export class GenerateScreen extends React.Component {
 								</Item>
 								<Item>
 									<Button
-										backgroundColor={colors.red.a700}
+										backgroundColor={colors.red.a400}
 										disabled={
 											(this.state.counter || 1) <= 1
 										}

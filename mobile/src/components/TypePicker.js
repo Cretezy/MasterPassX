@@ -4,7 +4,7 @@ import { templates } from "masterpassx-core";
 import { View } from "react-native";
 import { Button } from "./Button";
 import { List, ListItem } from "react-native-elements";
-import { primary } from "../color";
+import { colors } from "../color";
 import autobind from "autobind-decorator";
 
 export class TypePicker extends React.PureComponent {
@@ -27,7 +27,7 @@ export class TypePicker extends React.PureComponent {
 				<Button
 					title={templates[this.props.value]}
 					onPress={this.show}
-					backgroundColor={primary.a700}
+					backgroundColor={colors.lightblue.a400}
 				/>
 				<Modal
 					isVisible={this.state.show}

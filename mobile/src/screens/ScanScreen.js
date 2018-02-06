@@ -1,10 +1,12 @@
 import React from "react";
 import { Text } from "react-native-elements";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
 import autobind from "autobind-decorator";
 import { addUser } from "../store/users.actions";
 import { connect } from "react-redux";
+import { secondary } from "../color";
+import { CenterText } from "../components/CenterText";
 
 @connect(null, dispatch => ({
 	addUser(name, key) {
@@ -12,7 +14,12 @@ import { connect } from "react-redux";
 	}
 }))
 export class ScanScreen extends React.Component {
-	static navigationOptions = { title: "Scan" };
+	static navigationOptions = {
+		title: "Scan",
+		headerStyle: {
+			backgroundColor: secondary[500]
+		}
+	};
 
 	state = {
 		hasCameraPermission: null
@@ -38,12 +45,13 @@ export class ScanScreen extends React.Component {
 	render() {
 		const { hasCameraPermission } = this.state;
 
+		let content;
 		if (hasCameraPermission === null) {
-			return <Text>Requesting for camera permission</Text>;
+			content = cameraText("Requesting for camera permission");
 		} else if (!hasCameraPermission) {
-			return <Text>No access to camera</Text>;
+			content = cameraText("No access to camera");
 		} else {
-			return (
+			content = (
 				<View style={{ flex: 1 }}>
 					<BarCodeScanner
 						onBarCodeRead={this.onScan}
@@ -52,5 +60,22 @@ export class ScanScreen extends React.Component {
 				</View>
 			);
 		}
+
+		return (
+			<View style={{ flex: 1 }}>
+				<StatusBar
+					translucent
+					barStyle="light-content"
+					backgroundColor={secondary[700]}
+				/>
+				{content}
+			</View>
+		);
 	}
+}
+
+function cameraText(text) {
+	return (
+		<CenterText style={{ paddingTop: 20, fontSize: 16 }} children={text} />
+	);
 }
