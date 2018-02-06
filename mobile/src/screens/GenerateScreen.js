@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { createPassword, createSeed } from "masterpassx-core";
 import { PasswordDisplay } from "../components/PasswordDisplay";
 import { getCurrentUserKey, getHidePasswords } from "../store/users.selectors";
-import { View, Clipboard, Platform, ScrollView } from "react-native";
-import { FormLabel, FormInput, Card } from "react-native-elements";
+import { View, Clipboard, Platform, ScrollView, TextInput } from "react-native";
+import { FormLabel, FormInput, Card, normalize } from "react-native-elements";
 import autobind from "autobind-decorator";
 import { Item, Row } from "../components/Grid";
 import { Button } from "../components/Button";
@@ -172,8 +172,29 @@ export class GenerateScreen extends React.Component {
 								</CenterText>
 							</Item>
 							<Row>
+								<Item>
+									<Button
+										backgroundColor={colors.red.a400}
+										disabled={
+											(this.state.counter || 1) <= 1
+										}
+										onPress={this.onIncrement(-1)}
+										title="-"
+										containerViewStyle={{
+											marginLeft: 2,
+											marginRight: 0,
+											marginHorizontal: 0
+										}}
+									/>
+								</Item>
 								<Item size={1.5}>
-									<FormInput
+									<TextInput
+										style={{
+											flex: 1,
+											fontSize: normalize(14),
+											color: "#86939e"
+										}}
+										textAlign="center"
 										underlineColorAndroid="transparent"
 										value={
 											isNaN(this.state.counter)
@@ -192,21 +213,6 @@ export class GenerateScreen extends React.Component {
 										containerViewStyle={{
 											marginLeft: 0,
 											marginRight: 2,
-											marginHorizontal: 0
-										}}
-									/>
-								</Item>
-								<Item>
-									<Button
-										backgroundColor={colors.red.a400}
-										disabled={
-											(this.state.counter || 1) <= 1
-										}
-										onPress={this.onIncrement(-1)}
-										title="-"
-										containerViewStyle={{
-											marginLeft: 2,
-											marginRight: 0,
 											marginHorizontal: 0
 										}}
 									/>
