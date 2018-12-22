@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "es5",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "lib": ["es2018"]
+  },
+  "include": ["src/**/*"]
+}

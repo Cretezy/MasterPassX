@@ -1,0 +1,55 @@
+@import "bootstrap/bootstrap";
+
+body {
+  background-color: #f0f0f0;
+}
+
+@mixin container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.normal-container {
+  max-width: 600px;
+  @include container;
+}
+
+.wide-container {
+  max-width: 1000px;
+  @include container;
+}
+
+.content {
+  padding: 25px 10px 10px 10px;
+}
+
+.content-navbar {
+  padding: 10px;
+}
+
+/* Override Bootstrap button outline for mobile */
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.tooltip-label {
+  color: #1d588b !important;
+  text-decoration: #1d588b underline !important;
+  &:hover {
+    color: darkblue !important;
+    text-decoration: darkblue underline !important;
+  }
+}
+
+/*
+Fix Firefox button/a border
+ */
+*::-moz-focus-inner {
+  border: 0;
+}
+
+a, button {
+  outline: 0;
+}
+

@@ -9,8 +9,8 @@ jobs:
     - stage: deploy
       env: DEPLOY=netlify
       script:
-      - "npm --prefix core run build"
-      - "npm --prefix web run build"
+        - "npm --prefix packages/core.js run build"
+        - "npm --prefix packages/web run build"
       before_deploy: "npm i -g netlify-cli" # can't use yarn global?!
       deploy:
         provider: script

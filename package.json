@@ -1,17 +1,19 @@
 {
   "name": "masterpassx",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "repository": "git@github.com:Cretezy/MasterPassX.git",
+  "repository": "https://github.com:Cretezy/MasterPassX",
   "author": "Charles Crete <charles@cretezy.com>",
   "license": "MIT",
   "workspaces": [
-    "core",
-    "web",
-    "cli"
+    "packages/*"
   ],
   "scripts": {
-    "test": "npm --prefix core run test && npm --prefix core run build && npm --prefix web run test",
-    "build": "npm --prefix web run test && npm --prefix core run test"
+    "test": "lerna run test",
+    "format": "prettier --write README.md CONTRIBUTING.md .travis.yml lerna.json package.json && lerna run format"
+  },
+  "devDependencies": {
+    "lerna": "^3.8.0",
+    "prettier": "^1.15.3"
   }
 }

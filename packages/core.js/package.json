@@ -1,0 +1,32 @@
+{
+  "name": "@masterpassx/core",
+  "version": "2.0.0",
+  "license": "MIT",
+  "repository": "https://github.com/Cretezy/MasterPassX",
+  "author": "Charles Crete <charles@cretezy.com>",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc",
+    "format": "prettier --write src/**/*.ts jest.config.js tsconfig.json package.json README.md",
+    "test": "jest",
+    "prepack": "npm run build"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "buffer": "^5.2.1",
+    "crypto-js": "^3.1.9-1",
+    "scrypt-async-modern": "^3.0.7"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^3.1.43",
+    "@types/jest": "^23.3.10",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
+  }
+}

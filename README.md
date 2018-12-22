@@ -1,20 +1,37 @@
 # [MasterPassX](https://masterpassx.org) [![Build Status](https://travis-ci.org/Cretezy/MasterPassX.svg?branch=master)](https://travis-ci.org/Cretezy/MasterPassX)
 
-MasterPassX is separated into many modules. It is based fully in JavaScript.
+MasterPassX is separated into many packages:
 
-## [Web](web)
+## [Web](packages/web)
 
 The [main MasterPassX site](https://masterpassx.org).
 
-## [Core](core)
+## [Mobile](packages/mobile)
 
-The core module is the base algorithm of MasterPassX.
-It's a simple and very fast implementation of the Master Password algorithm.
+> Not yet (re)implemented
 
-## [Extensions](extension)
+The main MasterPassX mobile apps.
+
+## [CLI](packages/cli)
+
+A simple command line interface for the MasterPassX algorithm.
+
+## [Extensions](packages/extension)
 
 The [Firefox](https://addons.mozilla.org/en-US/firefox/addon/masterpassx/)/[Chrome](https://chrome.google.com/webstore/detail/masterpassx/acocljodaoecblhjggkadfhnbjcfgbbb) extensions.
 
-## [CLI](cli)
+## [Core.js](packages/core.js)
 
-A simple command line interface for the MasterPassX algorithm.
+The core JavaScript implementation of the base algorithm of MasterPassX.
+It's a simple and very fast implementation of the Master Password algorithm.
+
+It is used in the web and CLI packages.
+
+## [Core.dart](packages/core.dart)
+
+> Not yet implemented
+
+The core Dart implementation of the base algorithm of MasterPassX.
+It's a simple and very fast implementation of the Master Password algorithm.
+
+It is used in the mobile package.
