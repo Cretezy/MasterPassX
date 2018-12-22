@@ -9,6 +9,7 @@ import {
   templates
 } from "@masterpassx/core";
 import * as inquirer from "inquirer";
+import * as clipboardy from "clipboardy";
 
 (async () => {
   // Setup program
@@ -19,6 +20,8 @@ import * as inquirer from "inquirer";
     .option("-c, --counter <counter>", "Set counter (default: 1)", parseInt, 1)
     .option("-r, --reset", "Reset user information", false)
     .option("-n, --no-save", "Don't save user information", false)
+    .option("-h, --hide", "Don't show password output", false)
+    .option("-np, --no-copy", "Don't copy password output", false)
     .option(
       "-p, --config-path <path>",
       "Path to config (default: ~/.config/masterpassx)",
@@ -26,7 +29,8 @@ import * as inquirer from "inquirer";
     )
     .parse(process.argv);
 
-  const { configPath, reset, save, counter } = program;
+  const { configPath, reset, save, counter, hide, copy } = program;
+
   let template = program.template || "long";
 
   const errors = [];
@@ -84,6 +88,10 @@ import * as inquirer from "inquirer";
 
   if (save && !configPath) {
     errors.push("Config path is invalid. (default: ~/.config/masterpassx)");
+  }
+
+  if (hide && !copy) {
+    errors.push("Cannot disable copy and hide password (pointless)");
   }
 
   if (errors.length > 0) {
@@ -150,6 +158,18 @@ import * as inquirer from "inquirer";
   const seed = createSeed(config.key, site, counter);
   const password = createPassword(seed, template);
 
-  console.warn("Password for '" + site + "':");
-  console.log(password);
+  if (copy) {
+    await clipboardy.write(password);
+  }
+
+  if (hide) {
+    console.warn("Password for '" + site + "' copied to clipboard!");
+  } else {
+    if (copy) {
+      console.warn("Password for '" + site + "' copied to clipboard:");
+    } else {
+      console.warn("Password for '" + site + "':");
+    }
+    console.log(password);
+  }
 })();
