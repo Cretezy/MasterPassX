@@ -26,11 +26,8 @@ import * as inquirer from "inquirer";
     )
     .parse(process.argv);
 
-  const reset = !!program.reset;
-  const save = !!program.save;
-  const configPath = program.configPath;
+  const { configPath, reset, save, counter } = program;
   let template = program.template || "long";
-  const counter = program.counter;
 
   const errors = [];
 
@@ -94,7 +91,7 @@ import * as inquirer from "inquirer";
     return;
   }
 
-  let config = null;
+  let config;
   if (!reset) {
     try {
       config = await fs.readJson(configPath);
@@ -104,10 +101,14 @@ import * as inquirer from "inquirer";
       }
     }
   }
-  if (config === null || !config.name || !config.key) {
+
+  if (config == null || !config.name || !config.key) {
     console.warn("You must first setup your user for MasterPassX!");
 
-    const { name, masterPassword } = await inquirer.prompt([
+    const { name, masterPassword } = await inquirer.prompt<{
+      name: string;
+      masterPassword: string;
+    }>([
       {
         type: "input",
         name: "name",
@@ -130,9 +131,10 @@ import * as inquirer from "inquirer";
     }
   }
 
-  const site =
-    program.args[0] ||
-    (await inquirer.prompt<{ site: string }>([
+  let site = program.args[0];
+
+  while (!site) {
+    site = (await inquirer.prompt<{ site: string }>([
       {
         type: "input",
         name: "site",
@@ -140,9 +142,9 @@ import * as inquirer from "inquirer";
       }
     ])).site;
 
-  if (!site) {
-    console.warn("Invalid site.");
-    return;
+    if (!site) {
+      console.warn("Invalid site.");
+    }
   }
 
   const seed = createSeed(config.key, site, counter);
