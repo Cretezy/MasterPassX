@@ -16,6 +16,8 @@ Make sure to have `yarn global bin` or `npm bin --global` in your PATH.
 
 Command: `mpx`
 
+You can view usage with `mpx --help`
+
 When no user found, it will ask you to setup a user (name & master password).
 
 To generate a password for a site, simply do `mpx` for a prompt or supply the site as an argument (i.e.: `mpx github.com`).
@@ -26,4 +28,6 @@ Flags:
 - `-c, --counter <counter>`: Set counter (integer, default: 1).
 - `-r, --reset`: Reset stored user (will ask for new user information).
 - `-n, --no-save`: Will not save current user.
+- `-np, --no-copy`: Will not copy password to clipboard.
+- `-h, --hide`: Will hide output password.
 - `-p, --config-path <path>`: Path to config (default: ~/.config/masterpassx)
