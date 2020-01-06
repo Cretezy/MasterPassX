@@ -1,4 +1,4 @@
-import { createKey, createSeed, createPassword } from ".";
+import { createKey, createSeed, createPassword, Templates } from ".";
 
 describe("MasterPassX", () => {
   it("should generate key", async () => {
@@ -21,7 +21,7 @@ describe("MasterPassX", () => {
     const key = await createKey("user", "password");
     const seed = createSeed(key, "example.com", 1);
 
-    const password = createPassword(seed, "long");
+    const password = createPassword(seed, Templates.Long);
     expect(password).toBe("ZedaFaxcZaso9*");
   });
 
@@ -29,7 +29,7 @@ describe("MasterPassX", () => {
     const key = await createKey("user", "password");
     const seed = createSeed(key, "example.com", 1);
 
-    const password = createPassword(seed, "maximum");
+    const password = createPassword(seed, Templates.Maximum);
     expect(password).toBe("pf4zS1LjCg&LjhsZ7T2~");
   });
 });

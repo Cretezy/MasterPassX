@@ -17,16 +17,24 @@
     "src"
   ],
   "dependencies": {
-    "buffer": "^5.2.1",
+    "buffer": "^5.4.3",
     "crypto-js": "^3.1.9-1",
-    "scrypt-async-modern": "^3.0.7"
+    "scrypt-async-modern": "^3.0.12"
   },
   "devDependencies": {
     "@types/crypto-js": "^3.1.43",
-    "@types/jest": "^23.3.10",
-    "jest": "^23.6.0",
-    "prettier": "^1.15.3",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
+    "@types/jest": "^24.0.25",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "roots": ["<rootDir>/src"],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "moduleFileExtensions": ["ts", "js", "json"]
   }
 }

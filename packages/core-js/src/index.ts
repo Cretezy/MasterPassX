@@ -1,11 +1,24 @@
 import scrypt from "scrypt-async-modern";
 import { Buffer } from "buffer";
 import * as CryptoJS from "crypto-js";
-import { templateChars, templateNames, templatesBase } from "./templates";
+import {
+  templateChars,
+  templateNames,
+  Templates,
+  templatesBase
+} from "./templates";
 
-function createNamespace(namespace) {
+export interface ICreateKeyOptions {
+  interruptStep?: number;
+}
+
+export function createNamespace(namespace: string) {
   return {
-    createKey(name, master, { interruptStep = null } = {}) {
+    async createKey(
+      name: string,
+      master: string,
+      { interruptStep }: ICreateKeyOptions = {}
+    ) {
       let offset = 0;
       const buf = Buffer.alloc(
         namespace.length + 4 /* uint32 size */ + name.length
@@ -19,7 +32,7 @@ function createNamespace(namespace) {
 
       buf.write(name, offset);
 
-      return scrypt(master, buf, {
+      return await scrypt(master, buf, {
         N: 32768,
         r: 8,
         p: 2,
@@ -29,9 +42,9 @@ function createNamespace(namespace) {
       });
     },
 
-    createSeed(key, site, counter) {
+    createSeed(key: string, site: string, counter: number) {
       let offset = 0;
-      const buf = new Buffer(
+      const buf = Buffer.alloc(
         namespace.length +
         4 /* uint32 size */ +
           site.length +
@@ -57,7 +70,7 @@ function createNamespace(namespace) {
       );
     },
 
-    createPassword(seed, template) {
+    createPassword(seed: string, template: Templates) {
       const buf = Buffer.from(seed, "hex");
 
       const templates = templatesBase[template];
@@ -74,14 +87,8 @@ function createNamespace(namespace) {
   };
 }
 
-const { createKey, createSeed, createPassword } = createNamespace(
+export const { createKey, createSeed, createPassword } = createNamespace(
   "com.lyndir.masterpassword"
 );
 
-export {
-  createKey,
-  createSeed,
-  createPassword,
-  createNamespace,
-  templateNames as templates
-};
+export { templateNames, Templates };

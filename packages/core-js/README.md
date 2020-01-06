@@ -32,10 +32,10 @@ See [`test`](src/index.test.ts).
 
 ## Dependencies
 
-For the base key derivation, we use `scrypt-async`. This is a fully JavaScript scrypt implentation, which works in browser (and is quick, takes ~0.5 seconds on average).
+For the base key derivation, we use `scrypt-async-modern`. This is a fully JavaScript async scrypt implementation, which works in browser (and is quick, takes ~0.5 seconds on average).
 
-Next we use `crypto-js` for a JavaScript HMAC-SHA256. Very quick. Could be used alongside WebCrypto when more support is available.
+Next we use `crypto-js` for a JavaScript HMAC-SHA256. Very fast to run. Could be used alongside WebCrypto when more support is available.
 
 We also use `buffer` to mimic the Node.js `Buffer` in the browser.
 
-The goal was to have a set of library and code that works both on browsers and Node.js, and is very quick.
+The goal was to have a set of library and code that works both on browsers and Node.js, is very fast and is simple to maintain.

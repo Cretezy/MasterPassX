@@ -4,7 +4,8 @@
     "outDir": "dist",
     "target": "es5",
     "sourceMap": true,
-    "lib": ["es2018"]
+    "lib": ["esnext"],
+    "strict": true
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.test.ts"]
